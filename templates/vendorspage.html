@@ -1,0 +1,13 @@
+{% extends 'base.html'%}
+{% block title %}Vendors page {% endblock %}
+{% block body %}
+<h1>All Vendors</h1>
+<ul id="vendor-list">
+{% for vendor in vendors%}
+<li>
+    <h2>{{vendor.vendor_name}}</h2>
+    <a href="/tacovendors/{{vendor.vendor_id}}"><img src="{{vendor.image}}" alt="image" class="tacoimage"></a>
+</li>
+{% endfor %}
+</ul>
+{% endblock %}

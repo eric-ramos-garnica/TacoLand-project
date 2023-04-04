@@ -1,0 +1,8 @@
+{% extends 'base.html'%}
+{% block title %}Vendor page {% endblock %}
+{% block body %}
+<h1>Welcome to {{vendor_info.vendor_name}} </h1>
+<img src="{{vendor_info.image}}" alt="image">
+<p>Hours {{vendor_info.working_hours}}</p>
+<p>address {{vendor_info.location}}</p>
+{% endblock %}

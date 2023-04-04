@@ -8,19 +8,19 @@ class Rating(db.Model):
     __tablename__ = "ratings"
     rating_id = db.Column(db.Integer, primary_key = True,autoincrement=True)
     user_id = db.Column(db.Integer,db.ForeignKey("users.user_id"))
-    vender_id = db.Column(db.Integer,db.ForeignKey("venders.vender_id"))
+    vendor_id = db.Column(db.Integer,db.ForeignKey("vendors.vendor_id"))
     score = db.Column(db.Integer)
     
     #relationship with User and Vender class
     user = db.relationship("User", back_populates="ratings")
-    vender = db.relationship("Vender", back_populates = "ratings")
+    vendor = db.relationship("Vendor", back_populates = "ratings")
 
     def __repr__(self):
         return f"<<(RatingClass) rating_id={self.rating_id} score ={self.score}>>"
     
     @classmethod
-    def create(cls,user,vender,score):
-        obj = cls(user=user,vender=vender,score=score)
+    def create(cls,user,vendor,score):
+        obj = cls(user=user,vendor=vendor,score=score)
         db.session.add(obj)
         db.session.commit()
         return obj
@@ -52,30 +52,37 @@ class User(db.Model):
         return obj
     
 
-class Vender(db.Model):
+class Vendor(db.Model):
 
-    __tablename__ = "venders"
+    __tablename__ = "vendors"
 
-    vender_id = db.Column(db.Integer, primary_key = True,autoincrement=True)
-    vender_name = db.Column(db.String)
+    vendor_id = db.Column(db.Integer, primary_key = True,autoincrement=True)
+    vendor_name = db.Column(db.String)
     location = db.Column(db.String)
     working_hours = db.Column(db.String)
-    menu = db.Column(db.String)
+    image = db.Column(db.String)
 
     #relationship with Rating
-    ratings = db.relationship("Rating", back_populates = "vender")
+    ratings = db.relationship("Rating", back_populates = "vendor")
     
     def __repr__(self):
-        return f"<<(VenderClass) vender_id={self.vender_id} location={self.location} hours={self.working_hours}>>"
+        return f"<<(VenderClass) vendor_id={self.vendor_id} location={self.location} hours={self.working_hours}>>"
    
     
     @classmethod
-    def create(cls,vender_name,location,working_hours,menu):
+    def create(cls,vendor_name,location,working_hours,image):
         """Creates venders"""
-        obj = cls(vender_name=vender_name,location=location,working_hours=working_hours,menu=menu)
+        obj = cls(vendor_name=vendor_name,location=location,working_hours=working_hours,image=image)
         db.session.add(obj)
         db.session.commit()
         return obj
+    @classmethod
+    def get_vendor(cls):
+        return Vendor.query.all()
+    @classmethod
+    def get_vendor_by_id(cls,vendor_id):
+        """Returns a vendor by primary key"""
+        return Vendor.query.get(vendor_id)
 
 
 
