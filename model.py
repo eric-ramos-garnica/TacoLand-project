@@ -18,6 +18,13 @@ class Rating(db.Model):
     def __repr__(self):
         return f"<<(RatingClass) rating_id={self.rating_id} score ={self.score}>>"
     
+    @classmethod
+    def create(cls,user,vender,score):
+        obj = cls(user=user,vender=vender,score=score)
+        db.session.add(obj)
+        db.session.commit()
+        return obj
+    
 
 
 class User(db.Model):
@@ -35,6 +42,15 @@ class User(db.Model):
 
     def __repr__(self):
         return f"<<(UserCLass) user_id ={self.user_id} email={self.email_id}>>"
+    
+    @classmethod
+    def create(cls, email, fname,lname,password):
+        """Creates users"""
+        obj = cls(email=email,fname=fname,lname=lname,password=password)
+        db.session.add(obj)
+        db.session.commit()
+        return obj
+    
 
 class Vender(db.Model):
 
@@ -51,6 +67,15 @@ class Vender(db.Model):
     
     def __repr__(self):
         return f"<<(VenderClass) vender_id={self.vender_id} location={self.location} hours={self.working_hours}>>"
+   
+    
+    @classmethod
+    def create(cls,vender_name,location,working_hours,menu):
+        """Creates venders"""
+        obj = cls(vender_name=vender_name,location=location,working_hours=working_hours,menu=menu)
+        db.session.add(obj)
+        db.session.commit()
+        return obj
 
 
 
