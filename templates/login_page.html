@@ -1,1 +1,23 @@
-login page
+{% extends 'base.html' %}
+{% block title %}Log in{% endblock %}
+{% block body %}
+    <div id="container">
+        <div id="container-logo">
+            <img src="/static/img/taco_icon.png" alt="taco image">
+            <h2>Taco Land</h2>
+        </div>
+        <div id="container-form">
+            <form action="/loginpage" method="POST">
+                <label for="email">Email</label><br>
+                <input type="email" name="email" id="email">
+                <br>
+                <label for="password">Password</label><br>
+                <input type="password" name="password" id="password">
+                <br>
+                <button type="submit">Log in</button>
+            </form>
+            <p>or</p>
+            <a href="/createaccountpage">Create account</a>
+        </div>
+    </div>
+{% endblock %}

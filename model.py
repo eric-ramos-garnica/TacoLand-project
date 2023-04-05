@@ -41,7 +41,7 @@ class User(db.Model):
     ratings = db.relationship("Rating", back_populates = "user")
 
     def __repr__(self):
-        return f"<<(UserCLass) user_id ={self.user_id} email={self.email_id}>>"
+        return f"<<(UserCLass) user_id ={self.user_id} email={self.email}>>"
     
     @classmethod
     def create(cls, email, fname,lname,password):
@@ -50,7 +50,20 @@ class User(db.Model):
         db.session.add(obj)
         db.session.commit()
         return obj
-    
+    @classmethod
+    def get_email_by_user(cls,email):
+        """return email if its in the database"""
+        user_email = User.query.filter(User.email == email).first()
+        return user_email.email
+    @classmethod
+    def get_password_by_user(cls,email):
+        """return password if its in the database"""
+        user_password = User.query.filter(User.email == email).first()
+        return user_password.password
+    @classmethod
+    def get_object_by_email(cls,email):
+        obj = User.query.filter(User.email == email).first()
+        return obj
 
 class Vendor(db.Model):
 
