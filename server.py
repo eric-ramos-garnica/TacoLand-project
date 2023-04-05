@@ -44,7 +44,7 @@ def register_user():
 
     user = User.get_email_by_user(email)
     if user:
-       flash("Please enter a new email. Try again.")
+       flash("This email exist! Please enter a new email.")
     else:
         user =User.create(email,fname,lname,password)
         flash("Account created successfully! Please log in.")
@@ -60,14 +60,15 @@ def login():
     email = request.form.get('email')
     password = request.form.get('password')
     #getting email and password from database
-    email_database =User.get_email_by_user(email)
-    password_database= User.get_password_by_user(email)
-    obj = User.get_object_by_email(email)
-    # if user.password not 
+    obj =User.get_email_by_user(email)
+    password_database = obj.password
+    email_database = obj.email
+    
     print('===>',password,'@@@@@@@',password_database)
     print('===>',email,'@@@@@@@',email_database)
     if password == password_database and email == email_database:
-        
+        # session["name"] = obj.name
+        # session["login"] = "login"
         return redirect("/")
     # else:
     #     # flash("Incorrect password or email!")

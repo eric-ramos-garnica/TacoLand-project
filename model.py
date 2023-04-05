@@ -52,18 +52,9 @@ class User(db.Model):
         return obj
     @classmethod
     def get_email_by_user(cls,email):
-        """return email if its in the database"""
-        user_email = User.query.filter(User.email == email).first()
-        return user_email.email
-    @classmethod
-    def get_password_by_user(cls,email):
-        """return password if its in the database"""
-        user_password = User.query.filter(User.email == email).first()
-        return user_password.password
-    @classmethod
-    def get_object_by_email(cls,email):
-        obj = User.query.filter(User.email == email).first()
-        return obj
+        """return email if its in the database"""         
+        return User.query.filter(User.email == email).first()
+    
 
 class Vendor(db.Model):
 
