@@ -29,6 +29,21 @@ def vendor_business(vendor_id):
     vendor_info = Vendor.get_vendor_by_id(vendor_id)
     return render_template('vendor_information.html',vendor_info=vendor_info)
 
+@app.route("/createaccountpage")
+def create_account():
+    """Create account page"""
+    return render_template('create_account.html')
+
+@app.route("/loginpage")
+def login():
+    """Login page"""
+    return render_template('login_page.html')
+
+@app.route("/vendorpage")
+def create_vendor():
+    """Vendor page"""
+    return render_template('create_vendor_account.html')
+
 
 if __name__ == "__main__":
     connect_to_db(app)
