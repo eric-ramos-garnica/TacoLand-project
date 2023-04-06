@@ -6,6 +6,9 @@
             <img src="/static/img/taco_icon.png" alt="taco image">
             <h2>Taco Land</h2>
         </div>
+    {% for message in get_flashed_messages() %}
+        <h1 id="message">{{message}}</h1>
+    {% endfor %}
         <div id="container-form">
             <form action="/loginpage" method="POST">
                 <label for="email">Email</label><br>

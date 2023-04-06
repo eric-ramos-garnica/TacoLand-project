@@ -14,7 +14,10 @@ app.jinja_env.undefined = StrictUndefined
 @app.route("/")
 def homepage():
     """View homepage"""
-    return render_template('homepage.html')
+    if 'login' in session:
+        return render_template("/homepage_login.html") 
+    else:  
+        return render_template('homepage.html')
 
 @app.route("/tacovendors")
 def vendors():
@@ -63,22 +66,21 @@ def login():
     obj =User.get_email_by_user(email)
     password_database = obj.password
     email_database = obj.email
-    
-    print('===>',password,'@@@@@@@',password_database)
-    print('===>',email,'@@@@@@@',email_database)
+
     if password == password_database and email == email_database:
-        # session["name"] = obj.name
-        # session["login"] = "login"
-        return redirect("/")
-    # else:
-    #     # flash("Incorrect password or email!")
-    #     return redirect('/loginpage')
+        session['name'] = obj.fname
+        session['login'] = "login"
+        return render_template("/homepage_login.html")
+    else:
+        flash("Incorrect password or email!")
+        return redirect('/loginpage')
 
 
 @app.route("/vendorpage")
 def create_vendor():
     """Vendor page"""
     return render_template('create_vendor_account.html')
+
 
 
 if __name__ == "__main__":
