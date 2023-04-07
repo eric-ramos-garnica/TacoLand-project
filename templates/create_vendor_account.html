@@ -1,33 +1,39 @@
 {% extends 'base.html' %}
 {% block title %}Vendor sign up{% endblock %}
 {% block body %}
-<form action="">
-    <div id="/vendorpage">
+{% for message in get_flashed_messages() %}
+        <h1 id="message">{{message}}</h1>
+{% endfor %}
+<form action="/vendorpage" method="POST" enctype="multipart/form-data">
+    <div id="containter-form">
         <label for="vendorName">Business Name</label><br>
-        <input type="text" name="vendorName" id="vendorName">
-        <br>
+        <input type="text" name="vendorName" id="vendorName"><br>
+
         <label for="address">Address</label><br>
-        <input type="text" name="address" id="address">
-        <br>
+        <input type="text" name="address" id="address"><br>
+
         <label for="hours">Hours</label><br>
-        <input type="text" name="hours" id="hours">
-        <br>
-        <label for="profile_pic">Choose file to upload</label>
+        <input type="text" name="hours" id="hours"><br>
+
+        <!-- <label for="profile_pic">Choose image/logo to upload</label>
         <input
         type="file"
         id="profile_pic"
         name="profile_pic"
-        accept=".jpg, .jpeg, .png" />
-        <br>
+        accept=".jpg, .jpeg, .png" /><br> -->
+        <label for="image">image</label>
+		<input type="text" name="image" id="image">
+
         <label for="zipcode">Zipcode</label><br>
-        <input type="number" name="zipcode" id="zipcode">
-        <br>
+        <input type="number" name="zipcode" id="zipcode"><br>
+
+
         <label for="state">State</label><br>
-        <input type="text" name="state" id="state">
-        <br>
+        <input type="text" name="state" id="state"><br>
+
         <label for="city">City</label><br>
-        <input type="text" name="city" id="city">
-        <br>
+        <input type="text" name="city" id="city"><br>
+
         <button type="submit">Sign up</button>
     </div>
     

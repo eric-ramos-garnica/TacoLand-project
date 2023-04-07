@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 
 
+
 db = SQLAlchemy()
 
 class Rating(db.Model):
@@ -92,6 +93,7 @@ class Vendor(db.Model):
     def get_vendor_by_id(cls,vendor_id):
         """Returns a vendor by primary key"""
         return Vendor.query.get(vendor_id)
+    
 
 
 
