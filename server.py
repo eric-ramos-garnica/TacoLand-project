@@ -10,7 +10,7 @@ from jinja2 import StrictUndefined
 app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
-app.config['UPLOAD_FOLDER'] = '/home/ericramosgarnica/src/tacoland/static/img'
+# app.config['UPLOAD_FOLDER'] = '/home/ericramosgarnica/src/tacoland/static/img'
 
 
 
@@ -68,17 +68,17 @@ def login():
     password = request.form.get('password')
     #getting email and password from database
     obj =User.get_email_by_user(email)
-    password_database = obj.password
-    email_database = obj.email
-
-    if password == password_database and email == email_database:
+    # password_database = obj.password
+    # email_database = obj.email
+    if not obj or obj.password != password:
+        flash("The email or password you entered was incorrect.")
+        return redirect('/loginpage')
+    else:
         session['name'] = obj.fname
         session['login'] = "login"
-        session['user-object'] = obj
+        session['email'] = obj.email
         return render_template("/homepage_login.html")
-    else:
-        flash("Incorrect password or email!")
-        return redirect('/loginpage')
+
 
 
 @app.route("/vendorpage")
@@ -105,4 +105,3 @@ def vendor_info():
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)
-
