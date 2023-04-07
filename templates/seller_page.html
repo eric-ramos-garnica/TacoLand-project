@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Vendor{% endblock %}
+{% block head %}
+{% for message in get_flashed_messages() %}
+    <h1 id="message">{{message}}</h1>
+{% endfor %}
+
+
+    <a href="/vendorpage">Vendor Sign Up</a>
+    <a href="/vendorInfo">Vendor Settings</a>
+{% endblock %}

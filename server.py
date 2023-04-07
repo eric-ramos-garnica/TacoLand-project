@@ -19,7 +19,7 @@ app.jinja_env.undefined = StrictUndefined
 def homepage():
     """View homepage"""
     if 'login' in session:
-        return render_template("/homepage_login.html") 
+        return render_template("homepage_login.html") 
     else:  
         return render_template('homepage.html')
 
@@ -78,12 +78,11 @@ def login():
         session['id'] = obj.user_id
         session['login'] = "login"
         session['email'] = obj.email
-        print('=====>',session['name'] )
-        print('=====>',session['id'] )
-        print('=====>',session['login'] )
-        print('=====>',session['email'] )
         return render_template("/homepage_login.html")
-
+@app.route("/sellerPage")
+def seller_page():
+    """Will display vendor sign up and vendor Info"""
+    return render_template('seller_page.html')
 
 
 @app.route("/vendorpage")
@@ -110,6 +109,16 @@ def vendor_info():
     else:
         flash("Need to login to create a vendor account")
         return redirect("/vendorpage")
+    
+@app.route("/vendorInfo")
+def vendor_account():
+    """Will show all business from owner/user """
+    if 'login' in session:
+        user_businesses = Vendor.get_businesses_by_user_id(session['id'])
+        return render_template('vendor_info_by_owner.html',user_businesses=user_businesses)
+    else:
+        flash("Need to login to see vendor info")
+        return redirect('/sellerPage')
 
 if __name__ == "__main__":
     connect_to_db(app)

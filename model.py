@@ -97,6 +97,10 @@ class Vendor(db.Model):
     def get_vendor_by_id(cls,vendor_id):
         """Returns a vendor by primary key"""
         return Vendor.query.get(vendor_id)
+    @classmethod
+    def get_businesses_by_user_id(cls,id):
+        """Retunrs business by user/owner """
+        return Vendor.query.filter_by(user_id = id).all()
     
 
 
