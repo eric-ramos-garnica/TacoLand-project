@@ -7,6 +7,11 @@
 <li>
     <h2>{{vendor.vendor_name}}</h2>
     <a href="/tacovendors/{{vendor.vendor_id}}"><img src="{{vendor.image}}" alt="image" class="tacoimage"></a>
+    {% if vendor.vendor_id in rating_dic %}
+        <p>Rating:{{rating_dic[vendor.vendor_id]}}</p>
+    {% else %}
+        <p>Rating:No ratings</p>
+    {% endif %}
 </li>
 {% endfor %}
 </ul>

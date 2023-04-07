@@ -20,12 +20,14 @@ class Rating(db.Model):
         return f"<<(RatingClass) rating_id={self.rating_id} score ={self.score}>>"
     
     @classmethod
-    def create(cls,user,vendor,score):
-        obj = cls(user=user,vendor=vendor,score=score)
+    def create(cls,user_id,vendor_id,score):
+        obj = cls(user_id=user_id,vendor_id=vendor_id,score=score)
         db.session.add(obj)
         db.session.commit()
         return obj
-    
+    @classmethod
+    def get_ratings(cls):
+        return Rating.query.all()
 
 
 class User(db.Model):

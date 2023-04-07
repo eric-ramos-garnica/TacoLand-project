@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, flash, session, redirect,url_for
 from model import connect_to_db, db
-from model import Vendor,User
+from model import Vendor,User,Rating
 import os
 
 # import crud
@@ -27,8 +27,14 @@ def homepage():
 def vendors():
     """view all vendors """
     vendors = Vendor.get_vendor()
-    
-    return render_template('vendorspage.html',vendors=vendors)
+    #rating object
+    ratings =Rating.get_ratings()
+    rating_dic ={}
+    for rating in ratings:
+        rating_dic[rating.vendor_id] = rating.score
+    return render_template('vendorspage.html',vendors=vendors,rating_dic=rating_dic)
+
+        
 
 @app.route("/tacovendors/<vendor_id>")
 def vendor_business(vendor_id):
