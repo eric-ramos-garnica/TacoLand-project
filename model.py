@@ -40,6 +40,7 @@ class User(db.Model):
 
     #relationship with Rating
     ratings = db.relationship("Rating", back_populates = "user")
+    vendors = db.relationship("Vendor", back_populates = "user")
 
     def __repr__(self):
         return f"<<(UserCLass) user_id ={self.user_id} email={self.email}>>"
@@ -69,6 +70,9 @@ class Vendor(db.Model):
     zipcode =db.Column(db.Integer)
     state = db.Column(db.String)
     city = db.Column(db.String)
+    user_id = db.Column(db.Integer,db.ForeignKey("users.user_id"))
+
+    user = db.relationship("User", back_populates = "vendors")
 
 
 
@@ -80,9 +84,9 @@ class Vendor(db.Model):
    
     
     @classmethod
-    def create(cls,vendor_name,location,working_hours,image,zipcode,state,city):
+    def create(cls,vendor_name,location,working_hours,image,zipcode,state,city,user_id):
         """Creates venders"""
-        obj = cls(vendor_name=vendor_name,location=location,working_hours=working_hours,image=image,zipcode=zipcode,state=state,city=city)
+        obj = cls(vendor_name=vendor_name,location=location,working_hours=working_hours,image=image,zipcode=zipcode,state=state,city=city,user_id =user_id)
         db.session.add(obj)
         db.session.commit()
         return obj

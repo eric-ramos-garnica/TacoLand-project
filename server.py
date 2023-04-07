@@ -75,8 +75,13 @@ def login():
         return redirect('/loginpage')
     else:
         session['name'] = obj.fname
+        session['id'] = obj.user_id
         session['login'] = "login"
         session['email'] = obj.email
+        print('=====>',session['name'] )
+        print('=====>',session['id'] )
+        print('=====>',session['login'] )
+        print('=====>',session['email'] )
         return render_template("/homepage_login.html")
 
 
@@ -88,19 +93,23 @@ def create_vendor():
 
 @app.route("/vendorpage", methods=["POST"])
 def vendor_info():
-    vendor_name = request.form.get('vendorName')
-    location = request.form.get('address')
-    working_hours = request.form.get('hours')  
-    zipcode = request.form.get('zipcode')
-    state = request.form.get('state')
-    city = request.form.get('city')
-    image = request.form.get('image')
-    
-    # store data in database
-    vendor = Vendor.create(vendor_name, location, working_hours, image, zipcode, state, city)
-    if vendor:    
-        flash("Account created successfully!")
-        return redirect('/vendorpage')
+    if 'login' in session:
+        vendor_name = request.form.get('vendorName')
+        location = request.form.get('address')
+        working_hours = request.form.get('hours')  
+        zipcode = request.form.get('zipcode')
+        state = request.form.get('state')
+        city = request.form.get('city')
+        image = request.form.get('image')
+        
+        # store data in database
+        vendor = Vendor.create(vendor_name, location, working_hours, image, zipcode, state, city,session['id'])
+        if vendor:    
+            flash("Account created successfully!")
+            return redirect('/vendorpage')
+    else:
+        flash("Need to login to create a vendor account")
+        return redirect("/vendorpage")
 
 if __name__ == "__main__":
     connect_to_db(app)
