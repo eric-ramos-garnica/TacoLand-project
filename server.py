@@ -42,6 +42,13 @@ def vendor_business(vendor_id):
     vendor_info = Vendor.get_vendor_by_id(vendor_id)
     return render_template('vendor_information.html',vendor_info=vendor_info)
 
+@app.route("/rating/<vendor_id>")
+def rating(vendor_id):
+    """Will display rating page"""
+    vendor_info = Vendor.get_vendor_by_id(vendor_id)
+    return render_template('ratingpage.html')
+
+
 @app.route("/createaccountpage")
 def create_account():
     """Create account page"""
