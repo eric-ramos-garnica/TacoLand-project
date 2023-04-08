@@ -1,7 +1,11 @@
 {% extends 'base.html'%}
 {% block title %}Taco Land {% endblock %}
 {% block body %}
+{% if 'login' in session %}
+<h1>Welcome {{session['name']}} to Taco Land</h1>
+{% else %}
 <h1>Welcome to Taco Land</h1>
+{% endif%}
 <ul>
     <li><a href="/tacovendors">View all Tacos Vendors</a></li>
     

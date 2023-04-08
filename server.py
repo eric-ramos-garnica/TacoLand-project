@@ -16,12 +16,8 @@ app.jinja_env.undefined = StrictUndefined
 
 # Replace this with routes and view functions!
 @app.route("/")
-def homepage():
-    """View homepage"""
-    if 'login' in session:
-        return render_template("homepage_login.html") 
-    else:  
-        return render_template('homepage.html')
+def homepage():  
+    return render_template('homepage.html')
 
 @app.route("/tacovendors")
 def vendors():
@@ -91,7 +87,7 @@ def login():
         session['id'] = obj.user_id
         session['login'] = "login"
         session['email'] = obj.email
-        return render_template("/homepage_login.html")
+        return redirect("/")
 @app.route("/sellerPage")
 def seller_page():
     """Will display vendor sign up and vendor Info"""
