@@ -35,12 +35,25 @@ def vendors():
 @app.route("/tacovendors/<vendor_id>")
 def vendor_business(vendor_id):
     """Views a specific vendor """
+    #returns all vendor objects with specific vendor id
     vendor_info = Vendor.get_vendor_by_id(vendor_id)
-    return render_template('vendor_information.html',vendor_info=vendor_info)
+   #returns all rating objects with specific vendor id
+    vendor_ratings =Rating.get_vendor_rating_by_id(vendor_id)
+    #getting average for rating
+    if vendor_ratings:
+        rating_sum = 0
+        for rating in vendor_ratings:
+            rating_sum += rating.score
+        average=  rating_sum/len(vendor_ratings)
+        round_rating = round(average)
+    else:
+        round_rating = 0
+    return render_template('vendor_information.html',vendor_info=vendor_info,rating=round_rating)
 
 @app.route("/rating/<vendor_id>")
 def rating(vendor_id):
     """Will display rating page"""
+    
     vendor_info = Vendor.get_vendor_by_id(vendor_id)
     return render_template('ratingpage.html')
 

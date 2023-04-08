@@ -5,5 +5,14 @@
 <img src="{{vendor_info.image}}" alt="image">
 <p>Hours {{vendor_info.working_hours}}</p>
 <p>address {{vendor_info.location}}</p>
-<a href="/rating/{{vendor_info.vendor_id}}"><button>click</button></a>
+{% if rating == 0 %}
+    <p>Ratings:no rating</p>
+{% else %}
+    <p>Rating:{{rating}}</p>
+{% endif %}
+<div>
+    <p>Make a rating</p>
+    <a href="/rating/{{vendor_info.vendor_id}}"><button>rating</button></a>
+</div>  
+   
 {% endblock %}

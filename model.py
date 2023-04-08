@@ -28,6 +28,9 @@ class Rating(db.Model):
     @classmethod
     def get_ratings(cls):
         return Rating.query.all()
+    @classmethod
+    def get_vendor_rating_by_id(cls,id):
+        return Rating.query.filter_by(vendor_id = id).all()
 
 
 class User(db.Model):
