@@ -40,6 +40,7 @@ def vendor_business(vendor_id):
    #returns all rating objects with specific vendor id
     vendor_ratings =Rating.get_vendor_rating_by_id(vendor_id)
     #getting average for rating
+
     if vendor_ratings:
         rating_sum = 0
         for rating in vendor_ratings:
@@ -48,6 +49,7 @@ def vendor_business(vendor_id):
         round_rating = round(average)
     else:
         round_rating = 0
+    
     return render_template('vendor_information.html',vendor_info=vendor_info,rating=round_rating)
 
 @app.route("/rating/<vendor_id>")
@@ -57,10 +59,19 @@ def rating(vendor_id):
     return render_template('ratingpage.html',vendor_info=vendor_info)
     
 
-@app.route("/ratingSubmission/<vendor_id>")
+@app.route("/ratingSubmission/<vendor_id>", methods=["GET", "POST"])
 def rating_submission(vendor_id):
-    print('@@++++>', vendor_id,session['id'])
-    return render_template('ratingSubmission.html')
+    if request.method == "POST":
+        score = request.form.get("rating")
+        print('@@++++>', vendor_id, score)
+        # save the rating to database or do something with it
+        if "login" in session:
+            Rating.create(session['id'],vendor_id,score)
+        else:
+            Rating.create(None,vendor_id,score)
+        return render_template('ratingSubmission.html')
+
+    return redirect(url_for("rating", vendor_id=vendor_id))
     
 @app.route("/createaccountpage")
 def create_account():
@@ -105,6 +116,7 @@ def login():
         session['login'] = "login"
         session['email'] = obj.email
         return redirect("/")
+    
 @app.route("/sellerPage")
 def seller_page():
     """Will display vendor sign up and vendor Info"""
