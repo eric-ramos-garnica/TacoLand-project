@@ -1,5 +1,14 @@
 {% extends 'base.html'%}
 {% block title %}Rating Page{% endblock %}
 {% block body %}
-hi
+{% for message in get_flashed_messages() %}
+    <h1 id="message">{{message}}</h1>
+{% endfor %}
+<img src="{{vendor_info.image}}" alt="image"><br>
+<form action="/ratingSubmission/{{vendor_info.vendor_id}}"method="GET">
+    <label for="rating">Enter rating between 1-5</label><br>
+    <input type="number" name="rating" id="rating" min="1" max="5">
+    <button type="submit">submit</button>
+</form>
+
 {% endblock %}

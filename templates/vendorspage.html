@@ -1,3 +1,4 @@
+
 {% extends 'base.html'%}
 {% block title %}Vendors page {% endblock %}
 {% block body %}
@@ -7,12 +8,24 @@
 <li>
     <h2>{{vendor.vendor_name}}</h2>
     <a href="/tacovendors/{{vendor.vendor_id}}"><img src="{{vendor.image}}" alt="image" class="tacoimage"></a>
-    {% if vendor.vendor_id in rating_dic %}
-        <p>Rating:{{rating_dic[vendor.vendor_id]}}</p>
-    {% else %}
-        <p>Rating:No ratings</p>
-    {% endif %}
+    
+    <div>
+        {% set vendor_ratings = Rating.get_vendor_rating_by_id(vendor.vendor_id) %}
+        {% set rating_sum = 0 %}
+        {% if vendor_ratings %}
+            {% for rating in vendor_ratings %}
+                {% set rating_sum =rating_sum+ rating.score %}
+            {% endfor %}
+            <h1>{{ rating_sum }}</h1>
+            {% set average = rating_sum / vendor_ratings|length %}
+            {% set round_rating = average|round %}
+        {% else %}
+            {% set round_rating = 0 %}
+        {% endif %}
+    </div>
 </li>
 {% endfor %}
 </ul>
 {% endblock %}
+
+

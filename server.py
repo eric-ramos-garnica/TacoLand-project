@@ -27,8 +27,8 @@ def vendors():
     ratings =Rating.get_ratings()
     rating_dic ={}
     for rating in ratings:
-        rating_dic[rating.vendor_id] = rating.score
-    return render_template('vendorspage.html',vendors=vendors,rating_dic=rating_dic)
+        rating_dic[rating.vendor_id] = rating.vendor_id
+    return render_template('vendorspage.html',vendors=vendors,rating_dic=rating_dic,Rating =Rating)
 
         
 
@@ -53,11 +53,15 @@ def vendor_business(vendor_id):
 @app.route("/rating/<vendor_id>")
 def rating(vendor_id):
     """Will display rating page"""
-    
     vendor_info = Vendor.get_vendor_by_id(vendor_id)
-    return render_template('ratingpage.html')
+    return render_template('ratingpage.html',vendor_info=vendor_info)
+    
 
-
+@app.route("/ratingSubmission/<vendor_id>")
+def rating_submission(vendor_id):
+    print('@@++++>', vendor_id,session['id'])
+    return render_template('ratingSubmission.html')
+    
 @app.route("/createaccountpage")
 def create_account():
     """Create account page"""
