@@ -181,6 +181,7 @@ def vendor_info():
 @app.route("/vendorInfo")
 def vendor_account():
     """Will show all business from owner/user """
+    
     if 'login' in session:
         user_businesses = Vendor.get_businesses_by_user_id(session['id'])
         return render_template('vendor_info_by_owner.html',user_businesses=user_businesses)
@@ -194,7 +195,15 @@ def edit(vendor_id):
         session['edit'] = True
         session['vendor_id'] = vendor_id
         return redirect('/vendorpage')
-
+    
+@app.route("/deleteVendorAccount")
+def delete():
+    """Deletes vendor account"""
+    if 'login' in session:
+        vendor = Vendor.get_vendor_by_id(session['vendor_id'])
+        db.session.delete(vendor)
+        db.session.commit()
+        return redirect("/vendorInfo")
 
 if __name__ == "__main__":
     connect_to_db(app)

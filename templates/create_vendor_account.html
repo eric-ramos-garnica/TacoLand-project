@@ -40,8 +40,17 @@
         <label for="city">City</label><br>
         <input type="text" name="city" id="city"><br>
 
-        <button type="submit">Sign up</button>
+        {% if 'login' in session and 'edit' not in session or 'login' not in session %}
+            <button type="submit">Sign up</button>
+        {% endif %}
+        {#session.get('edit') is used instead of session['edit'] to avoid a KeyError if the edit key is not present in the session dictionary.#}
+        {% if 'login' in session and session.get('edit') == True%}
+            <button type="submit">Edit</button>
+        {% endif %}
     </div>
 </form>
+<p>or</p>
+<p>Delete account</p>
+<a href="/deleteVendorAccount"><button>Delete</button></a>
     
 {% endblock %}
