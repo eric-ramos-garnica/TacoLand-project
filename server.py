@@ -63,7 +63,6 @@ def rating(vendor_id):
 def rating_submission(vendor_id):
     if request.method == "POST":
         score = request.form.get("rating")
-        print('@@++++>', vendor_id, score)
         # save the rating to database or do something with it
         if "login" in session:
             Rating.create(session['id'],vendor_id,score)
@@ -116,6 +115,12 @@ def login():
         session['login'] = "login"
         session['email'] = obj.email
         return redirect("/")
+    
+@app.route("/logout")
+def logout():
+    if 'login' in session:
+        session.clear()
+    return redirect('/')
     
 @app.route("/sellerPage")
 def seller_page():
