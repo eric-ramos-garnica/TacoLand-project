@@ -39,7 +39,7 @@ def vendors():
             average=  rating_sum/len(vendor_ratings)
             round_rating = round(average)
             rating_dic[vendor_id] = round_rating
-            
+
     return render_template('vendorspage.html',vendors=vendors,rating_dic=rating_dic)
 
         
@@ -147,23 +147,44 @@ def create_vendor():
 
 @app.route("/vendorpage", methods=["POST"])
 def vendor_info():
-    if 'login' in session:
-        vendor_name = request.form.get('vendorName')
-        location = request.form.get('address')
-        working_hours = request.form.get('hours')  
-        zipcode = request.form.get('zipcode')
-        state = request.form.get('state')
-        city = request.form.get('city')
-        image = request.form.get('image')
+    vendorname = request.form.get('vendorName')
+    location = request.form.get('address')
+    workinghours = request.form.get('hours')  
+    zipcode = request.form.get('zipcode')
+    state = request.form.get('state')
+    city = request.form.get('city')
+    image = request.form.get('image')
+    
+    if 'login' in session and 'edit' in session and session['edit'] == True:
+        flash("Edit was successful!")
+        vendor = Vendor.get_vendor_by_id(session['vendor_id'])
+        vendor.vendor_name = vendorname
+        vendor.location = location
+        vendor.working_hours = workinghours
+        vendor.zipcode = zipcode
+        vendor.state = state
+        vendor.city = city
+        vendor.image = image
+        db.session.commit()
+        session['edit'] = False
+        del session['vendor_id']
+        print('@@==>',session)
         
+        
+        return redirect('/vendorpage')
+    elif 'login' in session:
+
         # store data in database
-        vendor = Vendor.create(vendor_name, location, working_hours, image, zipcode, state, city,session['id'])
+        vendor = Vendor.create(vendorname, location, workinghours, image, zipcode, state, city,session['id'])
         if vendor:    
             flash("Account created successfully!")
             return redirect('/vendorpage')
     else:
         flash("Need to login to create a vendor account")
         return redirect("/vendorpage")
+    
+    
+    
     
 @app.route("/vendorInfo")
 def vendor_account():
@@ -174,6 +195,15 @@ def vendor_account():
     else:
         flash("Need to login to see vendor info")
         return redirect('/sellerPage')
+    
+@app.route("/BusinessEdit/<vendor_id>")
+def edit(vendor_id):
+    if "login" in session:
+        session['edit'] = True
+        session['vendor_id'] = vendor_id
+        print("++++====>",session)
+        return redirect('/vendorpage')
+
 
 if __name__ == "__main__":
     connect_to_db(app)
