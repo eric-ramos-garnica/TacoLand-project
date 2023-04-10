@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 {% block title %}Vendor sign up{% endblock %}
 {% block body %}
+
+{% if 'login' in session and 'edit' not in session or 'login' not in session %}
+    <h1>Create vendor account</h1>
+    <hr>
+{% endif %}
+{#session.get('edit') is used instead of session['edit'] to avoid a KeyError if the edit key is not present in the session dictionary.#}
+{% if 'login' in session and session.get('edit') == True%}
+    <h1>Edit account</h1>
+    <hr>
+{% endif %}
+
 {% for message in get_flashed_messages() %}
         <h1 id="message">{{message}}</h1>
 {% endfor %}
@@ -16,12 +27,6 @@
         <label for="hours">Hours</label><br>
         <input type="text" name="hours" id="hours"><br>
 
-        <!-- <label for="profile_pic">Choose image/logo to upload</label>
-        <input
-        type="file"
-        id="profile_pic"
-        name="profile_pic"
-        accept=".jpg, .jpeg, .png" /><br> -->
         <label for="image">image</label><br>
 		<input type="text" name="image" id="image"><br>
 

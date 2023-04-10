@@ -156,7 +156,6 @@ def vendor_info():
     image = request.form.get('image')
     
     if 'login' in session and 'edit' in session and session['edit'] == True:
-        flash("Edit was successful!")
         vendor = Vendor.get_vendor_by_id(session['vendor_id'])
         vendor.vendor_name = vendorname
         vendor.location = location
@@ -166,14 +165,10 @@ def vendor_info():
         vendor.city = city
         vendor.image = image
         db.session.commit()
-        session['edit'] = False
+        del session['edit']
         del session['vendor_id']
-        print('@@==>',session)
-        
-        
-        return redirect('/vendorpage')
+        return redirect('/vendorInfo')
     elif 'login' in session:
-
         # store data in database
         vendor = Vendor.create(vendorname, location, workinghours, image, zipcode, state, city,session['id'])
         if vendor:    
@@ -182,10 +177,7 @@ def vendor_info():
     else:
         flash("Need to login to create a vendor account")
         return redirect("/vendorpage")
-    
-    
-    
-    
+     
 @app.route("/vendorInfo")
 def vendor_account():
     """Will show all business from owner/user """
@@ -201,7 +193,6 @@ def edit(vendor_id):
     if "login" in session:
         session['edit'] = True
         session['vendor_id'] = vendor_id
-        print("++++====>",session)
         return redirect('/vendorpage')
 
 
