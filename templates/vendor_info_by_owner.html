@@ -9,7 +9,10 @@
         <img src="{{business.image}}" alt="business-image" class="business">
         <p>Address:{{business.location}}</p>
         <p>Hours:{{business.working_hours}}</p>
-        <p> city:{{business.city}} Zipcode:{{business.zipcode}} State:{{business.state}}</p>
+        <p> city:{{business.city}} </p>
+        <p>Zipcode:{{business.zipcode}}</p>
+        <p>State:{{business.state}}</p>
+        <a href="/BusinessEdit"><button>Edit</button></a>
     </li>
     {% endfor %}
     </ul> 

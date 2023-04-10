@@ -26,9 +26,21 @@ def vendors():
     #rating object
     ratings =Rating.get_ratings()
     rating_dic ={}
-    for rating in ratings:
-        rating_dic[rating.vendor_id] = rating.vendor_id
-    return render_template('vendorspage.html',vendors=vendors,rating_dic=rating_dic,Rating =Rating)
+    rating_set =set()
+    for obj in ratings:
+        rating_set.add(obj.vendor_id)
+
+    for vendor_id in rating_set:
+        vendor_ratings =Rating.get_vendor_rating_by_id(vendor_id)
+        if vendor_ratings:
+            rating_sum = 0
+            for rating in vendor_ratings:
+                rating_sum += rating.score
+            average=  rating_sum/len(vendor_ratings)
+            round_rating = round(average)
+            rating_dic[vendor_id] = round_rating
+            
+    return render_template('vendorspage.html',vendors=vendors,rating_dic=rating_dic)
 
         
 
