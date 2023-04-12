@@ -48,12 +48,13 @@
         {#session.get('edit') is used instead of session['edit'] to avoid a KeyError if the edit key is not present in the session dictionary.#}
         {% if 'login' in session and session.get('edit') == True%}
             <button type="submit">Edit</button>
+            <p>or</p>
+            <p>Delete account</p>
+            <a href="/deleteVendorAccount"><button>Delete</button></a>
         {% endif %}
     </div>
 </form>
-<p>or</p>
-<p>Delete account</p>
-<a href="/deleteVendorAccount"><button>Delete</button></a>
+
     
 <script>
     window.addEventListener('load', function() {

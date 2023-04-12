@@ -76,22 +76,20 @@ class Vendor(db.Model):
     state = db.Column(db.String)
     city = db.Column(db.String)
     user_id = db.Column(db.Integer,db.ForeignKey("users.user_id"))
-
-    user = db.relationship("User", back_populates = "vendors")
-
-
-
+    coords = db.Column(db.String)
+    
     #relationship with Rating
     ratings = db.relationship("Rating", back_populates = "vendor")
+    user = db.relationship("User", back_populates = "vendors")
     
     def __repr__(self):
         return f"<<(VenderClass) vendor_id={self.vendor_id} location={self.location} hours={self.working_hours}>>"
    
     
     @classmethod
-    def create(cls,vendor_name,location,working_hours,image,zipcode,state,city,user_id):
+    def create(cls,vendor_name,location,working_hours,image,zipcode,state,city,user_id,coords ):
         """Creates venders"""
-        obj = cls(vendor_name=vendor_name,location=location,working_hours=working_hours,image=image,zipcode=zipcode,state=state,city=city,user_id =user_id)
+        obj = cls(vendor_name=vendor_name,location=location,working_hours=working_hours,image=image,zipcode=zipcode,state=state,city=city,user_id =user_id, coords=coords)
         db.session.add(obj)
         db.session.commit()
         return obj

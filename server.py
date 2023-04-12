@@ -154,8 +154,8 @@ def vendor_info():
     state = request.form.get('state')
     city = request.form.get('city')
     image = request.form.get('image')
-    coordinates = request.form.get('coordinates') 
-    print('@@###====>',coordinates)
+    coords = request.form.get('coordinates')
+    
     
     if 'login' in session and 'edit' in session and session['edit'] == True:
         vendor = Vendor.get_vendor_by_id(session['vendor_id'])
@@ -172,7 +172,7 @@ def vendor_info():
         return redirect('/vendorInfo')
     elif 'login' in session:
         # store data in database
-        vendor = Vendor.create(vendorname, location, workinghours, image, zipcode, state, city,session['id'])
+        vendor = Vendor.create(vendorname, location, workinghours, image, zipcode, state, city,session['id'],coords)
         if vendor:    
             flash("Account created successfully!")
             return redirect('/vendorpage')
