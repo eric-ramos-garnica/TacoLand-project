@@ -49,6 +49,7 @@ def vendor_business(vendor_id):
     """Views a specific vendor """
     #returns all vendor objects with specific vendor id
     vendor_info = Vendor.get_vendor_by_id(vendor_id)
+    
    #returns all rating objects with specific vendor id
     vendor_ratings =Rating.get_vendor_rating_by_id(vendor_id)
     #getting average for rating
@@ -61,9 +62,13 @@ def vendor_business(vendor_id):
         round_rating = round(average)
     else:
         round_rating = 0
+
+    if vendor_info is None:
+        return render_template('vendor_information.html',vendor_info=vendor_info,rating=round_rating)
     
     return render_template('vendor_information.html',vendor_info=vendor_info,rating=round_rating)
 
+    
 @app.route("/rating/<vendor_id>")
 def rating(vendor_id):
     """Will display rating page"""
@@ -82,7 +87,7 @@ def rating_submission(vendor_id):
             Rating.create(None,vendor_id,score)
         return render_template('ratingSubmission.html')
 
-    return redirect(url_for("rating", vendor_id=vendor_id))
+    # return redirect(url_for("rating", vendor_id=vendor_id)) //i dont know if i need it but everything works without
     
 @app.route("/createaccountpage")
 def create_account():
