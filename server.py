@@ -154,6 +154,8 @@ def vendor_info():
     state = request.form.get('state')
     city = request.form.get('city')
     image = request.form.get('image')
+    coordinates = request.form.get('coordinates') 
+    print('@@###====>',coordinates)
     
     if 'login' in session and 'edit' in session and session['edit'] == True:
         vendor = Vendor.get_vendor_by_id(session['vendor_id'])

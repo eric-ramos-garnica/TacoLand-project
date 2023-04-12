@@ -16,7 +16,7 @@
         <h1 id="message">{{message}}</h1>
 {% endfor %}
 
-<form action="/vendorpage" method="POST" enctype="multipart/form-data">
+<form action="/vendorpage" id="vendor-form" method="POST" enctype="multipart/form-data">
     <div id="containter-form">
         <label for="vendorName">Business Name</label><br>
         <input type="text" name="vendorName" id="vendorName"><br>
@@ -40,6 +40,8 @@
         <label for="city">City</label><br>
         <input type="text" name="city" id="city"><br>
 
+        <input type="hidden" id="coordinates" name="coordinates">
+        
         {% if 'login' in session and 'edit' not in session or 'login' not in session %}
             <button type="submit">Sign up</button>
         {% endif %}
@@ -53,4 +55,30 @@
 <p>Delete account</p>
 <a href="/deleteVendorAccount"><button>Delete</button></a>
     
+<script>
+    window.addEventListener('load', function() {
+        const form = document.getElementById('vendor-form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // prevent form submission
+
+            const apiKey = 'AIzaSyBeoOdd3zdS3zAfqGFF7o6X8N3hGvsa04o';
+            const address = document.getElementById('address').value;
+
+            fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'OK') {
+                        const location = data.results[0].geometry.location;
+                        const coordinates = [location.lat, location.lng];
+                        console.log(coordinates);
+                        document.getElementById('coordinates').value = coordinates.join(',');
+                        form.submit(); // submit the form after getting the coordinates
+                    } else {
+                        console.log(`Error: ${data.status}`);
+                    }
+                })
+                .catch(error => console.log('Error:', error));
+        });
+    });
+</script>
 {% endblock %}
