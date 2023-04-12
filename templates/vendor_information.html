@@ -1,5 +1,10 @@
 {% extends 'base.html'%}
 {% block title %}Vendor page {% endblock %}
+
+{% block head %}
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+{% endblock %}
+
 {% block body %}
 <h1>Welcome to {{vendor_info.vendor_name}} </h1>
 <img src="{{vendor_info.image}}" alt="image">
@@ -10,9 +15,57 @@
 {% else %}
     <p>Rating:{{rating}}</p>
 {% endif %}
+
+<!-- hidden elements -->
+<p id="coord" style="display:none">{{vendor_info.coords}}</p>
+<p id="hr" style="display:none">{{vendor_info.working_hours}}</p>
+<p id="rating" style="display:none">{{rating}}</p>
+
 <div>
     <p>Make a rating</p>
     <a href="/rating/{{vendor_info.vendor_id}}"><button>rating</button></a>
 </div>  
    
+<h3>My Google Maps</h3>
+<div id="map"></div>
+
+<script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBeoOdd3zdS3zAfqGFF7o6X8N3hGvsa04o&callback=initMap&v=weekly"
+        defer
+      ></script>
+      
+<script>
+    const coordinate = document.getElementById("coord").innerHTML.split(","); 
+    const hr = document.getElementById("hr").innerHTML; 
+    const rating = document.getElementById("rating").innerHTML; 
+
+
+    function initMap() {
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 10,
+      center: { lat: 37.3387, lng:  -121.8853 },
+    });    
+
+    const marker = new google.maps.Marker({
+      position: { lat:  Number(coordinate[0]), lng:  Number(coordinate[1]) },
+      map,
+      icon:{
+        url: "https://img.icons8.com/officexs/15/null/taco.png",
+      },
+      animation: google.maps.Animation.DROP
+    });
+    var infoWindow = new google.maps.InfoWindow({
+      content:`<a href="#"><h2>Tacos el Gordo</h2></a><h2>Hours:${hr}<h2><h2>Rating:${rating}</h2>`
+    });
+    marker.addListener('click',function(){
+      infoWindow.open(map,marker)
+      map.setZoom(14);
+      // map.setCenter(marker.getPosition());
+    }); 
+  }
+  
+  
+window.initMap = initMap;
+initMap();
+</script>
 {% endblock %}
