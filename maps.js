@@ -1,27 +1,28 @@
-// Initialize and add the map
-let map;
 
-async function initMap() {
-  // The location of Uluru
-  const position = { lat: 37.43188, lng: -121.87224 };
-  // Request needed libraries.
-  //@ts-ignore
-  const { Map } = await google.maps.importLibrary("maps");
-  const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
+function initMap() {
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 10,
+    center: { lat: 37.3387, lng:  -121.8853 },
+  });    
 
-  // The map, centered at Uluru
-  map = new Map(document.getElementById("map"), {
-    zoom: 4,
-    center: position,
-    mapId: "DEMO_MAP_ID",
+  const marker = new google.maps.Marker({
+    position: { lat:  37.43188, lng:  -121.87224 },
+    map,
+    icon:{
+      url: "https://img.icons8.com/officexs/15/null/taco.png",
+    },
+    animation: google.maps.Animation.DROP
   });
-
-  // The marker, positioned at Uluru
-  const marker = new AdvancedMarkerView({
-    map: map,
-    position: position,
-    title: "Uluru",
+  var infoWindow = new google.maps.InfoWindow({
+    content:'<a href="www.soccer.com"><h2>Tacos el Gordo</h2></a>'
   });
+  marker.addListener('click',function(){
+    infoWindow.open(map,marker)
+    map.setZoom(14);
+    // map.setCenter(marker.getPosition());
+  }); 
 }
 
+
+window.initMap = initMap;
 initMap();
