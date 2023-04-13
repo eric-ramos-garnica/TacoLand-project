@@ -1,16 +1,21 @@
 from flask import Flask, render_template, request, flash, session, redirect,url_for
 from model import connect_to_db, db
 from model import Vendor,User,Rating
+import cloudinary.uploader
 import os
-
-# import crud
 
 from jinja2 import StrictUndefined
 #added the part after comma
 app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
-# app.config['UPLOAD_FOLDER'] = '/home/ericramosgarnica/src/tacoland/static/img'
+
+# importing cloudinary 
+CLOUDINARY_KEY = os.environ['CLOUDINARY_KEY']
+CLOUDINARY_SECRET = os.environ['CLOUDINARY_SECRET']
+CLOUD_NAME = "dkyhrd8xs"
+
+
 
 
 
@@ -158,8 +163,13 @@ def vendor_info():
     zipcode = request.form.get('zipcode')
     state = request.form.get('state')
     city = request.form.get('city')
-    image = request.form.get('image')
     coords = request.form.get('coordinates')
+    my_file = request.files.get('my-file')
+    result = cloudinary.uploader.upload(my_file,
+         api_key=CLOUDINARY_KEY,
+         api_secret=CLOUDINARY_SECRET,
+         cloud_name=CLOUD_NAME)
+    img_url = result['secure_url']
     
     
     if 'login' in session and 'edit' in session and session['edit'] == True:
@@ -170,14 +180,14 @@ def vendor_info():
         vendor.zipcode = zipcode
         vendor.state = state
         vendor.city = city
-        vendor.image = image
+        vendor.image = img_url
         db.session.commit()
         del session['edit']
         del session['vendor_id']
         return redirect('/vendorInfo')
     elif 'login' in session:
         # store data in database
-        vendor = Vendor.create(vendorname, location, workinghours, image, zipcode, state, city,session['id'],coords)
+        vendor = Vendor.create(vendorname, location, workinghours, img_url, zipcode, state, city,session['id'],coords)
         if vendor:    
             flash("Account created successfully!")
             return redirect('/vendorpage')
@@ -188,7 +198,6 @@ def vendor_info():
 @app.route("/vendorInfo")
 def vendor_account():
     """Will show all business from owner/user """
-    
     if 'login' in session:
         user_businesses = Vendor.get_businesses_by_user_id(session['id'])
         return render_template('vendor_info_by_owner.html',user_businesses=user_businesses)
@@ -211,6 +220,8 @@ def delete():
         db.session.delete(vendor)
         db.session.commit()
         return redirect("/vendorInfo")
+# 
+
 
 if __name__ == "__main__":
     connect_to_db(app)
