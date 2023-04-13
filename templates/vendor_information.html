@@ -3,6 +3,7 @@
 
 {% block head %}
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
 {% endblock %}
 
 {% block body %}
@@ -16,45 +17,67 @@
     <p>Rating:{{rating}}</p>
 {% endif %}
 
+<div>
+  <p>Make a rating</p>
+  <a href="/rating/{{vendor_info.vendor_id}}"><button>rating</button></a>
+</div> 
 <!-- hidden elements -->
 <p id="coord" style="display:none">{{vendor_info.coords}}</p>
 <p id="hr" style="display:none">{{vendor_info.working_hours}}</p>
 <p id="rating" style="display:none">{{rating}}</p>
-
+<hr>
+<br>
 <div>
-    <p>Make a rating</p>
-    <a href="/rating/{{vendor_info.vendor_id}}"><button>rating</button></a>
-</div>  
-   
-<h3>My Google Maps</h3>
-<div id="map"></div>
+  <div>
+    <label for="origin">Origin:</label>
+    <input type="text" id="origin">
+  </div>
+  <div>
+    <label for="destination">Destination:</label>
+    <input type="text" id="destination" value="{{vendor_info.location}}" >
+  </div>
+  <div>
+    <button onclick="calculateRoute()">Calculate Route</button>
+  </div>
+  <div id="map"></div>
+  
+</div>
+ 
+
+<!-- hidden elements -->
+<p id="hr" style="display:none">{{vendor_info.working_hours}}</p>
+<p id="rating" style="display:none">{{rating}}</p>
 
 <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBeoOdd3zdS3zAfqGFF7o6X8N3hGvsa04o&callback=initMap&v=weekly"
-        defer
-      ></script>
-      
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBETplZ7GOXp0wItLmoW5P-nTKwiSMYjAM&callback=initMap&v=weekly"
+  defer
+></script>
+
 <script>
-    const coordinate = document.getElementById("coord").innerHTML.split(","); 
-    const hr = document.getElementById("hr").innerHTML; 
-    const rating = document.getElementById("rating").innerHTML; 
+var map;
+const coordinate = document.getElementById("coord").innerHTML.split(","); 
+const hr = document.getElementById("hr").innerHTML; 
+const rating = document.getElementById("rating").innerHTML;
 
+function initMap() {
+  var coords = document.getElementById('coord').textContent.split(',');
+  var latLng = { lat: parseFloat(coords[0]), lng: parseFloat(coords[1]) };
 
-    function initMap() {
-    const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 10,
-      center: { lat: 37.3387, lng:  -121.8853 },
-    });    
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: latLng,
+    zoom: 13
+  });
 
-    const marker = new google.maps.Marker({
-      position: { lat:  Number(coordinate[0]), lng:  Number(coordinate[1]) },
-      map,
-      icon:{
+  var marker = new google.maps.Marker({
+    position: latLng,
+    map: map,
+    icon:{
         url: "https://img.icons8.com/officexs/15/null/taco.png",
       },
       animation: google.maps.Animation.DROP
-    });
-    var infoWindow = new google.maps.InfoWindow({
+  });
+
+  var infoWindow = new google.maps.InfoWindow({
       content:`<a href="#"><h2>Tacos el Gordo</h2></a><h2>Hours:${hr}<h2><h2>Rating:${rating}</h2>`
     });
     marker.addListener('click',function(){
@@ -62,10 +85,30 @@
       map.setZoom(14);
       // map.setCenter(marker.getPosition());
     }); 
-  }
-  
-  
-window.initMap = initMap;
-initMap();
+}
+
+function calculateRoute() {
+  var origin = document.getElementById('origin').value;
+  var destination = document.getElementById('destination').value;
+
+  var directionsService = new google.maps.DirectionsService();
+  var directionsRenderer = new google.maps.DirectionsRenderer();
+
+  directionsRenderer.setMap(map);
+
+  directionsService.route(
+    {
+      origin: origin,
+      destination: destination,
+      travelMode: google.maps.TravelMode.DRIVING
+    },
+    function(response, status) {
+      if (status === 'OK') {
+        directionsRenderer.setDirections(response);
+      } else {
+        window.alert('Directions request failed due to ' + status);
+      }
+    });
+}
 </script>
 {% endblock %}
