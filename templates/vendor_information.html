@@ -3,7 +3,7 @@
 
 {% block head %}
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
 
 {% block body %}
@@ -31,17 +31,21 @@
   <div>
     <label for="origin">Origin:</label>
     <input type="text" id="origin">
+    <i class="fa-solid fa-location-dot"></i>
   </div>
   <div>
     <label for="destination">Destination:</label>
     <input type="text" id="destination" value="{{vendor_info.location}}" >
+    <i class="fa-solid fa-flag-checkered"></i>
   </div>
   <div>
     <button onclick="calculateRoute()">Calculate Route</button>
   </div>
-  <div id="map"></div>
-  
 </div>
+<!-- google maps -->
+<div id="map"></div>
+<!-- output for google maps -->
+<div id="output"></div>
  
 
 <!-- hidden elements -->
@@ -104,6 +108,8 @@ function calculateRoute() {
     },
     function(response, status) {
       if (status === 'OK') {
+        const output = document.querySelector('#output');
+        output.innerHTML = "<div class='alert-info'> From: " + document.getElementById("origin").value + ".<br>To: " + document.getElementById("destination").value + ".<br>Driving distance <i class='fa-solid fa-road'></i>" + response.routes[0].legs[0].distance.text + ".<br>Duration <i class='fa-solid fa-hourglass-half'></i> : " + response.routes[0].legs[0].duration.text + ". </div>" ;
         directionsRenderer.setDirections(response);
       } else {
         window.alert('Directions request failed due to ' + status);
