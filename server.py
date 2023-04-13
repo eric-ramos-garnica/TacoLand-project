@@ -153,7 +153,11 @@ def seller_page():
 @app.route("/vendorpage")
 def create_vendor():
     """Vendor page"""
-    return render_template('create_vendor_account.html')
+    if 'login' in session:
+        return render_template('create_vendor_account.html')
+    else:
+        flash("Need to login to sign up")
+        return redirect('/sellerPage')
 
 @app.route("/vendorpage", methods=["POST"])
 def vendor_info():
