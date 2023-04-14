@@ -174,23 +174,9 @@ def vendor_info():
             api_secret=CLOUDINARY_SECRET,
             cloud_name=CLOUD_NAME)
         img_url = result['secure_url']
-        
-        
-        # if 'login' in session and 'edit' in session and session['edit'] == True:
-        #     vendor = Vendor.get_vendor_by_id(session['vendor_id'])
-        #     vendor.vendor_name = vendorname
-        #     vendor.location = location
-        #     vendor.working_hours = workinghours
-        #     vendor.zipcode = zipcode
-        #     vendor.state = state
-        #     vendor.city = city
-        #     vendor.image = img_url
-        #     db.session.commit()
-        #     del session['edit']
-        #     del session['vendor_id']
-        #     return redirect('/vendorInfo')
-            # store data in database
-        vendor = Vendor.create(vendorname, location, workinghours, img_url, zipcode, state, city,session['id'],coords)
+        business_type = request.form.get('business_type')
+    
+        vendor = Vendor.create(vendorname, location, workinghours, img_url, zipcode, state, city,session['id'],coords,business_type)
         if vendor:    
             flash("Account created successfully!")
             return redirect('/vendorpage')
@@ -235,7 +221,9 @@ def edit_page():
             api_secret=CLOUDINARY_SECRET,
             cloud_name=CLOUD_NAME)
         img_url = result['secure_url']
+        business_type = request.form.get('business_type')
 
+        # updating vendor information
         vendor = Vendor.get_vendor_by_id(session['vendor_id'])
         vendor.vendor_name = vendorname
         vendor.location = location
@@ -245,6 +233,7 @@ def edit_page():
         vendor.city = city
         vendor.image = img_url
         vendor.coords = coords
+        vendor.business_type = business_type
         del session['edit']
         del session['vendor_id']
         db.session.commit()

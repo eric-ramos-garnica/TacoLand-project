@@ -77,6 +77,7 @@ class Vendor(db.Model):
     city = db.Column(db.String)
     user_id = db.Column(db.Integer,db.ForeignKey("users.user_id"))
     coords = db.Column(db.String)
+    business_type = db.Column(db.String)
     
     #relationship with Rating
     ratings = db.relationship("Rating", back_populates = "vendor")
@@ -87,9 +88,9 @@ class Vendor(db.Model):
    
     
     @classmethod
-    def create(cls,vendor_name,location,working_hours,image,zipcode,state,city,user_id,coords ):
+    def create(cls,vendor_name,location,working_hours,image,zipcode,state,city,user_id,coords,business_type):
         """Creates venders"""
-        obj = cls(vendor_name=vendor_name,location=location,working_hours=working_hours,image=image,zipcode=zipcode,state=state,city=city,user_id =user_id, coords=coords)
+        obj = cls(vendor_name=vendor_name,location=location,working_hours=working_hours,image=image,zipcode=zipcode,state=state,city=city,user_id =user_id, coords=coords, business_type=business_type)
         db.session.add(obj)
         db.session.commit()
         return obj
