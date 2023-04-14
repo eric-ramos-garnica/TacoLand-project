@@ -52,6 +52,7 @@
 <!-- hidden elements -->
 <p id="hr" style="display:none">{{vendor_info.working_hours}}</p>
 <p id="rating" style="display:none">{{rating}}</p>
+<p id="taco-icon" style="display:none">{{vendor_info.business_type}}</p>
 
 <script
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo&callback=initMap&v=weekly"
@@ -63,6 +64,7 @@ var map;
 const coordinate = document.getElementById("coord").innerHTML.split(","); 
 const hr = document.getElementById("hr").innerHTML; 
 const rating = document.getElementById("rating").innerHTML;
+const business_type = document.getElementById("taco-icon").innerHTML;
 
 function initMap() {
   var coords = document.getElementById('coord').textContent.split(',');
@@ -72,12 +74,19 @@ function initMap() {
     center: latLng,
     zoom: 13
   });
+   
+  if( business_type=== 'taco truck'){
+      var icon_image ="https://img.icons8.com/color/25/null/food-truck.png";
+    }
+  else if(business_type === 'taco stand'){
+      var icon_image ="https://img.icons8.com/officexs/25/null/taco.png";
+    }
 
   var marker = new google.maps.Marker({
     position: latLng,
     map: map,
     icon:{
-        url: "https://img.icons8.com/officexs/15/null/taco.png",
+        url: icon_image,
       },
       animation: google.maps.Animation.DROP
   });
