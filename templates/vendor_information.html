@@ -4,6 +4,7 @@
 {% block head %}
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo"></script>
 {% endblock %}
 
 {% block body %}
@@ -30,12 +31,12 @@
 <div>
   <div>
     <label for="origin">Origin:</label>
-    <input type="text" id="origin">
+    <input type="text" id="origin" name="origin" placeholder="Type address">
     <i class="fa-solid fa-location-dot"></i>
   </div>
   <div>
     <label for="destination">Destination:</label>
-    <input type="text" id="destination" value="{{vendor_info.location}}" >
+    <input type="text" id="destination" value="{{vendor_info.location}}" name="destination">
     <i class="fa-solid fa-flag-checkered"></i>
   </div>
   <div>
@@ -115,6 +116,8 @@ function calculateRoute() {
         window.alert('Directions request failed due to ' + status);
       }
     });
-}
+    
+    
+  } 
 </script>
 {% endblock %}

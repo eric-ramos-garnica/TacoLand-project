@@ -13,6 +13,7 @@
 {% set business_name = []%}
 {% set vendorId = []%}
 {% set hours = []%}
+{% set taco_icons = []%}
 <ul id="vendor-list">
 {% for vendor in vendors%}
 <li>
@@ -22,6 +23,7 @@
     {% set _ = business_name.append(vendor.vendor_name) %}
     {% set _ = vendorId.append(vendor.vendor_id) %}
     {% set _ = hours.append(vendor.working_hours) %}
+    {% set _ = taco_icons.append(vendor.business_type) %}
 
     {% if vendor.vendor_id in rating_dic %}
         <p>Rating:{{rating_dic[vendor.vendor_id]}}</p>
@@ -36,6 +38,7 @@
 <p id ="business_name" style="display:none">{{business_name}}</p>
 <p id="vendor_id" style="display:none">{{vendorId}}</p>
 <p id="hours" style="display:none">{{hours}}</p>
+<p id="business_type" style="display:none">{{taco_icons}}</p>
 <br>
 <!-- <p id="result"></p> -->
 
@@ -61,6 +64,8 @@ var vendor_ids_array=JSON.parse(vendor_ids.replace(/'/g, "\""))
 
 const hours = document.getElementById("hours").innerHTML;
 var hours_array=JSON.parse(hours.replace(/'/g, "\""))
+const taco_icons = document.getElementById("business_type").innerHTML;
+var taco_icons_array=JSON.parse(taco_icons.replace(/'/g, "\""))
 
 // function for google maps
 function initMap() {
@@ -69,12 +74,21 @@ function initMap() {
     center: { lat: 37.3387, lng:  -121.8853 },
   });
   
+  "https://img.icons8.com/officexs/15/null/taco.png"
+  
   arr.forEach((coord,i) => {
+    if( taco_icons_array[i] === 'taco truck'){
+      var icon_image ="https://img.icons8.com/color/25/null/food-truck.png";
+    }
+    else if(taco_icons_array[i] === 'taco stand'){
+      var icon_image ="https://img.icons8.com/officexs/25/null/taco.png";
+    }
+
     const marker = new google.maps.Marker({
       position: { lat: Number(coord.lat), lng: Number(coord.long) },
       map,
       icon: {
-        url: "https://img.icons8.com/officexs/15/null/taco.png",
+        url: icon_image,
       },
       animation: google.maps.Animation.DROP
     });
