@@ -149,7 +149,6 @@ def seller_page():
     """Will display vendor sign up and vendor Info"""
     return render_template('seller_page.html')
 
-
 @app.route("/vendorpage")
 def create_vendor():
     """Vendor page"""
@@ -161,36 +160,36 @@ def create_vendor():
 
 @app.route("/vendorpage", methods=["POST"])
 def vendor_info():
-    vendorname = request.form.get('vendorName')
-    location = request.form.get('address')
-    workinghours = request.form.get('hours')  
-    zipcode = request.form.get('zipcode')
-    state = request.form.get('state')
-    city = request.form.get('city')
-    coords = request.form.get('coordinates')
-    my_file = request.files.get('my-file')
-    result = cloudinary.uploader.upload(my_file,
-         api_key=CLOUDINARY_KEY,
-         api_secret=CLOUDINARY_SECRET,
-         cloud_name=CLOUD_NAME)
-    img_url = result['secure_url']
-    
-    
-    if 'login' in session and 'edit' in session and session['edit'] == True:
-        vendor = Vendor.get_vendor_by_id(session['vendor_id'])
-        vendor.vendor_name = vendorname
-        vendor.location = location
-        vendor.working_hours = workinghours
-        vendor.zipcode = zipcode
-        vendor.state = state
-        vendor.city = city
-        vendor.image = img_url
-        db.session.commit()
-        del session['edit']
-        del session['vendor_id']
-        return redirect('/vendorInfo')
-    elif 'login' in session:
-        # store data in database
+    if 'login' in session:
+        vendorname = request.form.get('vendorName')
+        location = request.form.get('address')
+        workinghours = request.form.get('hours')  
+        zipcode = request.form.get('zipcode')
+        state = request.form.get('state')
+        city = request.form.get('city')
+        coords = request.form.get('coordinates')
+        my_file = request.files.get('my-file')
+        result = cloudinary.uploader.upload(my_file,
+            api_key=CLOUDINARY_KEY,
+            api_secret=CLOUDINARY_SECRET,
+            cloud_name=CLOUD_NAME)
+        img_url = result['secure_url']
+        
+        
+        # if 'login' in session and 'edit' in session and session['edit'] == True:
+        #     vendor = Vendor.get_vendor_by_id(session['vendor_id'])
+        #     vendor.vendor_name = vendorname
+        #     vendor.location = location
+        #     vendor.working_hours = workinghours
+        #     vendor.zipcode = zipcode
+        #     vendor.state = state
+        #     vendor.city = city
+        #     vendor.image = img_url
+        #     db.session.commit()
+        #     del session['edit']
+        #     del session['vendor_id']
+        #     return redirect('/vendorInfo')
+            # store data in database
         vendor = Vendor.create(vendorname, location, workinghours, img_url, zipcode, state, city,session['id'],coords)
         if vendor:    
             flash("Account created successfully!")
@@ -198,6 +197,8 @@ def vendor_info():
     else:
         flash("Need to login to create a vendor account")
         return redirect("/vendorpage")
+    
+
      
 @app.route("/vendorInfo")
 def vendor_account():
@@ -214,7 +215,40 @@ def edit(vendor_id):
     if "login" in session:
         session['edit'] = True
         session['vendor_id'] = vendor_id
-        return redirect('/vendorpage')
+        # return redirect('/vendorpage')
+        return render_template( "edit.html")
+    
+@app.route("/editpage", methods=["POST"])
+def edit_page():
+    if 'login' in session and 'edit' in session and session['edit'] == True:
+
+        vendorname = request.form.get('vendorName')
+        location = request.form.get('address')
+        workinghours = request.form.get('hours')  
+        zipcode = request.form.get('zipcode')
+        state = request.form.get('state')
+        city = request.form.get('city')
+        coords = request.form.get('coordinates')
+        my_file = request.files.get('my-file')
+        result = cloudinary.uploader.upload(my_file,
+            api_key=CLOUDINARY_KEY,
+            api_secret=CLOUDINARY_SECRET,
+            cloud_name=CLOUD_NAME)
+        img_url = result['secure_url']
+
+        vendor = Vendor.get_vendor_by_id(session['vendor_id'])
+        vendor.vendor_name = vendorname
+        vendor.location = location
+        vendor.working_hours = workinghours
+        vendor.zipcode = zipcode
+        vendor.state = state
+        vendor.city = city
+        vendor.image = img_url
+        vendor.coords = coords
+        del session['edit']
+        del session['vendor_id']
+        db.session.commit()
+        return redirect('/vendorInfo')
     
 @app.route("/deleteVendorAccount")
 def delete():

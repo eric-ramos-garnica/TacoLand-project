@@ -1,15 +1,10 @@
 {% extends 'base.html' %}
-{% block title %}Vendor sign up{% endblock %}
+{% block title %}Edit page{% endblock %}
 {% block body %}
-
-<h1>Create vendor account</h1>
+<h1>Edit account</h1>
 <hr>
 
-{% for message in get_flashed_messages() %}
-        <h1 id="message">{{message}}</h1>
-{% endfor %}
-
-<form action="/vendorpage" id="vendor-form" method="POST" enctype="multipart/form-data">
+<form action="/editpage" id="vendor-form" method="POST" enctype="multipart/form-data">
     <div id="containter-form">
         <label for="vendorName">Business Name</label><br>
         <input type="text" name="vendorName" id="vendorName"><br>
@@ -34,11 +29,20 @@
         <input type="text" name="city" id="city"><br>
 
         <input type="hidden" id="coordinates" name="coordinates">
+        
     
-        <button type="submit">Sign up</button>   
+        <button type="submit">Edit</button>
+        
     </div>
 </form>
-    
+
+<p>or</p>
+
+<div>
+    <p>Delete account</p>
+    <a href="/deleteVendorAccount"><button>Delete</button></a>
+</div>
+
 <script>
     window.addEventListener('load', function() {
         const form = document.getElementById('vendor-form');
@@ -47,7 +51,7 @@
 
             const apiKey = 'AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo';
             const address = document.getElementById('address').value;
-        
+
             fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`)
                 .then(response => response.json())
                 .then(data => {
@@ -64,4 +68,5 @@
         });
     });
 </script>
+
 {% endblock %}
