@@ -44,9 +44,23 @@
         <button type="submit">Sign up</button>   
     </div>
 </form>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo&libraries=places"></script>
     
 <script>
     window.addEventListener('load', function() {
+        const autocomplete = new google.maps.places.Autocomplete(document.getElementById('address'));
+
+        autocomplete.addListener('place_changed', function() {
+            const place = autocomplete.getPlace();
+            if (!place.geometry) {
+                console.log('No details available for input: ' + place.name);
+                return;
+            }
+            const address = place.formatted_address;
+            document.getElementById('address').value = address;
+
+        });
+
         const form = document.getElementById('vendor-form');
         form.addEventListener('submit', function(event) {
             event.preventDefault(); // prevent form submission
