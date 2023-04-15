@@ -4,7 +4,8 @@
 {% block head %}
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo&libraries=places"></script>
+
 {% endblock %}
 
 {% block body %}
@@ -22,14 +23,10 @@
   <p>Make a rating</p>
   <a href="/rating/{{vendor_info.vendor_id}}"><button>rating</button></a>
 </div> 
-<!-- hidden elements -->
-<p id="coord" style="display:none">{{vendor_info.coords}}</p>
-<p id="hr" style="display:none">{{vendor_info.working_hours}}</p>
-<p id="rating" style="display:none">{{rating}}</p>
 <hr>
 <br>
 <div>
-  <div>
+   <div>
     <label for="origin">Origin:</label>
     <input type="text" id="origin" name="origin" placeholder="Type address">
     <i class="fa-solid fa-location-dot"></i>
@@ -53,17 +50,18 @@
 <!-- output for google maps -->
 <div id="output"></div>
 
- 
-
-<!-- hidden elements -->
+ <!-- hidden elements -->
+<p id="coord" style="display:none">{{vendor_info.coords}}</p>
 <p id="hr" style="display:none">{{vendor_info.working_hours}}</p>
 <p id="rating" style="display:none">{{rating}}</p>
 <p id="taco-icon" style="display:none">{{vendor_info.business_type}}</p>
+
 
 <script
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo&callback=initMap&v=weekly"
   defer
 ></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo&libraries=places"></script>
 
 <script>
 var map;
@@ -72,8 +70,10 @@ const hr = document.getElementById("hr").innerHTML;
 const rating = document.getElementById("rating").innerHTML;
 const business_type = document.getElementById("taco-icon").innerHTML;
 
+
 function initMap() {
-  var coords = document.getElementById('coord').textContent.split(',');
+
+  var coords = document.getElementById('coord').innerHTML.split(',');
   var latLng = { lat: parseFloat(coords[0]), lng: parseFloat(coords[1]) };
 
   map = new google.maps.Map(document.getElementById('map'), {
@@ -104,8 +104,17 @@ function initMap() {
       infoWindow.open(map,marker)
       map.setZoom(14);
       // map.setCenter(marker.getPosition());
-    }); 
+    });
+
+    const defaultBounds = {
+    north: center.lat + 0.1,
+    south: center.lat - 0.1,
+    east: center.lng + 0.1,
+    west: center.lng - 0.1,
+  };
+
 }
+
 
 function calculateRoute() {
   var origin = document.getElementById('origin').value;
@@ -113,8 +122,7 @@ function calculateRoute() {
 
   var directionsService = new google.maps.DirectionsService();
   var directionsRenderer = new google.maps.DirectionsRenderer({ 
-    draggable:true,
-    map,
+    // draggable:true,   //i commented this  so the route wont be draggable.
     panel: document.getElementById("panel"),
   });
 
@@ -144,9 +152,8 @@ function calculateRoute() {
       }
     });
     
-    
-  } 
-
+  }
+   
 function displayRoute(origin, destination,service,display){
   service.route({
     origin:origin,
@@ -162,4 +169,8 @@ function displayRoute(origin, destination,service,display){
   });
 }
 </script>
+
+
+
+
 {% endblock %}
