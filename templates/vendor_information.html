@@ -4,7 +4,7 @@
 {% block head %}
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo&libraries=places"></script>
+
 
 {% endblock %}
 
@@ -28,7 +28,7 @@
 <div>
    <div>
     <label for="origin">Origin:</label>
-    <input type="text" id="origin" name="origin" placeholder="Type address">
+    <input type="text" id="origin" name="origin" placeholder="Type address" class="origin-autocomplate">
     <i class="fa-solid fa-location-dot"></i>
   </div>
   <div>
@@ -61,7 +61,6 @@
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo&callback=initMap&v=weekly"
   defer
 ></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo&libraries=places"></script>
 
 <script>
 var map;
@@ -69,6 +68,7 @@ const coordinate = document.getElementById("coord").innerHTML.split(",");
 const hr = document.getElementById("hr").innerHTML; 
 const rating = document.getElementById("rating").innerHTML;
 const business_type = document.getElementById("taco-icon").innerHTML;
+
 
 
 function initMap() {
