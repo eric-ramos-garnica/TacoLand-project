@@ -7,13 +7,19 @@
 {% endblock %}
 
 {% block body %}
-
-<h1>All Vendors</h1>
+<!-- jinja arrays -->
 {% set my_list = [] %}
 {% set business_name = []%}
 {% set vendorId = []%}
 {% set hours = []%}
 {% set taco_icons = []%}
+<h1>All Vendors</h1>
+<!-- /filters -->
+<a href="/filtervendors/taco truck"><button >Taco trucks</button></a>
+<a href="/filtervendors/taco stand"><button >Taco stands</button></a>
+<a href="/filtervendors/all"><button >All taco vendors</button></a>
+
+<!-- show vendors -->
 <ul id="vendor-list">
 {% for vendor in vendors%}
 <li>
@@ -109,7 +115,7 @@ function initMap() {
 
 window.initMap = initMap;
 initMap();
-    
+
  </script>
 
 {% endblock %}

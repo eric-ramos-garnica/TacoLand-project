@@ -44,9 +44,10 @@ def vendors():
             average=  rating_sum/len(vendor_ratings)
             round_rating = round(average)
             rating_dic[vendor_id] = round_rating
-
+    
+    # filter by all vendors,taco trucks,taco stands 
+    
     return render_template('vendorspage.html',vendors=vendors,rating_dic=rating_dic)
-
         
 
 @app.route("/tacovendors/<vendor_id>")
@@ -72,6 +73,29 @@ def vendor_business(vendor_id):
         return render_template('vendor_information.html',vendor_info=vendor_info,rating=round_rating)
     
     return render_template('vendor_information.html',vendor_info=vendor_info,rating=round_rating)
+
+@app.route("/filtervendors/<filter_choice>")
+def filters(filter_choice):
+    ratings =Rating.get_ratings()
+    rating_dic ={}
+    rating_set =set()
+    for obj in ratings:
+        rating_set.add(obj.vendor_id)
+
+    for vendor_id in rating_set:
+        vendor_ratings =Rating.get_vendor_rating_by_id(vendor_id)
+        if vendor_ratings:
+            rating_sum = 0
+            for rating in vendor_ratings:
+                rating_sum += rating.score
+            average=  rating_sum/len(vendor_ratings)
+            round_rating = round(average)
+            rating_dic[vendor_id] = round_rating
+    if filter_choice == 'taco stand' or filter_choice == 'taco truck':
+        vendors = Vendor.get_businesses_by_user_business_type(filter_choice)
+    elif filter_choice == 'all':
+        vendors = Vendor.get_vendor()
+    return render_template('vendorspage.html',vendors=vendors,rating_dic=rating_dic)
 
     
 @app.route("/rating/<vendor_id>")

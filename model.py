@@ -105,6 +105,9 @@ class Vendor(db.Model):
     def get_businesses_by_user_id(cls,id):
         """Retunrs business by user/owner """
         return Vendor.query.filter_by(user_id = id).all()
+    @classmethod
+    def get_businesses_by_user_business_type(cls,vendor_type):
+        return Vendor.query.filter_by(business_type=vendor_type)
     
 
 
