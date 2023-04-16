@@ -97,6 +97,50 @@ def filters(filter_choice):
         vendors = Vendor.get_vendor()
     return render_template('vendorspage.html',vendors=vendors,rating_dic=rating_dic)
 
+@app.route("/filterByZipcodeAndCity")
+def filter_zipcode_city():
+    zipcode = request.args.get("zipcode")
+    city = request.args.get("city")
+    business_type = request.args.get("business_type_filter")
+    if not zipcode:
+        zipcode = None
+    if not city:
+        city = None
+    # Rating average
+    ratings =Rating.get_ratings()
+    rating_dic ={}
+    rating_set =set()
+    for obj in ratings:
+        rating_set.add(obj.vendor_id)
+
+    for vendor_id in rating_set:
+        vendor_ratings =Rating.get_vendor_rating_by_id(vendor_id)
+        if vendor_ratings:
+            rating_sum = 0
+            for rating in vendor_ratings:
+                rating_sum += rating.score
+            average=  rating_sum/len(vendor_ratings)
+            round_rating = round(average)
+            rating_dic[vendor_id] = round_rating  
+    # checks for requirements
+    if zipcode is None and city is None:
+        vendors = Vendor.get_businesses_by_user_business_type(business_type)
+    if zipcode is None and city is None and business_type == "all" :
+        vendors = Vendor.get_vendor()
+    if zipcode is not None and city is None:
+        vendors = Vendor.get_businesses_by_zipcode_and_business_type(zipcode,business_type)
+    if zipcode is not None and city is None and business_type == "all" :
+        vendors = Vendor.get_businesses_by_zipcode(zipcode)
+    if city is not None and zipcode is None:
+        vendors = Vendor.get_businesses_by_city_and_business_type(city,business_type)
+    if city is not None and zipcode is None and business_type == "all" :
+        vendors = Vendor.get_businesses_by_city(city)
+    if zipcode is not None and city is not None:
+        vendors = Vendor.get_businesses_by_zipcode_city_business_type(zipcode,city,business_type)
+    if zipcode is not None and city is not None and business_type == "all" :
+        vendors = Vendor.get_businesses_by_zipcode_and_city(zipcode,city)
+
+    return render_template('vendorspage.html',vendors=vendors,rating_dic=rating_dic)
     
 @app.route("/rating/<vendor_id>")
 def rating(vendor_id):

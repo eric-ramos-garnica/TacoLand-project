@@ -108,8 +108,24 @@ class Vendor(db.Model):
     @classmethod
     def get_businesses_by_user_business_type(cls,vendor_type):
         return Vendor.query.filter_by(business_type=vendor_type)
-    
-
+    @classmethod
+    def get_businesses_by_zipcode_and_business_type(cls,zipcode,business_type):
+        return Vendor.query.filter((Vendor.zipcode == zipcode) & (Vendor.business_type == business_type))
+    @classmethod
+    def get_businesses_by_zipcode(cls,zipcode):
+        return Vendor.query.filter_by(zipcode=zipcode)
+    @classmethod
+    def get_businesses_by_city_and_business_type(cls,city,business_type):
+        return Vendor.query.filter((Vendor.city == city) & (Vendor.business_type == business_type))
+    @classmethod
+    def get_businesses_by_city(cls,city):
+        return Vendor.query.filter_by(city=city)
+    @classmethod
+    def get_businesses_by_zipcode_city_business_type(cls,zipcode,city,business_type):
+        return Vendor.query.filter((Vendor.zipcode == zipcode) & (Vendor.city == city) & (Vendor.business_type == business_type))
+    @classmethod
+    def get_businesses_by_zipcode_and_city(cls,zipcode,city):
+        return Vendor.query.filter((Vendor.zipcode == zipcode) & (Vendor.city == city))
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///tacoratings", echo=True):

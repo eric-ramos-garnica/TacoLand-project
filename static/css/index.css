@@ -8,3 +8,13 @@ img{
     width: 100%; /* The width is the width of the web page */
 }
 
+/* filter */
+.filter-image{
+    height: 30px;
+    width: 30px;
+}
+.container-filter-display{  /* to get rid of filter from page  */
+    display: none;
+}
+
+
