@@ -1,9 +1,112 @@
 {% extends 'base.html'%}
+
 {% block title %}Mexican Restaurants{% endblock %}
+
+{% block head %}
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+{% endblock %}
+
 {% block body %}
-<form action="/mexicanRestaurantsApi" method="GET">
-    <label for="location">Location</label>
-    <input type="text" name="restaurantsLocation" id="location">
-    <button type="submit">Submit</button>
-</form>
+<!-- Initialization for coordinates array-->
+{% set coordinate_list = [] %}
+{% set business_name = []%}
+{% set phone = []%}
+
+
+<h1>Mexican Restaurants</h1>
+{% if not mexican_restaurants_data %}
+    <p>Please enter zipcode or city or address or state.</p>
+{% endif %}
+    <form action="/mexicanRestaurantsApi" method="GET">
+        <label for="location">Location</label>
+        <input type="text" name="restaurantsLocation" id="location">
+        <button type="submit">Submit</button>
+    </form>
+
+{% if mexican_restaurants_data %} 
+<ul id="mexican-restaurants-list">
+    {% for business in mexican_restaurants_data["businesses"] %}
+        <li>
+            <h2>{{business["name"]}}</h2>
+            <a href="#"><img src="{{business['image_url']}}" alt="Mexican image" class="mexican-restaurant-image"></a>
+            <p>Rating:{{business["rating"]}}</p>
+        </li>
+        <!-- appending all coordinates in array -->
+        {% set _ = coordinate_list.append(business['coordinates']) %}
+        {% set _ = business_name.append(business["name"]) %}
+        {% set _ = phone.append(business['display_phone']) %}
+
+    {% endfor %}
+
+    <!-- elements for javascript to get data -->
+    <p id="k" style="display: none;">{{coordinate_list}}</p>
+    <p id ="business_name" style="display: none;">{{business_name}}</p>
+    <p id="phone" style="display: none;">{{phone}}</p>
+    <p id="regions" style="display: none;">{{mexican_restaurants_data['region']['center']}}</p>
+    <!-- google maps -->
+    <h1>google maps</h1>
+    <div id="map"></div>
+{% endif %}
+</ul>
+
+
+<script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo&callback=initMap&v=weekly"
+        defer
+></script> 
+<script>
+    // converting string to array objects
+    var mex_restaurants = document.getElementById("k").innerHTML;
+    var mex_restaurants_array=JSON.parse(mex_restaurants.replace(/'/g, "\""));
+
+    const business_title = document.getElementById("business_name").innerHTML;
+    var business_title_array=JSON.parse(business_title.replace(/'/g, "\""))
+    
+    const phones = document.getElementById("phone").innerHTML;
+    var phones_array=JSON.parse(phones.replace(/'/g, "\""))
+
+    const reg = document.getElementById("regions").innerHTML;
+    var reg_obj=JSON.parse(reg.replace(/'/g, "\""))
+    
+    
+    // function for google maps
+    function initMap() {
+    const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 10,
+        center: { lat: reg_obj.latitude, lng:  reg_obj.longitude },
+    });
+    
+    mex_restaurants_array.forEach((coord,i) => {
+        
+        const marker = new google.maps.Marker({
+        position: { lat: coord.latitude, lng: coord.longitude},
+        map,
+        icon:"https://img.icons8.com/officexs/25/null/taco.png",
+        animation: google.maps.Animation.DROP
+        });
+        
+        const infoWindow = new google.maps.InfoWindow({
+        content: `<a href="#"><h2>${business_title_array[i]}</h2></a><h2>Hours:${phones_array[i]}</h2>`
+        });
+        
+        marker.addListener('click', () => {
+        infoWindow.open(map, marker);
+        map.setZoom(14);
+        map.setCenter(marker.getPosition());
+        }); 
+    });
+    
+    return map;
+    }
+
+    window.initMap = initMap;
+    initMap();
+
+</script>
+
+
+
+
+
+
 {% endblock %}

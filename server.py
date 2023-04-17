@@ -28,7 +28,9 @@ def homepage():
 
 @app.route("/mexicanRestaurants")
 def restaurants():
-    return render_template("restaurants.html")
+    #I used this so it wont give me an error when the form submits to get the api
+    mexican_restaurants_data = ""
+    return render_template("restaurants.html", mexican_restaurants_data=mexican_restaurants_data)
 
 @app.route("/mexicanRestaurantsApi")
 def restaurants_api():
@@ -42,7 +44,7 @@ def restaurants_api():
     #defines the parameters 
     PARAMETERS = { 
         'term':'Mexican restaurants',
-        'limit': 25,
+        'limit': 6,
         'radius': 10000,
         'location': location
     }
@@ -53,7 +55,7 @@ def restaurants_api():
     mexican_restaurants_data = response.json()
    #render to template with json
     return render_template("restaurants.html", mexican_restaurants_data = mexican_restaurants_data)
-
+    # return mexican_restaurants_data
 
 
 @app.route("/tacovendors")
