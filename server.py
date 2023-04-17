@@ -3,6 +3,8 @@ from model import connect_to_db, db
 from model import Vendor,User,Rating
 import cloudinary.uploader
 import os
+import requests
+
 
 from jinja2 import StrictUndefined
 #added the part after comma
@@ -14,15 +16,45 @@ app.jinja_env.undefined = StrictUndefined
 CLOUDINARY_KEY = os.environ['CLOUDINARY_KEY']
 CLOUDINARY_SECRET = os.environ['CLOUDINARY_SECRET']
 CLOUD_NAME = "dkyhrd8xs"
-
+# YELP_API_KEY = os.environ['YELP_API_KEY']
 
 
 
 
 # Replace this with routes and view functions!
 @app.route("/")
-def homepage():  
+def homepage(): 
     return render_template('homepage.html')
+
+@app.route("/mexicanRestaurants")
+def restaurants():
+    return render_template("restaurants.html")
+
+@app.route("/mexicanRestaurantsApi")
+def restaurants_api():
+    location = request.args.get("restaurantsLocation")
+    
+    # Defines the api key, endpoint and authorization
+    YELP_API_KEY = "2NjVBsiTBfPq3sCInXbZsZvOBKzFYIo2MeGiciWnN2zjS6BjazmX76s8rJpqssQAoX9yyE4Fkn5JF9PdeRN_jfLsFltmP-7RU0_KGEN7cvkuJooxMhHq4RjHQEg8ZHYx"
+    ENDPOINT = "https://api.yelp.com/v3/businesses/search"
+    HEADERS = {'Authorization': 'bearer %s' % YELP_API_KEY}
+
+    #defines the parameters 
+    PARAMETERS = { 
+        'term':'Mexican restaurants',
+        'limit': 25,
+        'radius': 10000,
+        'location': location
+    }
+    
+    response = requests.get(url = ENDPOINT, params= PARAMETERS, headers= HEADERS)
+
+    #convert to json string to a dictionary
+    mexican_restaurants_data = response.json()
+   #render to template with json
+    return render_template("restaurants.html", mexican_restaurants_data = mexican_restaurants_data)
+
+
 
 @app.route("/tacovendors")
 def vendors():

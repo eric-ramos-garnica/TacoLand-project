@@ -1,0 +1,9 @@
+{% extends 'base.html'%}
+{% block title %}Mexican Restaurants{% endblock %}
+{% block body %}
+<form action="/mexicanRestaurantsApi" method="GET">
+    <label for="location">Location</label>
+    <input type="text" name="restaurantsLocation" id="location">
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}
