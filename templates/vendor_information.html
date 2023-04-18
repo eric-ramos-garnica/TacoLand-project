@@ -4,8 +4,6 @@
 {% block head %}
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-
 {% endblock %}
 
 {% block body %}
@@ -40,21 +38,23 @@
     <button onclick="calculateRoute()">Calculate Route</button>
   </div>
 </div>
-
+<!-- google maps container -->
 <div>
   <!-- google maps -->
   <div id="map"></div>
   <!-- pannel for directions -->
   <div id="panel"></div>
+  <!-- output for google maps -->
+  <div id="output"></div>
 </div>
-<!-- output for google maps -->
-<div id="output"></div>
 
  <!-- hidden elements -->
 <p id="coord" style="display:none">{{vendor_info.coords}}</p>
 <p id="hr" style="display:none">{{vendor_info.working_hours}}</p>
 <p id="rating" style="display:none">{{rating}}</p>
 <p id="taco-icon" style="display:none">{{vendor_info.business_type}}</p>
+<p id="business-name" style="display:none">{{vendor_info.vendor_name}} </p>
+
 
 
 <script
@@ -68,6 +68,7 @@ const coordinate = document.getElementById("coord").innerHTML.split(",");
 const hr = document.getElementById("hr").innerHTML; 
 const rating = document.getElementById("rating").innerHTML;
 const business_type = document.getElementById("taco-icon").innerHTML;
+const business_name = document.getElementById("business-name").innerHTML;
 
 
 
@@ -98,7 +99,7 @@ function initMap() {
   });
 
   var infoWindow = new google.maps.InfoWindow({
-      content:`<a href="#"><h2>Tacos el Gordo</h2></a><h2>Hours:${hr}<h2><h2>Rating:${rating}</h2>`
+      content:`<a href="#"><h2>${business_name}</h2></a><h2>Hours:${hr}<h2><h2>Rating:${rating}</h2>`
     });
     marker.addListener('click',function(){
       infoWindow.open(map,marker)
@@ -106,12 +107,6 @@ function initMap() {
       // map.setCenter(marker.getPosition());
     });
 
-    const defaultBounds = {
-    north: center.lat + 0.1,
-    south: center.lat - 0.1,
-    east: center.lng + 0.1,
-    west: center.lng - 0.1,
-  };
 
 }
 

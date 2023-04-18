@@ -28,7 +28,7 @@
     {% for business in mexican_restaurants_data["businesses"] %}
         <li>
             <h2>{{business["name"]}}</h2>
-            <a href="#"><img src="{{business['image_url']}}" alt="Mexican image" class="mexican-restaurant-image"></a>
+            <a href="/restaurantInfo/{{business['id']}}"><img src="{{business['image_url']}}" alt="Mexican image" class="mexican-restaurant-image"></a>
             <p>Rating:{{business["rating"]}}</p>
         </li>
         <!-- appending all coordinates in array -->
@@ -81,7 +81,7 @@
         const marker = new google.maps.Marker({
         position: { lat: coord.latitude, lng: coord.longitude},
         map,
-        icon:"https://img.icons8.com/officexs/25/null/taco.png",
+        icon:"https://img.icons8.com/external-nawicon-outline-color-nawicon/16/null/external-taco-fast-food-nawicon-outline-color-nawicon.png",
         animation: google.maps.Animation.DROP
         });
         
@@ -103,10 +103,4 @@
     initMap();
 
 </script>
-
-
-
-
-
-
 {% endblock %}

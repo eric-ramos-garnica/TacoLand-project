@@ -1,0 +1,155 @@
+{% extends 'base.html'%}
+{% block title %}Mexican Restaurant{% endblock %}
+
+{% block head %}
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock%}
+
+{% block body %}
+<h1>Welcome to {{name}} </h1>
+<img src="{{image_url}}" alt="image">
+<p>Address: {{address}}</p>
+<p>Phone: {{phone}}</p>
+<p>Rating: {{rating}}</p>
+
+<div>
+  <p>Make a rating</p>
+  <a href="{{url}}"><button>rating</button></a>
+</div> 
+<hr>
+<br>
+<!-- directions -->
+
+<div>
+    <label for="origin">Origin:</label>
+    <input type="text" id="origin" name="origin" placeholder="Type address" class="origin-autocomplate">
+    <i class="fa-solid fa-location-dot"></i>
+</div>
+<div>
+    <label for="destination">Destination:</label>
+    <input type="text" id="destination" value="{{address}}" name="destination">
+    <i class="fa-solid fa-flag-checkered"></i>
+</div>
+<div>
+    <button onclick="calculateRoute()">Calculate Route</button>
+</div>
+
+<!-- google maps container -->
+<div>
+    <!-- google maps -->
+    <div id="map"></div>
+    <!-- pannel for directions -->
+    <div id="panel"></div>
+    
+    <!-- output for google maps -->
+    <div id="output"></div>
+</div>
+ 
+<!-- hidden elements -->
+<p id="coord" style="display:none">{{coordinates}}</p>
+<p id="phone" style="display:none">{{phone}}</p>
+<p id="rating" style="display:none">{{rating}}</p>
+<p id="business-name" style="display:none">{{name}} </p>
+
+
+
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo&callback=initMap&v=weekly"
+  defer
+></script>
+
+<script>
+    var map;
+    const coordinate = document.getElementById("coord").innerHTML;
+    const coordinate_array = JSON.parse(coordinate.replace(/'/g, "\"")); 
+    const phone = document.getElementById("phone").innerHTML; 
+    const rating = document.getElementById("rating").innerHTML;
+    const business_name = document.getElementById("business-name").innerHTML;
+    
+    function initMap() {
+        var latLng = { lat: coordinate_array['latitude'] , lng: coordinate_array['longitude'] };
+
+        map = new google.maps.Map(document.getElementById('map'), {
+        center: latLng,
+        zoom: 13
+        });
+        
+
+        var marker = new google.maps.Marker({
+        position: latLng,
+        map: map,
+        icon:"https://img.icons8.com/external-nawicon-outline-color-nawicon/16/null/external-taco-fast-food-nawicon-outline-color-nawicon.png",
+        animation: google.maps.Animation.DROP
+        });
+
+        var infoWindow = new google.maps.InfoWindow({
+            content: `<a href="#"><h2>${business_name}</h2></a><h2>Rating:${rating}</h2><h2>Phone:${phone}</h2>`
+        });
+        marker.addListener('click',function(){
+            infoWindow.open(map,marker)
+            map.setZoom(14);
+            // map.setCenter(marker.getPosition());
+        });
+
+
+
+    }
+
+    function calculateRoute() {
+    var origin = document.getElementById('origin').value;
+    var destination = document.getElementById('destination').value;
+
+    var directionsService = new google.maps.DirectionsService();
+    var directionsRenderer = new google.maps.DirectionsRenderer({ 
+        // draggable:true,   //i commented this  so the route wont be draggable.
+        panel: document.getElementById("panel"),
+    });
+
+    directionsRenderer.addListener("directions_changed", ()=>{
+        const directions = directionsRenderer.getDirections();
+
+    });
+
+    displayRoute(origin,destination,directionsService,directionsRenderer);
+
+
+    directionsRenderer.setMap(map);
+
+    directionsService.route(
+        {
+        origin: origin,
+        destination: destination,
+        travelMode: google.maps.TravelMode.DRIVING
+        },
+        function(response, status) {
+        if (status === 'OK') {
+            const output = document.querySelector('#output');
+            output.innerHTML = "<div class='alert-info'> From: " + document.getElementById("origin").value + ".<br>To: " + document.getElementById("destination").value + ".<br>Driving distance <i class='fa-solid fa-road'></i>" + response.routes[0].legs[0].distance.text + ".<br>Duration <i class='fa-solid fa-hourglass-half'></i> : " + response.routes[0].legs[0].duration.text + ". </div>" ;
+            directionsRenderer.setDirections(response);
+        } else {
+            window.alert('Directions request failed due to ' + status);
+        }
+        });
+        
+    }
+    
+    function displayRoute(origin, destination,service,display){
+    service.route({
+        origin:origin,
+        destination:destination,
+        travelMode:google.maps.TravelMode.DRIVING,
+        avoidTolls: true,
+    })
+    .then(function(result){
+        display.setDirections(result);
+    })
+    .catch(function(e) {
+        alert("Could not display directions due to: " + e)
+    });
+    }
+
+</script>
+
+
+{% endblock %}

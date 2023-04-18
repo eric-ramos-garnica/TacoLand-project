@@ -4,6 +4,7 @@ from model import Vendor,User,Rating
 import cloudinary.uploader
 import os
 import requests
+import json
 
 
 from jinja2 import StrictUndefined
@@ -17,7 +18,8 @@ CLOUDINARY_KEY = os.environ['CLOUDINARY_KEY']
 CLOUDINARY_SECRET = os.environ['CLOUDINARY_SECRET']
 CLOUD_NAME = "dkyhrd8xs"
 # YELP_API_KEY = os.environ['YELP_API_KEY']
-
+YELP_API_KEY = "2NjVBsiTBfPq3sCInXbZsZvOBKzFYIo2MeGiciWnN2zjS6BjazmX76s8rJpqssQAoX9yyE4Fkn5JF9PdeRN_jfLsFltmP-7RU0_KGEN7cvkuJooxMhHq4RjHQEg8ZHYx"
+ENDPOINT = "https://api.yelp.com/v3/businesses/search"
 
 
 
@@ -37,8 +39,8 @@ def restaurants_api():
     location = request.args.get("restaurantsLocation")
     
     # Defines the api key, endpoint and authorization
-    YELP_API_KEY = "2NjVBsiTBfPq3sCInXbZsZvOBKzFYIo2MeGiciWnN2zjS6BjazmX76s8rJpqssQAoX9yyE4Fkn5JF9PdeRN_jfLsFltmP-7RU0_KGEN7cvkuJooxMhHq4RjHQEg8ZHYx"
-    ENDPOINT = "https://api.yelp.com/v3/businesses/search"
+    # YELP_API_KEY = "2NjVBsiTBfPq3sCInXbZsZvOBKzFYIo2MeGiciWnN2zjS6BjazmX76s8rJpqssQAoX9yyE4Fkn5JF9PdeRN_jfLsFltmP-7RU0_KGEN7cvkuJooxMhHq4RjHQEg8ZHYx"
+    # ENDPOINT = "https://api.yelp.com/v3/businesses/search"
     HEADERS = {'Authorization': 'bearer %s' % YELP_API_KEY}
 
     #defines the parameters 
@@ -56,6 +58,26 @@ def restaurants_api():
    #render to template with json
     return render_template("restaurants.html", mexican_restaurants_data = mexican_restaurants_data)
     # return mexican_restaurants_data
+@app.route("/restaurantInfo/<id>")
+def restaurant_info(id):
+    # Make a GET request to the Yelp API to retrieve information for the specific restaurant with the given id
+    headers = {'Authorization': 'bearer %s' % YELP_API_KEY}
+    url = f'https://api.yelp.com/v3/businesses/{id}'
+    response = requests.get(url, headers=headers)
+    
+    # Parse the response JSON to extract the relevant information
+    # restaurant_data = json.loads(response.text)
+    restaurant_data = response.json()
+    name = restaurant_data['name']
+    image_url = restaurant_data['image_url']
+    rating = restaurant_data['rating']
+    phone = restaurant_data['phone']
+    address = ', '.join(restaurant_data['location']['display_address'])
+    url = restaurant_data['url']
+    coordinates = restaurant_data['coordinates']
+
+    # Pass the extracted information to the template
+    return render_template('restaurant_info.html', name=name, image_url=image_url, rating=rating, phone=phone, address=address, url=url, coordinates=coordinates)
 
 
 @app.route("/tacovendors")
