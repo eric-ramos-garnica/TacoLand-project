@@ -384,12 +384,30 @@ def delete():
 @app.route('/userRatingTopFive')
 def user_rating_top_five():
     if 'login' in session:
-        all_ratings_by_user = Rating.get_all_ratings_dec_sorted_by_user_id(session['id'])
-        #getting top five only
-        top_five_array = [] 
+        all_ratings_by_user = Rating.get_all_ratings_dec_sorted_scores_by_user_id(session['id'])
+
+        #will store top 5 ratings in decending order
+        top_five_array = []
+        #will store top 5 vendor obj so we can use vendor info
+        top_five_vendors_from_user = []
+        #will store average rating by vendor
+        top_five_vendors_rate = []
+        
         for i in range(5):
             top_five_array.append(all_ratings_by_user[i])
-        return render_template('user_rating_top_five.html', top_five_array=top_five_array)
+            vendor = Vendor.get_vendor_by_id(all_ratings_by_user[i].vendor_id)
+            top_five_vendors_from_user.append(vendor)
+            #calculating average
+            vendor_ratings =Rating.get_vendor_rating_by_id(all_ratings_by_user[i].vendor_id)
+            if vendor_ratings:
+                rating_sum = 0
+                for rating in vendor_ratings:
+                    rating_sum += rating.score
+                average=  rating_sum/len(vendor_ratings)
+                round_rating = round(average)
+                top_five_vendors_rate.append(round_rating)
+        
+        return render_template('user_rating_top_five.html', top_five_array=top_five_array,top_five_vendors_from_user=top_five_vendors_from_user,top_five_vendors_rate=top_five_vendors_rate)
 
 if __name__ == "__main__":
     connect_to_db(app)

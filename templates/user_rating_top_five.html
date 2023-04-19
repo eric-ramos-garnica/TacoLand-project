@@ -8,7 +8,13 @@
 <!-- body -->
 {% block body %}
 <h1>Top 5 ratings</h1>
-{% for rating in top_five_array %}
-    <p>{{rating.score}} </p>    
+
+{% for idx in range(top_five_array|length) %}
+    <h2>{{idx + 1}}.</h2>
+    <p>{{top_five_vendors_from_user[idx].vendor_name}}</p>
+    <p><img src="{{top_five_vendors_from_user[idx].image}}" alt="vendor image"></p>
+    <p>Rating:{{top_five_vendors_rate[idx]}}</p>
+    <p>Users rate for vendor:{{top_five_array[idx].score}}</p>
+    
 {% endfor %}
 {% endblock %}
