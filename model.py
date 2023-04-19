@@ -8,7 +8,7 @@ class Rating(db.Model):
 
     __tablename__ = "ratings"
     rating_id = db.Column(db.Integer, primary_key = True,autoincrement=True)
-    user_id = db.Column(db.Integer,db.ForeignKey("users.user_id"),nullable =True)
+    user_id = db.Column(db.Integer,db.ForeignKey("users.user_id"))
     vendor_id = db.Column(db.Integer,db.ForeignKey("vendors.vendor_id"))
     score = db.Column(db.Integer)
     
@@ -31,6 +31,10 @@ class Rating(db.Model):
     @classmethod
     def get_vendor_rating_by_id(cls,id):
         return Rating.query.filter_by(vendor_id = id).all()
+    @classmethod
+    def get_vendor_rating_by_user_id_and_vendor_id(cls,user_id,vendor_id):
+        return Rating.query.filter((Rating.user_id == user_id) & (Rating.vendor_id == vendor_id)).all()
+    
 
 
 class User(db.Model):

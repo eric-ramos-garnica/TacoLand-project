@@ -197,8 +197,21 @@ def filter_zipcode_city():
 @app.route("/rating/<vendor_id>")
 def rating(vendor_id):
     """Will display rating page"""
-    vendor_info = Vendor.get_vendor_by_id(vendor_id)
-    return render_template('ratingpage.html',vendor_info=vendor_info)
+
+    # User can rate one time per custumer, if user not login user will not be able to rate.
+    if 'login' in session:                                              
+        vendor_info = Vendor.get_vendor_by_id(vendor_id)
+        rating_obj = Rating.get_vendor_rating_by_user_id_and_vendor_id(session['id'],vendor_id)
+        if rating_obj:
+            flash("You can only rate one time per costumer")
+            return redirect(f'/tacovendors/{vendor_id}')
+        else:
+            return render_template('ratingpage.html',vendor_info=vendor_info)
+    else:
+        flash("Need to be logged in to rate!")
+        return redirect(f'/tacovendors/{vendor_id}')
+    
+    
     
 
 @app.route("/ratingSubmission/<vendor_id>", methods=["GET", "POST"])
