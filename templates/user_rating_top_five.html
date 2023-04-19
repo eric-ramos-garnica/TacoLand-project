@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+<!-- title -->
+{% block title %}Top 5 ratings{% endblock %}
+<!-- head -->
+{% block head %}
+
+{% endblock %}
+<!-- body -->
+{% block body %}
+<h1>Top 5 ratings</h1>
+{% for rating in all_ratings_by_user %}
+    <p>{{rating.score}} </p>    
+{% endfor %}
+{% endblock %}

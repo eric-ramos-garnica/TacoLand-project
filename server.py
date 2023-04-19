@@ -380,8 +380,12 @@ def delete():
         db.session.delete(vendor)
         db.session.commit()
         return redirect("/vendorInfo")
-# 
-
+ 
+@app.route('/userRatingTopFive')
+def user_rating_top_five():
+    if 'login' in session:
+        all_ratings_by_user = Rating.get_all_ratings_by_user_id(session['id'])
+        return render_template('user_rating_top_five.html', all_ratings_by_user=all_ratings_by_user)
 
 if __name__ == "__main__":
     connect_to_db(app)
