@@ -27,15 +27,25 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/loginpage">Login</a>
-        </li>	
+        </li>
+        <li class="nav-item dropdown" id="user-tab" style="display: none;">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            User
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/userRatingTopFive">Top 5 ratings</a></li>
+            <!-- <li><hr class="dropdown-divider"></li> -->
+          </ul>
+        </li>		
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Settings
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/createaccountpage">Sign up</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+            <!-- the logout tab and devider will only appear when the user is login, also this tab should always be the last one -->
+            <li><hr class="dropdown-divider" id="logout-devider" style="display: none;"></li>
+            <li><a class="dropdown-item" id="logout-tab" style="display: none;" href="/logout">Logout</a></li>
           </ul>
         </li>		
         </ul>		  
