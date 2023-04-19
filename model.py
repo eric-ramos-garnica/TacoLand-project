@@ -35,9 +35,10 @@ class Rating(db.Model):
     def get_vendor_rating_by_user_id_and_vendor_id(cls,user_id,vendor_id):
         return Rating.query.filter((Rating.user_id == user_id) & (Rating.vendor_id == vendor_id)).all()
     @classmethod
-    def get_all_ratings_by_user_id(cls,user_id):
+    def get_all_ratings_dec_sorted_by_user_id(cls,user_id):
         all_ratings_by_user = Rating.query.filter(Rating.user_id == user_id)
         return all_ratings_by_user.order_by(desc(Rating.score)).all()
+        # you can write like this too V
         # def get_all_ratings_by_user_id(cls, user_id):
         # all_ratings_by_user = Rating.query.filter_by(user_id=user_id).order_by(desc(Rating.score)).all()
         # return all_ratings_by_user

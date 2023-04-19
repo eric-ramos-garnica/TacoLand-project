@@ -203,7 +203,7 @@ def rating(vendor_id):
         vendor_info = Vendor.get_vendor_by_id(vendor_id)
         rating_obj = Rating.get_vendor_rating_by_user_id_and_vendor_id(session['id'],vendor_id)
         if rating_obj:
-            flash("You can only rate one time per costumer")
+            flash("You can only rate one time per vendor")
             return redirect(f'/tacovendors/{vendor_id}')
         else:
             return render_template('ratingpage.html',vendor_info=vendor_info)
@@ -384,8 +384,12 @@ def delete():
 @app.route('/userRatingTopFive')
 def user_rating_top_five():
     if 'login' in session:
-        all_ratings_by_user = Rating.get_all_ratings_by_user_id(session['id'])
-        return render_template('user_rating_top_five.html', all_ratings_by_user=all_ratings_by_user)
+        all_ratings_by_user = Rating.get_all_ratings_dec_sorted_by_user_id(session['id'])
+        #getting top five only
+        top_five_array = [] 
+        for i in range(5):
+            top_five_array.append(all_ratings_by_user[i])
+        return render_template('user_rating_top_five.html', top_five_array=top_five_array)
 
 if __name__ == "__main__":
     connect_to_db(app)

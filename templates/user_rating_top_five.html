@@ -8,7 +8,7 @@
 <!-- body -->
 {% block body %}
 <h1>Top 5 ratings</h1>
-{% for rating in all_ratings_by_user %}
+{% for rating in top_five_array %}
     <p>{{rating.score}} </p>    
 {% endfor %}
 {% endblock %}
