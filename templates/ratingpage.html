@@ -1,8 +1,20 @@
 {% extends 'base.html'%}
 {% block title %}Rating Page{% endblock %}
 {% block body %}
+
+{% for message in get_flashed_messages() %}
+        <h1 id="message">{{message}}</h1>
+{% endfor %}
+
+<div id="container-rating-review " >
+<h1>{{vendor_info.vendor_name}}</h1>
 <img src="{{vendor_info.image}}" alt="image"><br>
-<form action="{{ url_for('rating_submission', vendor_id=vendor_info.vendor_id) }}" method="POST">
+
+<!-- will display button to make a review -->
+<button id="rate-review-button">Make a rate/review</button>
+
+<!-- will display rating & review form -->
+<form action=" /ratingSubmission/{{vendor_info.vendor_id}}" method="POST" style="display: none;" id="rating-review-form">
     <label for="rating">Enter rating between 1-5</label><br>
     <input type="number" name="rating" id="rating" min="1" max="5" required><br>
 
@@ -11,5 +23,23 @@
 
     <button type="submit">submit</button>
 </form>
+</div>
+<hr>
+<!--will display review  -->
+<div>
+    <!-- will display latest review -->
+    {% for review in reviews[::-1]%}
+        <h4>Rate:{{review.score}}</h4>    
+        <p>{{review.review}}</p>
+    {% endfor%}
+</div>
+<script>
+    rating_button = document.getElementById("rate-review-button")
+    rating_button.addEventListener('click',(e)=>{
+        form_rating = document.getElementById("rating-review-form")
+        form_rating.removeAttribute("style")
+        e.target.setAttribute("style","display:none;")
+    });
 
+</script>
 {% endblock %}
