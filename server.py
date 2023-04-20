@@ -270,7 +270,7 @@ def login():
         session['login'] = "login"
         session['email'] = obj.email
         return redirect("/")
-    
+        
 @app.route("/logout")
 def logout():
     if 'login' in session:

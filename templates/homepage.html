@@ -2,7 +2,7 @@
 {% block title %}Taco Land {% endblock %}
 {% block body %}
 {% if 'login' in session %}
-<p id="display-user-nav" style="display: none;">{{session['login']}} </p>
+
 <h1>Welcome {{session['name']}} to Taco Land</h1>
 {% else %}
 <h1>Welcome to Taco Land</h1>
@@ -11,18 +11,4 @@
 <a href="/tacovendors">Taco Vendors</a>
 <a href="/mexicanRestaurants">Mexican Restaurants</a>
     
-<script>
-    // if the user is login the navbar tab <"USER"> will show, if user is not login it will not show
-    var login = document.getElementById("display-user-nav").innerHTML
-    //the 'login ' has space after the n, if you do not put a space there it will not work, you can check the web-developer tool and type login then it will show result
-    if(login == 'login '){
-        user_tab_in_navbar=document.getElementById("user-tab")
-        user_tab_in_navbar.removeAttribute("style")
-
-        logout_tab_in_navbar =document.getElementById("logout-tab")
-        logout_tab_in_navbar.removeAttribute("style")
-        logout_devider_in_navbar =document.getElementById("logout-devider")
-        logout_devider_in_navbar.removeAttribute("style")
-    }
-</script>
 {% endblock %}
