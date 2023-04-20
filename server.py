@@ -218,11 +218,10 @@ def rating(vendor_id):
 def rating_submission(vendor_id):
     if request.method == "POST":
         score = request.form.get("rating")
+        review = request.form.get("review")
         # save the rating to database or do something with it
         if "login" in session:
-            Rating.create(session['id'],vendor_id,score)
-        else:
-            Rating.create(None,vendor_id,score)
+            Rating.create(session['id'],vendor_id,score,review)
         return render_template('ratingSubmission.html')
 
     # return redirect(url_for("rating", vendor_id=vendor_id)) //i dont know if i need it but everything works without

@@ -4,7 +4,11 @@
 <img src="{{vendor_info.image}}" alt="image"><br>
 <form action="{{ url_for('rating_submission', vendor_id=vendor_info.vendor_id) }}" method="POST">
     <label for="rating">Enter rating between 1-5</label><br>
-    <input type="number" name="rating" id="rating" min="1" max="5">
+    <input type="number" name="rating" id="rating" min="1" max="5" required><br>
+
+    <label for="review">Review:</label><br>
+    <textarea name="review" id="review" cols="50" rows="5" required></textarea><br>
+
     <button type="submit">submit</button>
 </form>
 
