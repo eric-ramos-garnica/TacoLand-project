@@ -420,6 +420,19 @@ def user_rating_top_five():
 def user_profile():
     return render_template('user_profile.html')
 
+@app.route('/userProfileEdit',methods=["POST"])
+def profile_edit():
+    if 'login' in session:
+        my_file = request.files.get('my-file')
+        result = cloudinary.uploader.upload(my_file,
+                api_key=CLOUDINARY_KEY,
+                api_secret=CLOUDINARY_SECRET,
+                cloud_name=CLOUD_NAME)
+        img_url = result['secure_url']
+        print('@@@@@====>',img_url)
+        return redirect('/userProfile')
+
+
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)
