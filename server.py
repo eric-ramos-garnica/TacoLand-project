@@ -418,7 +418,8 @@ def user_rating_top_five():
         
 @app.route('/userProfile')
 def user_profile():
-    return render_template('user_profile.html')
+    user_info = User.get_user_info_by_user_id(session['id'])
+    return render_template('user_profile.html',user_info=user_info)
 
 @app.route('/userProfileEdit',methods=["POST"])
 def profile_edit():
@@ -429,13 +430,13 @@ def profile_edit():
                 api_secret=CLOUDINARY_SECRET,
                 cloud_name=CLOUD_NAME)
         img_url = result['secure_url']
-
+        
         if img_url:
             user_info = User.get_user_info_by_user_id(session['id'])
-            if user_info.user_image is None:
-                user_info.user_image = img_url
-                db.session.commit()
-        return redirect('/userProfile')
+            user_info.user_image = img_url
+            db.session.commit()
+        return render_template('user_profile.html',user_info=user_info)
+
 
 
 if __name__ == "__main__":

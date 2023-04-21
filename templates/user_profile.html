@@ -8,20 +8,35 @@
 
 <!-- body -->
 {% block body %}
-<div class="container-profile">
-    <br>
+
+{% if not user_info.user_image%}
+    <div class="container-profile">
+        <br>
+        <div id="container-user-image">
+            <form action="/userProfileEdit" method="POST" enctype="multipart/form-data">
+
+                <label for="user-image" ><i class="fa-solid fa-user fa-2xl"></i></label><br>
+                <input type="file" name="my-file" id="user-image" style="display: none;" required>
+                <button id="add-image-button">Add image</button>
+                <button id="user-image-button-submit" style="display: none;" type="submit">submit</button>
+            </form>
+            
+        </div>
+
+    </div>
+{% else %}
+    <img src="{{user_info.user_image}}" alt="user-image">
     <div id="container-user-image">
         <form action="/userProfileEdit" method="POST" enctype="multipart/form-data">
-
-            <label for="user-image" ><i class="fa-solid fa-user fa-2xl"></i></label><br>
             <input type="file" name="my-file" id="user-image" style="display: none;" required>
-            <button id="add-image-button">Add image</button>
+            <button id="add-image-button">Edit photo</button>
             <button id="user-image-button-submit" style="display: none;" type="submit">submit</button>
         </form>
         
     </div>
 
-</div>
+{% endif %}
+
 <script>
     // add photo
     add_image_button = document.getElementById('add-image-button')
@@ -31,8 +46,6 @@
         e.target.setAttribute("style","display:none;")
         document.getElementById("user-image-button-submit").removeAttribute('style');
        
-
-        
     });
 </script> 
 {% endblock %}
