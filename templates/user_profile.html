@@ -45,7 +45,27 @@
         <button id="user-phone-button-submit" style="display: none;" type="submit">submit</button>
     </form>
 {% else %}
-    <p id="user-phone">Phone:{{user_info.phone}}</p>
+    <p id="user-phone-edit">Phone:{{user_info.phone}}<span><button id="edit-button-phone">edit</button></span></p>
+    <form action="/userProfileEdit" method="POST" id="user-form-phone" style="display: none;" >
+        <label for="user-phone-edit" >Phone:</label>
+        <input type="text" name="user-phone-value" id="user-phone-edit">
+        <button type="submit">submit</button>
+        <button id="cancel-edit">cancel</button>
+    </form>
+    <!-- script -->
+    <script>
+        const edit_phone_button = document.getElementById('edit-button-phone');
+        edit_phone_button.addEventListener('click',(e)=>{
+            document.getElementById('user-phone-edit').setAttribute('style','display: none;');
+            document.getElementById('user-form-phone').removeAttribute('style');
+        });
+        const cancel_button = document.getElementById('cancel-edit');
+        cancel_button.addEventListener('click',(e)=>{
+            document.getElementById('user-form-phone').setAttribute('style','display: none;')
+            document.getElementById('user-phone-edit').removeAttribute('style')
+        });
+
+    </script>
 {% endif %}
 
 {% if not user_info.gender %}
@@ -98,7 +118,8 @@
         e.target.setAttribute("style","display:none;")
         document.getElementById("user-phone-button-submit").removeAttribute('style');
     });
-    
+
+
 </script> 
 
 {% endblock %}

@@ -447,7 +447,7 @@ def profile_edit():
             user_info.phone = phone
             db.session.commit()
         
-        #gets gender # from user
+        #gets gender from user
         gender = request.form.get('gender-value')
         if gender:
             user_info.gender = gender
