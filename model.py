@@ -73,6 +73,9 @@ class User(db.Model):
     def get_email_by_user(cls,email):
         """return email if its in the database"""         
         return User.query.filter(User.email == email).first()
+    @classmethod
+    def get_user_info_by_user_id(cls,user_id):
+        return User.query.filter_by(user_id = user_id).first()
     
 
 class Vendor(db.Model):

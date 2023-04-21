@@ -10,14 +10,13 @@
 {% block body %}
 <div class="container-profile">
     <br>
-    <div>
+    <div id="container-user-image">
         <form action="/userProfileEdit" method="POST" enctype="multipart/form-data">
 
             <label for="user-image" ><i class="fa-solid fa-user fa-2xl"></i></label><br>
             <input type="file" name="my-file" id="user-image" style="display: none;" required>
             <button id="add-image-button">Add image</button>
             <button id="user-image-button-submit" style="display: none;" type="submit">submit</button>
-        
         </form>
         
     </div>

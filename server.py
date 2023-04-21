@@ -429,7 +429,12 @@ def profile_edit():
                 api_secret=CLOUDINARY_SECRET,
                 cloud_name=CLOUD_NAME)
         img_url = result['secure_url']
-        print('@@@@@====>',img_url)
+
+        if img_url:
+            user_info = User.get_user_info_by_user_id(session['id'])
+            if user_info.user_image is None:
+                user_info.user_image = img_url
+                db.session.commit()
         return redirect('/userProfile')
 
 
