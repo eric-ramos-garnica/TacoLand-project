@@ -423,18 +423,30 @@ def user_profile():
 
 @app.route('/userProfileEdit',methods=["POST"])
 def profile_edit():
+
+    user_info = User.get_user_info_by_user_id(session['id'])
+
     if 'login' in session:
-        my_file = request.files.get('my-file')
-        result = cloudinary.uploader.upload(my_file,
-                api_key=CLOUDINARY_KEY,
-                api_secret=CLOUDINARY_SECRET,
-                cloud_name=CLOUD_NAME)
-        img_url = result['secure_url']
-        
-        if img_url:
-            user_info = User.get_user_info_by_user_id(session['id'])
-            user_info.user_image = img_url
+
+        #gets image from user
+        if 'my-file' in request.files:
+            my_file = request.files.get('my-file')
+            result = cloudinary.uploader.upload(my_file,
+                    api_key=CLOUDINARY_KEY,
+                    api_secret=CLOUDINARY_SECRET,
+                    cloud_name=CLOUD_NAME)
+            img_url = result['secure_url']
+            
+            if img_url:
+                user_info.user_image = img_url
+                db.session.commit()
+
+        # gets phone # from user
+        phone = request.form.get('user-phone-value')
+        if phone:
+            user_info.phone = phone
             db.session.commit()
+
         return render_template('user_profile.html',user_info=user_info)
 
 
