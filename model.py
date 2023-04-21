@@ -51,6 +51,9 @@ class User(db.Model):
     fname = db.Column(db.String)
     lname = db.Column(db.String)
     password = db.Column(db.String)
+    user_image = db.Column(db.String, nullable =True)
+    phone =db.Column(db.String,nullable =True)
+    gender = db.Column(db.String,nullable =True)
 
     #relationship with Rating
     ratings = db.relationship("Rating", back_populates = "user")

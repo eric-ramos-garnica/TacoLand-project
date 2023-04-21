@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+
+{% block title %}Profile{% endblock %}
+
+{% block head %}
+
+{% endblock %}
+
+<!-- body -->
+{% block body %}
+<div class="container-profile">
+    <br>
+    <div>
+        <label for="user-image" ><i class="fa-solid fa-user fa-2xl"></i></label><br>
+        <input type="file" name="user-image" id="user-image" style="display: none;">
+        <button id="add-image-button">Add image</button>
+        <a id="user-image-button-submit" href="#" style="display: none;"><button>submit</button></a>
+        
+    </div>
+
+</div>
+<script>
+    // add photo
+    add_image_button = document.getElementById('add-image-button')
+    add_image_button. addEventListener('click',(e)=>{
+        document.getElementById('user-image').removeAttribute('style');
+        e.target.setAttribute("style","display:none;")
+        document.getElementById("user-image-button-submit").removeAttribute('style');
+
+        
+    });
+</script> 
+{% endblock %}

@@ -416,6 +416,9 @@ def user_rating_top_five():
         
         return render_template('user_rating_top_five.html', top_five_array=top_five_array,top_five_vendors_from_user=top_five_vendors_from_user,top_five_vendors_rate=top_five_vendors_rate)
         
+@app.route('/userProfile')
+def user_profile():
+    return render_template('user_profile.html')
 
 if __name__ == "__main__":
     connect_to_db(app)
