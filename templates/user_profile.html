@@ -30,8 +30,22 @@
             <input type="file" name="my-file" id="user-image" style="display: none;" required>
             <button id="add-image-button">Edit photo</button>
             <button id="user-image-button-submit" style="display: none;" type="submit">submit</button>
+            <button id="cancel-edit-img" style="display: none;">cancel</button>
         </form>
     </div>
+
+    <script>
+        const cancel_button_img = document.getElementById('cancel-edit-img');
+        cancel_button_img.addEventListener('click',(e)=>{
+            
+            e.preventDefault()
+            document.getElementById('user-image').setAttribute('style','display:none;');
+            e.target.setAttribute('style','display:none;');
+            document.getElementById('user-image-button-submit').setAttribute('style','display:none;');
+            document.getElementById("add-image-button").removeAttribute('style');
+
+        });
+    </script>
 {%endif%}
 
     <p>Name:{{user_info.fname}} {{user_info.lname}}</p>
@@ -50,19 +64,24 @@
         <label for="user-phone-edit" >Phone:</label>
         <input type="text" name="user-phone-value" id="user-phone-edit">
         <button type="submit">submit</button>
-        <button id="cancel-edit">cancel</button>
+        <span><button id="cancel-edit" style="display: none">cancel</button></span>
     </form>
+    
     <!-- script -->
     <script>
         const edit_phone_button = document.getElementById('edit-button-phone');
         edit_phone_button.addEventListener('click',(e)=>{
             document.getElementById('user-phone-edit').setAttribute('style','display: none;');
             document.getElementById('user-form-phone').removeAttribute('style');
+            document.getElementById('cancel-edit').removeAttribute('style');
         });
+
         const cancel_button = document.getElementById('cancel-edit');
         cancel_button.addEventListener('click',(e)=>{
             document.getElementById('user-form-phone').setAttribute('style','display: none;')
             document.getElementById('user-phone-edit').removeAttribute('style')
+            e.preventDefault()
+            e.target.setAttribute('style','display: none;')
         });
 
     </script>
@@ -75,6 +94,7 @@
     <button id="add-gender-button">Add gender</button>
     <button id="user-gender-button-submit" style="display: none;" type="submit">submit</button>
 </form>
+<!-- script -->
 <script>
     const addGenderBtn = document.getElementById("add-gender-button");
     const genderSubmitBtn = document.getElementById("user-gender-button-submit");
@@ -88,9 +108,34 @@
     });
 </script>
 {%else%}
-    <p>Gender:{{user_info.gender}}</p>
-{% endif %}
+    <p id="gender-element">Gender:{{user_info.gender}}<span><button id="edit-button-gender">edit</button></span></p>
+    <form action="/userProfileEdit" method="POST" id="user-form-gender" style="display: none;">
+        <label for="gender">Gender:</label>
+        <input type="text" name="gender-value" id="gender" >
+        <button id="user-gender-button-submit"  type="submit">submit</button>
+        <span><button id="cancel-edit-gender" style="display: none">cancel</button></span>
+    </form>
 
+    <!-- script -->
+    <script>
+        const edit_gender_button = document.getElementById("edit-button-gender");
+        edit_gender_button.addEventListener('click',(e)=>{
+            e.preventDefault()
+            document.getElementById("user-form-gender").removeAttribute('style')
+            document.getElementById("gender-element").setAttribute('style','display:none;')
+            document.getElementById("cancel-edit-gender").removeAttribute('style')
+        });
+        const cancel_button_gender = document.getElementById("cancel-edit-gender")
+        cancel_button_gender.addEventListener('click',(e)=>{
+            document.getElementById("user-form-gender").setAttribute('style','display:none;')
+            document.getElementById("gender-element").removeAttribute('style')
+            e.preventDefault()
+            e.target.setAttribute("style","display:none;")
+        });
+
+    </script>
+{% endif %}
+<br>
 <a href="#"><button>Change Password</button></a>
     
             
@@ -108,6 +153,7 @@
         document.getElementById('user-image').removeAttribute('style');
         e.target.setAttribute("style","display:none;")
         document.getElementById("user-image-button-submit").removeAttribute('style');
+        document.getElementById("cancel-edit-img").removeAttribute('style')
        
     });
     //add phone
@@ -118,6 +164,8 @@
         e.target.setAttribute("style","display:none;")
         document.getElementById("user-phone-button-submit").removeAttribute('style');
     });
+
+    
 
 
 </script> 
