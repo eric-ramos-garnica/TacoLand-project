@@ -23,7 +23,6 @@
             
         </div>
     </div>
-    <h5>Name</h5>
 {% else %}
     <img src="{{user_info.user_image}}" alt="user-image">
     <div id="container-user-image">
@@ -33,25 +32,56 @@
             <button id="user-image-button-submit" style="display: none;" type="submit">submit</button>
         </form>
     </div>
+{%endif%}
+
     <p>Name:{{user_info.fname}} {{user_info.lname}}</p>
     <p>Email:{{user_info.email}}</p>
-    {% if not user_info.phone %}
-        <form action="/userProfileEdit" method="POST">
-            <label for="user-phone" >Phone:</label>
-            <input type="text" name="user-phone-value" id="user-phone" disabled="disabled">
-            <button id="add-phone-button">Add phone</button>
-            <button id="user-phone-button-submit" style="display: none;" type="submit">submit</button>
-        </form>
-    {% else %}
-        <p id="user-phone">Phone:{{user_info.phone}}</p>
-    {% endif %}
-            
+
+{% if not user_info.phone %}
+    <form action="/userProfileEdit" method="POST">
+        <label for="user-phone" >Phone:</label>
+        <input type="text" name="user-phone-value" id="user-phone" disabled="disabled">
+        <button id="add-phone-button">Add phone</button>
+        <button id="user-phone-button-submit" style="display: none;" type="submit">submit</button>
+    </form>
+{% else %}
+    <p id="user-phone">Phone:{{user_info.phone}}</p>
 {% endif %}
+
+{% if not user_info.gender %}
+<form action="/userProfileEdit" method="POST">
+    <label for="gender">Gender:</label>
+    <input type="text" name="gender-value" id="gender" disabled="disabled">
+    <button id="add-gender-button">Add gender</button>
+    <button id="user-gender-button-submit" style="display: none;" type="submit">submit</button>
+</form>
+<script>
+    const addGenderBtn = document.getElementById("add-gender-button");
+    const genderSubmitBtn = document.getElementById("user-gender-button-submit");
+
+    addGenderBtn.addEventListener("click", function(e) {
+        e.preventDefault()
+        document.getElementById("gender").removeAttribute('disabled');
+        e.target.setAttribute("style","display:none;")
+        document.getElementById("user-gender-button-submit").removeAttribute('style');
+      
+    });
+</script>
+{%else%}
+    <p>Gender:{{user_info.gender}}</p>
+{% endif %}
+
+<a href="#"><button>Change Password</button></a>
+    
+            
+
 
 
 <script>
+    const add_image_button = document.getElementById('add-image-button')
+    const add_phone_button = document.getElementById('add-phone-button');
+  
     // add photo
-    add_image_button = document.getElementById('add-image-button')
     add_image_button. addEventListener('click',(e)=>{
         
         e.preventDefault();
@@ -60,15 +90,15 @@
         document.getElementById("user-image-button-submit").removeAttribute('style');
        
     });
-
-    add_phone_button = document.getElementById('add-phone-button')
+    //add phone
     add_phone_button.addEventListener('click',(e)=>{
         
         e.preventDefault();
         document.getElementById('user-phone').removeAttribute('disabled');
         e.target.setAttribute("style","display:none;")
-        document.getElementById("user-phone-button-submit").removeAttribute('style');  
+        document.getElementById("user-phone-button-submit").removeAttribute('style');
     });
+    
 </script> 
 
 {% endblock %}

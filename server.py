@@ -446,8 +446,15 @@ def profile_edit():
         if phone:
             user_info.phone = phone
             db.session.commit()
+        
+        #gets gender # from user
+        gender = request.form.get('gender-value')
+        if gender:
+            user_info.gender = gender
+            db.session.commit()
 
         return render_template('user_profile.html',user_info=user_info)
+    
 
 
 
