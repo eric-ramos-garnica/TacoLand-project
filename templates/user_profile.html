@@ -47,8 +47,37 @@
         });
     </script>
 {%endif%}
-
-    <p>Name:{{user_info.fname}} {{user_info.lname}}</p>
+    <!-- NAME INFO -->
+    <div>
+        <p id="first-last-name">Name:{{user_info.fname}} {{user_info.lname}} <span><button id="edit-button-name">Edit</button></span></p>
+        <form action="/userProfileEdit" method="POST" style="display: none;" id="edit-form-name">
+            <label for="fname">First:</label>
+            <input type="text" name="name" id="fname">
+            <label for="lname">Last:</label>
+            <input type="text" name="lastname" id="lname">
+            <button type="submit" id="submit-button-name" >Submit</button>
+            <button id="cancel-edit-name" style="display: none;">cancel</button>
+        </form>
+    </div>
+    <script>
+        edit_button_name = document.getElementById("edit-button-name")
+        edit_button_name.addEventListener('click',(e)=>{
+            e.target.setAttribute('style','display:none;');
+            document.getElementById("edit-form-name").removeAttribute('style');
+            document.getElementById("first-last-name").setAttribute('style','display:none;');
+            document.getElementById("cancel-edit-name").removeAttribute("style");
+        });
+    
+        cancel_button_name = document.getElementById("cancel-edit-name")
+        cancel_button_name.addEventListener('click',(e)=>{
+            document.getElementById("first-last-name").removeAttribute('style');
+            document.getElementById("edit-form-name").setAttribute('style','display: none;');
+            e.preventDefault();
+            e.target.setAttribute('style','display: none;');
+            edit_button_name.removeAttribute("style");
+        });
+    </script>
+    <!-- email -->
     <p>Email:{{user_info.email}}</p>
 
 {% if not user_info.phone %}
@@ -136,7 +165,8 @@
     </script>
 {% endif %}
 <br>
-<a href="#"><button>Change Password</button></a>
+<a href="#"><button>Change Password</button></a><br>
+<a href=""><button>Delete Account</button></a>
     
             
 

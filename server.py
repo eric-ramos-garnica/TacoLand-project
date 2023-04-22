@@ -452,8 +452,18 @@ def profile_edit():
         if gender:
             user_info.gender = gender
             db.session.commit()
+        
+        #gets updated name
+        fname = request.form.get('name')
+        lname = request.form.get('lastname')
+
+        if fname and lname:
+            user_info.fname = fname
+            user_info.lname = lname
+            db.session.commit()
 
         return render_template('user_profile.html',user_info=user_info)
+
     
 
 
