@@ -464,6 +464,15 @@ def profile_edit():
 
         return render_template('user_profile.html',user_info=user_info)
 
+@app.route('/deleteAccount')
+def delete_account():
+    if 'login' in session:
+        account_to_delete = User.get_user_info_by_user_id(session['id'])
+        db.session.delete(account_to_delete)
+        session.clear()
+        db.session.commit()
+        return render_template('deleteAccount.html')
+
     
 
 
