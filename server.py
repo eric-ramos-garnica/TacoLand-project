@@ -479,6 +479,34 @@ def delete_account():
         db.session.commit()
         return render_template('deleteAccount.html')
 
+@app.route('/changePassword')
+def changing_password():
+    if 'login' in session:
+        return render_template('change_password.html')
+    
+@app.route('/changePassword',methods=["POST"])
+def changing_password_info():
+    email = request.form.get('email')
+    password = request.form.get('password')
+    new_password = request.form.get('new_password')
+    password_hash = bcrypt.generate_password_hash(new_password,10).decode('utf-8')#hashing password
+    obj =User.get_email_by_user(email)
+    
+    if obj is None:
+        flash("The email or password you entered was incorrect.")
+        return redirect('/changePassword')
+    
+    pass_validation = bcrypt.check_password_hash(obj.password , password)
+    
+    if not pass_validation:
+        flash("The email or password you entered was incorrect.")
+        return redirect('/changePassword')
+    else:
+        obj.password = password_hash
+        db.session.commit()
+        return render_template('successful_password_change.html')
+    
+
     
 
 
