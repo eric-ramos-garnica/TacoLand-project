@@ -26,13 +26,20 @@
 </div>
 <hr>
 <!--will display review  -->
+{% if reviews%}
 <div>
     <!-- will display latest review -->
     {% for review in reviews[::-1]%}
+        <img src="{{review.photo}}" alt="user photo"> 
         <h4>Rate:{{review.score}}</h4>    
         <p>{{review.review}}</p>
     {% endfor%}
 </div>
+{% else %}
+<div>
+    <h1>No Reviews</h1>
+</div>
+{% endif%}
 <script>
     rating_button = document.getElementById("rate-review-button")
     rating_button.addEventListener('click',(e)=>{

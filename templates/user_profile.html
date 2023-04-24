@@ -237,7 +237,28 @@
 </div>
 <!-- delete -->
 <div>
-    <a href="/deleteAccount"><button>Delete Account</button></a>
+    <button id="delete-button">Delete Account</button>
+    <p id="par-delete" style="display: none;">Are you sure you want to delete Account?</p>
+    <a href="/deleteAccount" style="display: none;" id="button-yes-delete"><button>Yes</button></a>
+    <button id="cancel-button-delete" style="display: none;">Cancel</button>
+    <script>
+        const button_delete = document.getElementById("delete-button")
+        button_delete.addEventListener('click',(e)=>{
+            e.target.setAttribute('style','display:none;');
+            document.getElementById("par-delete").removeAttribute('style');
+            document.getElementById("button-yes-delete").removeAttribute('style');
+            document.getElementById("cancel-button-delete").removeAttribute('style');
+        });
+        const button_cancel_delete = document.getElementById("cancel-button-delete");
+            button_cancel_delete.addEventListener('click',(e)=>{
+                e.preventDefault();
+                document.getElementById("par-delete").setAttribute('style','display:none;');
+                document.getElementById("button-yes-delete").setAttribute('style','display:none;');
+                document.getElementById("cancel-button-delete").setAttribute('style','display:none;');
+                document.getElementById("delete-button").removeAttribute('style');
+
+            });
+    </script>
 </div>
     
         

@@ -207,7 +207,6 @@ def rating(vendor_id):
         vendor_info = Vendor.get_vendor_by_id(vendor_id)
         # rating_obj = Rating.get_vendor_rating_by_user_id_and_vendor_id(session['id'],vendor_id)
         reviews = Rating.get_vendor_rating_by_id(vendor_id)
-        
         # if rating_obj:
         #     flash("You can only rate one time per vendor")
         #     return redirect(f'/tacovendors/{vendor_id}')
@@ -232,10 +231,18 @@ def rating_submission(vendor_id):
                 flash("You can only rate one time per vendor")
                 return redirect(f'/rating/{vendor_id}')
             else:
-                Rating.create(session['id'],vendor_id,score,review)
-                return render_template('ratingSubmission.html')
+                # get user photo
+                user_photo_obj = User.get_user_info_by_user_id(session['id'])
+                user_photo = user_photo_obj.user_image
 
-    # return redirect(url_for("rating", vendor_id=vendor_id)) //i dont know if i need it but everything works without
+                if user_photo:
+                    Rating.create(session['id'],vendor_id,score,review,user_photo)
+                else:
+                    no_user_photo = 'https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg'
+                    Rating.create(session['id'],vendor_id,score,review,no_user_photo)
+                return render_template('ratingSubmission.html')
+                
+            
     
 @app.route("/createaccountpage")
 def create_account():
@@ -506,11 +513,6 @@ def changing_password_info():
         db.session.commit()
         return render_template('successful_password_change.html')
     
-
-    
-
-
-
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)

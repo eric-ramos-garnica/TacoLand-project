@@ -12,6 +12,7 @@ class Rating(db.Model):
     vendor_id = db.Column(db.Integer,db.ForeignKey("vendors.vendor_id"))
     score = db.Column(db.Integer)
     review =db.Column(db.String)
+    photo = db.Column(db.String, nullable =True )
     
     #relationship with User and Vender class
     user = db.relationship("User", back_populates="ratings")
@@ -21,8 +22,8 @@ class Rating(db.Model):
         return f"<<(RatingClass) rating_id={self.rating_id} score ={self.score}>>"
     
     @classmethod
-    def create(cls,user_id,vendor_id,score,review):
-        obj = cls(user_id=user_id,vendor_id=vendor_id,score=score,review=review)
+    def create(cls,user_id,vendor_id,score,review,photo):
+        obj = cls(user_id=user_id,vendor_id=vendor_id,score=score,review=review,photo=photo) 
         db.session.add(obj)
         db.session.commit()
         return obj
