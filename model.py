@@ -40,6 +40,9 @@ class Rating(db.Model):
     def get_all_ratings_dec_sorted_scores_by_user_id(cls,user_id):
         all_ratings_by_user = Rating.query.filter(Rating.user_id == user_id)
         return all_ratings_by_user.order_by(desc(Rating.score)).all()
+    @classmethod
+    def get_rating_obj_by_user_id(cls,user_id):
+        return Rating.query.filter_by(user_id = user_id).first()
    
 
 

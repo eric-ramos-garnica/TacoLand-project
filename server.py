@@ -438,6 +438,7 @@ def user_profile():
 def profile_edit():
 
     user_info = User.get_user_info_by_user_id(session['id'])
+    rating_obj_for_photo = Rating.get_rating_obj_by_user_id(session['id'])
 
     if 'login' in session:
 
@@ -452,6 +453,9 @@ def profile_edit():
             
             if img_url:
                 user_info.user_image = img_url
+                # update user photo in ratings
+                rating_obj_for_photo.photo = img_url
+
                 db.session.commit()
 
         # gets phone # from user
