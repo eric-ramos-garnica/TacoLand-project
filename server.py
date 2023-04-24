@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, flash, session, redirect,url_for
 from model import connect_to_db, db
 from model import Vendor,User,Rating
+from flask_bcrypt import Bcrypt
+from flask_bcrypt import check_password_hash
+from flask_bcrypt import generate_password_hash
 import cloudinary.uploader
 import os
 import requests
@@ -12,6 +15,7 @@ from jinja2 import StrictUndefined
 app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
+bcrypt = Bcrypt(app)
 
 # importing cloudinary 
 CLOUDINARY_KEY = os.environ['CLOUDINARY_KEY']
@@ -245,12 +249,13 @@ def register_user():
     lname = request.form.get("lname")
     email = request.form.get("email")
     password = request.form.get("password")
-
+    password_hash = bcrypt.generate_password_hash(password,10).decode('utf-8')#hashing password
+    
     user = User.get_email_by_user(email)
     if user:
        flash("This email exist! Please enter a new email.")
     else:
-        user =User.create(email,fname,lname,password)
+        user =User.create(email,fname,lname,password_hash)
         flash("Account created successfully! Please log in.")
     return redirect("/createaccountpage")
 
@@ -265,11 +270,12 @@ def login():
     password = request.form.get('password')
     #getting email and password from database
     obj =User.get_email_by_user(email)
-    # password_database = obj.password
-    # email_database = obj.email
-    if not obj or obj.password != password:
+    pass_validation = bcrypt.check_password_hash(obj.password , password)
+    
+    if not obj or not pass_validation:
         flash("The email or password you entered was incorrect.")
         return redirect('/loginpage')
+
     else:
         session['name'] = obj.fname
         session['id'] = obj.user_id
