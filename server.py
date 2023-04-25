@@ -9,6 +9,7 @@ import os
 import requests
 import json
 import secrets
+from send_sms import message_from_vendor
 
 from jinja2 import StrictUndefined
 #added the part after comma
@@ -237,9 +238,19 @@ def rating_submission(vendor_id):
 
                 if user_photo:
                     Rating.create(session['id'],vendor_id,score,review,user_photo)
+                    if user_photo_obj.phone:
+                        #message from vendor
+                        vendor = Vendor.get_vendor_by_id(vendor_id)
+                        message = f'Thank you for your review!\nSincerely,\n{vendor.vendor_name}'
+                        message_from_vendor(message,user_photo_obj.phone)
                 else:
                     no_user_photo = 'https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg'
                     Rating.create(session['id'],vendor_id,score,review,no_user_photo)
+                    if user_photo_obj.phone:
+                        #message from vendor
+                        vendor = Vendor.get_vendor_by_id(vendor_id)
+                        message = f'Thank you for your review!\nSincerely,\n{vendor.vendor_name}'
+                        message_from_vendor(message,user_photo_obj.phone)
                 return render_template('ratingSubmission.html')
                 
             
@@ -454,7 +465,8 @@ def profile_edit():
             if img_url:
                 user_info.user_image = img_url
                 # update user photo in ratings
-                rating_obj_for_photo.photo = img_url
+                if rating_obj_for_photo:
+                    rating_obj_for_photo.photo = img_url
 
                 db.session.commit()
 
