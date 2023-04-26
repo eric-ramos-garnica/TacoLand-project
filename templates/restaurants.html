@@ -26,6 +26,7 @@
 
 {% if mexican_restaurants_data %} 
 <ul id="mexican-restaurants-list">
+    {% if "businesses" in mexican_restaurants_data %}
     {% for business in mexican_restaurants_data["businesses"] %}
         <li>
             <h2>{{business["name"]}}</h2>
@@ -37,20 +38,21 @@
         {% set _ = business_name.append(business["name"]) %}
         {% set _ = phone.append(business['display_phone']) %}
         {% set _ = vendorId.append(business['id']) %}
-
+        <p id="regions" style="display: none;">{{mexican_restaurants_data['region']['center']}}</p>
     {% endfor %}
+    {% endif %}
+</ul>
 
     <!-- elements for javascript to get data -->
     <p id="k" style="display: none;">{{coordinate_list}}</p>
     <p id ="business_name" style="display: none;">{{business_name}}</p>
     <p id="phone" style="display: none;">{{phone}}</p>
-    <p id="regions" style="display: none;">{{mexican_restaurants_data['region']['center']}}</p>
     <p id="vendor_id" style="display: none;" >{{vendorId}}</p>
+    
     <!-- google maps -->
     <h1>google maps</h1>
     <div id="map"></div>
 {% endif %}
-</ul>
 
 
 <script
