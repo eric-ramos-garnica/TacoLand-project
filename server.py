@@ -237,7 +237,7 @@ def rating_submission(vendor_id):
                         #message from vendor
                         vendor = Vendor.get_vendor_by_id(vendor_id)
                         message = f'Thank you for your review!\nSincerely,\n{vendor.vendor_name}'
-                        message_from_vendor(message,user_photo_obj.phone)
+                        message_from_vendor(message,user_photo_obj.phone)#sends message through twillio API
                 else:
                     no_user_photo = 'https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg'
                     Rating.create(session['id'],vendor_id,score,review,no_user_photo)
@@ -313,7 +313,7 @@ def create_vendor():
     if 'login' in session:
         return render_template('create_vendor_account.html')
     else:
-        flash("Need to login to sign up")
+        flash("Need to login to create business!")
         return redirect('/sellerPage')
 
 @app.route("/vendorpage", methods=["POST"])
@@ -351,7 +351,7 @@ def vendor_account():
         user_businesses = Vendor.get_businesses_by_user_id(session['id'])
         return render_template('vendor_info_by_owner.html',user_businesses=user_businesses)
     else:
-        flash("Need to login to see vendor info")
+        flash("Need to login to see vendor information!")
         return redirect('/sellerPage')
     
 @app.route("/BusinessEdit/<vendor_id>")

@@ -40,13 +40,5 @@
     <h1>No Reviews</h1>
 </div>
 {% endif%}
-<script>
-    rating_button = document.getElementById("rate-review-button")
-    rating_button.addEventListener('click',(e)=>{
-        form_rating = document.getElementById("rating-review-form")
-        form_rating.removeAttribute("style")
-        e.target.setAttribute("style","display:none;")
-    });
-
-</script>
+<script src="/static/js/ratingpage.js"></script>
 {% endblock %}

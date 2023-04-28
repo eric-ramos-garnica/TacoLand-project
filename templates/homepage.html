@@ -3,7 +3,7 @@
 {% block body %}
 {% if 'login' in session %}
 
-<h1>Welcome {{session['name']}} to Taco Land</h1>
+<h1 id="login-homepage">Welcome {{session['name']}} to Taco Land</h1>
 {% else %}
 <h1>Welcome to Taco Land</h1>
 {% endif%}

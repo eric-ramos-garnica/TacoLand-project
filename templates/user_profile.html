@@ -23,28 +23,8 @@
         
     </div>
     <!-- script -->
-    <script>
-        const add_image_button = document.getElementById('add-image-button')
-      
-        // add photo
-        add_image_button. addEventListener('click',(e)=>{
-            
-            e.preventDefault();
-            document.getElementById('user-image').removeAttribute('style');
-            e.target.setAttribute("style","display:none;")
-            document.getElementById("user-image-button-submit").removeAttribute('style');
-            document.getElementById("cancel-edit-img").removeAttribute('style')
-        });
-        cancel_button = document.getElementById("cancel-edit-img");
-        cancel_button.addEventListener('click',(e)=>{
-            document.getElementById("user-image").setAttribute('style','display:none;')
-            document.getElementById("add-image-button").removeAttribute('style')
-            document.getElementById('user-image-button-submit').setAttribute('style','display:none;');
-            e.preventDefault()
-            e.target.setAttribute('style', 'display:none;')
-        });
-
-    </script> 
+    <script src="/static/js/user_profile/user_profile_image.js"></script>
+     
 {% else %}
     <img src="{{user_info.user_image}}" alt="user-image">
     <div id="container-user-image">
@@ -55,30 +35,8 @@
             <button id="cancel-edit-img" style="display: none;">cancel</button>
         </form>
     </div>
-
-    <script>
-
-        const edit_button_image = document.getElementById("add-image-button")
-        edit_button_image.addEventListener('click',(e)=>{
-            e.preventDefault()
-            document.getElementById("user-image").removeAttribute('style');
-            document.getElementById("user-image-button-submit").removeAttribute('style');
-            document.getElementById("add-image-button").setAttribute('style', 'display:none;');
-            document.getElementById("cancel-edit-img").removeAttribute('style')
-        });
-
-
-        const cancel_button_img = document.getElementById('cancel-edit-img');
-        cancel_button_img.addEventListener('click',(e)=>{
-            
-            e.preventDefault()
-            document.getElementById('user-image').setAttribute('style','display:none;');
-            e.target.setAttribute('style','display:none;');
-            document.getElementById('user-image-button-submit').setAttribute('style','display:none;');
-            document.getElementById("add-image-button").removeAttribute('style');
-
-        });
-    </script>
+    <!-- script -->
+    <script src="/static/js/user_profile/user_profile_image.js"></script>
 {%endif%}
     <!-- NAME INFO -->
     <div>
@@ -92,24 +50,8 @@
             <button id="cancel-edit-name" style="display: none;">cancel</button>
         </form>
     </div>
-    <script>
-        edit_button_name = document.getElementById("edit-button-name")
-        edit_button_name.addEventListener('click',(e)=>{
-            e.target.setAttribute('style','display:none;');
-            document.getElementById("edit-form-name").removeAttribute('style');
-            document.getElementById("first-last-name").setAttribute('style','display:none;');
-            document.getElementById("cancel-edit-name").removeAttribute("style");
-        });
-    
-        cancel_button_name = document.getElementById("cancel-edit-name")
-        cancel_button_name.addEventListener('click',(e)=>{
-            document.getElementById("first-last-name").removeAttribute('style');
-            document.getElementById("edit-form-name").setAttribute('style','display: none;');
-            e.preventDefault();
-            e.target.setAttribute('style','display: none;');
-            edit_button_name.removeAttribute("style");
-        });
-    </script>
+    <!-- script -->
+    <script src="/static/js/user_profile/user_profile_name.js"></script>
     <!-- email -->
     <p>Email:{{user_info.email}}</p>
 <!-- phone  -->
@@ -121,28 +63,7 @@
         <button id="user-phone-button-submit" style="display: none;" type="submit">submit</button>
         <button id="cancel-edit" style="display: none">cancel</button>
     </form>
-    <script>
-        const add_phone_button = document.getElementById('add-phone-button')
-        add_phone_button.addEventListener('click',(e)=>{
-        e.preventDefault();
-        document.getElementById('user-phone').removeAttribute('disabled');
-        e.target.setAttribute("style","display:none;")
-        document.getElementById("user-phone-button-submit").removeAttribute('style');
-        document.getElementById("cancel-edit").removeAttribute('style')     
-    });
-
-    const cancel_button_image = document.getElementById('cancel-edit');
-    cancel_button_image.addEventListener('click',(e)=>{
-        e.preventDefault()
-            document.getElementById('user-phone').setAttribute('disabled', "disabled");
-            document.getElementById('user-phone-button-submit').setAttribute('style','display:none;')
-            e.target.setAttribute('style','display:none;')
-            document.getElementById('add-phone-button').removeAttribute('style')
-        });
-
-    </script>
-
-    </script>
+    <script src="/static/js/user_profile/user_profile_phone.js"></script>
 
 {% else %}
     <p id="user-phone-edit">Phone:{{user_info.phone}}<span><button id="edit-button-phone">edit</button></span></p>
@@ -154,23 +75,7 @@
     </form>
     
     <!-- script -->
-    <script>
-        const edit_phone_button = document.getElementById('edit-button-phone');
-        edit_phone_button.addEventListener('click',(e)=>{
-            document.getElementById('user-phone-edit').setAttribute('style','display: none;');
-            document.getElementById('user-form-phone').removeAttribute('style');
-            document.getElementById('cancel-edit').removeAttribute('style');
-        });
-
-        const cancel_button = document.getElementById('cancel-edit');
-        cancel_button.addEventListener('click',(e)=>{
-            document.getElementById('user-form-phone').setAttribute('style','display: none;')
-            document.getElementById('user-phone-edit').removeAttribute('style')
-            e.preventDefault()
-            e.target.setAttribute('style','display: none;')
-        });
-
-    </script>
+    <script src="/static/js/user_profile/user_profile_phone_edit.js"></script>
 {% endif %}
 <!-- gender -->
 {% if not user_info.gender %}
@@ -182,27 +87,7 @@
     <span><button id="cancel-edit-gender" style="display: none">cancel</button></span>
 </form>
 <!-- script -->
-<script>
-    const addGenderBtn = document.getElementById("add-gender-button");
-    addGenderBtn.addEventListener("click", function(e) {
-        e.preventDefault()
-        document.getElementById("gender").removeAttribute('disabled');
-        e.target.setAttribute("style","display:none;")
-        document.getElementById("user-gender-button-submit").removeAttribute('style');
-        document.getElementById("cancel-edit-gender").removeAttribute('style')  
-    });
-
-    const cancel_button_genders = document.getElementById("cancel-edit-gender")
-    cancel_button_genders.addEventListener('click',(e)=>{
-        e.preventDefault()
-        document.getElementById('gender').setAttribute('disabled', "disabled");
-        e.target.setAttribute('style','display:none');
-        document.getElementById("add-gender-button").removeAttribute('style');
-        document.getElementById("user-gender-button-submit").setAttribute('style','display:none;')
-
-    });
-    
-</script>
+<script src="/static/js/user_profile/user_profile_gender.js"></script>
 {%else%}
     <p id="gender-element">Gender:{{user_info.gender}}<span><button id="edit-button-gender">edit</button></span></p>
     <form action="/userProfileEdit" method="POST" id="user-form-gender" style="display: none;">
@@ -213,23 +98,7 @@
     </form>
 
     <!-- script -->
-    <script>
-        const edit_gender_button = document.getElementById("edit-button-gender");
-        edit_gender_button.addEventListener('click',(e)=>{
-            e.preventDefault()
-            document.getElementById("user-form-gender").removeAttribute('style')
-            document.getElementById("gender-element").setAttribute('style','display:none;')
-            document.getElementById("cancel-edit-gender").removeAttribute('style')
-        });
-        const cancel_button_gender = document.getElementById("cancel-edit-gender")
-        cancel_button_gender.addEventListener('click',(e)=>{
-            document.getElementById("user-form-gender").setAttribute('style','display:none;')
-            document.getElementById("gender-element").removeAttribute('style')
-            e.preventDefault()
-            e.target.setAttribute("style","display:none;")
-        });
-
-    </script>
+<script src="/static/js/user_profile/user_profile_gender_edit.js"></script>
 {% endif %}
 <!-- password -->
 <div>
@@ -241,24 +110,7 @@
     <p id="par-delete" style="display: none;">Are you sure you want to delete Account?</p>
     <a href="/deleteAccount" style="display: none;" id="button-yes-delete"><button>Yes</button></a>
     <button id="cancel-button-delete" style="display: none;">Cancel</button>
-    <script>
-        const button_delete = document.getElementById("delete-button")
-        button_delete.addEventListener('click',(e)=>{
-            e.target.setAttribute('style','display:none;');
-            document.getElementById("par-delete").removeAttribute('style');
-            document.getElementById("button-yes-delete").removeAttribute('style');
-            document.getElementById("cancel-button-delete").removeAttribute('style');
-        });
-        const button_cancel_delete = document.getElementById("cancel-button-delete");
-            button_cancel_delete.addEventListener('click',(e)=>{
-                e.preventDefault();
-                document.getElementById("par-delete").setAttribute('style','display:none;');
-                document.getElementById("button-yes-delete").setAttribute('style','display:none;');
-                document.getElementById("cancel-button-delete").setAttribute('style','display:none;');
-                document.getElementById("delete-button").removeAttribute('style');
-
-            });
-    </script>
+    <script src="/static/js/user_profile/user_profile_delete.js"></script>
 </div>
     
         
