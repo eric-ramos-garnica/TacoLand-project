@@ -13,9 +13,7 @@
     padding: 0;
 }
 
-main{
-    width: 100%;
-}
+
 /* 2.Typography Styles 
 ================================*/
 
@@ -24,9 +22,8 @@ main{
 /* homepage */
 #container-main{
     background-color: rgb(91,39,39);
-    
-  
 }
+
 .main-background{
     background-image: url('/static/img/background_image-PhotoRoom.png');
     background-repeat: no-repeat;
@@ -81,7 +78,7 @@ main{
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
     text-decoration: none;
     }
     
@@ -116,7 +113,7 @@ background-image: url('/static/img/mexican-restaurant.jpg');
 background-size: cover;
 background-position: center;
 background-repeat: no-repeat;
-transition: opacity 0.3s ease-in-out;
+transition: opacity 0.5s ease-in-out;
 text-decoration: none;
 }
 
@@ -141,6 +138,12 @@ opacity: 1;
 
 
 
+
+
+
+
+/* 5.Components 
+================================*/
 img{
     height: 100px;
     width: 100px;
@@ -160,9 +163,3 @@ img{
 .container-filter-display{  /* to get rid of filter from page  */
     display: none;
 }
-
-
-
-
-/* 5.Components 
-================================*/
