@@ -12,12 +12,21 @@
     margin: 0;
     padding: 0;
 }
+
+main{
+    width: 100%;
+}
 /* 2.Typography Styles 
 ================================*/
 
 /* 3.Structure Styles 
 ================================*/
 /* homepage */
+#container-main{
+    background-color: rgb(91,39,39);
+    
+  
+}
 .main-background{
     background-image: url('/static/img/background_image-PhotoRoom.png');
     background-repeat: no-repeat;
@@ -39,27 +48,93 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     background-color: rgb(91,39,39) ;
+    padding-bottom: 40px;
+    padding-top: 40px;
+    
 }
 
-.container-homepage-button{
-    height: 31.25rem;
+.container-homepage-button-vendors{
+    position: relative;
     width: 31.25rem;
+    height: 31.25rem;
     background-color: rgb(254,242,192);
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin-top: 1.875rem;
-}
-
-.buttons-homepage-vendors, .buttons-homepage-restaurant{
+    overflow: hidden;
     text-decoration: none;
+    font-size: 2.5rem;
+}
+.container-homepage-button-vendors:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background-image: url('/static/img/pexels-ali-alcántara-12203728.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: opacity 0.3s ease-in-out;
+    text-decoration: none;
+    }
+    
+.container-homepage-button-vendors:hover:before {
+opacity: 1;
 }
 
+
+.container-homepage-button-restaurants {
+position: relative;
+width: 31.25rem;
+height: 31.25rem;
+background-color: rgb(254,242,192);
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+overflow: hidden;
+text-decoration: none;
+font-size: 2.5rem;
+}
+
+.container-homepage-button-restaurants:before {
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+opacity: 0;
+background-image: url('/static/img/mexican-restaurant.jpg');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+transition: opacity 0.3s ease-in-out;
+text-decoration: none;
+}
+
+.container-homepage-button-restaurants:hover:before {
+opacity: 1;
+}
+
+.buttons-homepage-vendors,
+.buttons-homepage-restaurant {
+  color: rgb(4, 160, 100);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  text-shadow: 4px 4px 5px rgba(4, 160, 100, 0.3);
+  line-height: 1.6;
+}
 
 
 

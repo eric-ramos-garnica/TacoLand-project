@@ -1,27 +1,41 @@
 {% extends 'base.html'%}
 {% block title %}Taco Land {% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+{% endblock %}
+
 {% block body %}
 {% if 'login' in session %}
 
-<h1 id="login-homepage" class="title-homepage">Welcome {{session['name']}} to Taco Land</h1>
-{% else %}
-<h1 class="title-homepage">Welcome to Taco Land</h1>
-{% endif%}
-<div class="main-background ">
-    
-</div>
+    <header>
+        <h1 id="login-homepage" class="title-homepage">Welcome {{session['name']}} to Taco Land</h1>
+        {% else %}
+        <h1 class="title-homepage">Welcome to Taco Land</h1>
+        {% endif%}
+    </header>
 
-<div class="container-buttons">
-    <div class="container-homepage-button">
-        <a class="buttons-homepage-vendors" href="/tacovendors">Taco Vendors</a>
-    </div>
-    <div class="container-homepage-button"> 
-        <a class="buttons-homepage-restaurant" href="/mexicanRestaurants">
-            Mexican Restaurants
-        </a>
-    </div>
+    <section>
+        <div class="main-background "></div>
+        
+        <div class="container-buttons">
+            <a class="container-homepage-button-vendors" href="/tacovendors">
+                <div class="buttons-homepage-vendors">
+                    <p>𝖙𝖆𝖈𝖔</p>
+                    <p>𝖛𝖊𝖓𝖉𝖔𝖗𝖘</p>
+                </div>
+            </a>
+            <a class="container-homepage-button-restaurants" href="/mexicanRestaurants">
+                <div class=" buttons-homepage-restaurant"> 
+                    <P>𝕸𝖊𝖝𝖎𝖈𝖆𝖓</P>
+                    <P>𝕽𝖊𝖘𝖙𝖆𝖚𝖗𝖆𝖓𝖙𝖘</P>
+                </div>
+            </a>
+        
+        </div>
+    </section>
 
-</div>
     
 {% endblock %}
 
