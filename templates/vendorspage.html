@@ -40,12 +40,19 @@
 
   </form>
 </div>
-  
+<script>
+  var filter_button = document.querySelector(".filter-image")
+  filter_button.addEventListener('click',(e)=>{
+    document.getElementById("container-filter-business-type").className = "container-filter-display";
+    document.getElementById("container-filters").classList.remove("container-filter-display");
+  });
+</script>
+
 
 <!-- show vendors -->
 <ul id="vendor-list">
-{% for vendor in vendors%}
-<li>
+  {% for vendor in vendors%}
+  <li>
     <h2>{{vendor.vendor_name}}</h2>
     <a href="/tacovendors/{{vendor.vendor_id}}"><img src="{{vendor.image}}" alt="image" class="tacoimage"></a>
     {% set _ = my_list.append(vendor.coords) %}
@@ -53,14 +60,14 @@
     {% set _ = vendorId.append(vendor.vendor_id) %}
     {% set _ = hours.append(vendor.working_hours) %}
     {% set _ = taco_icons.append(vendor.business_type) %}
-
+    
     {% if vendor.vendor_id in rating_dic %}
-        <p>Rating:{{rating_dic[vendor.vendor_id]}}</p>
+    <p>Rating:{{rating_dic[vendor.vendor_id]}}</p>
     {% else %}
-        <p>Rating:no ratings</p>
+    <p>Rating:no ratings</p>
     {% endif %}
-</li>
-{% endfor %}
+  </li>
+  {% endfor %}
 </ul>
 <!-- hidden elements -->
 <p id ="k" style="display:none" >{{my_list}}</p>
@@ -74,11 +81,12 @@
 <div id="map"></div>
 
 <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo&callback=initMap&v=weekly"
-        defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo&callback=initMap&v=weekly"
+defer
 ></script> 
+
 <script src="/static/js/vendorspage.js"></script>
- 
+
 
 {% endblock %}
 

@@ -61,8 +61,3 @@ function initMap() {
 window.initMap = initMap;
 initMap();
 
-  var filter_button = document.querySelector(".filter-image")
-  filter_button.addEventListener('click',(e)=>{
-    document.getElementById("container-filter-business-type").className = "container-filter-display";
-    document.getElementById("container-filters").classList.remove("container-filter-display");
-  });

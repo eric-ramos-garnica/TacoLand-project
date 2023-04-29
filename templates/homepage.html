@@ -3,12 +3,25 @@
 {% block body %}
 {% if 'login' in session %}
 
-<h1 id="login-homepage">Welcome {{session['name']}} to Taco Land</h1>
+<h1 id="login-homepage" class="title-homepage">Welcome {{session['name']}} to Taco Land</h1>
 {% else %}
-<h1>Welcome to Taco Land</h1>
+<h1 class="title-homepage">Welcome to Taco Land</h1>
 {% endif%}
+<div class="main-background ">
+    
+</div>
 
-<a href="/tacovendors">Taco Vendors</a>
-<a href="/mexicanRestaurants">Mexican Restaurants</a>
+<div class="container-buttons">
+    <div class="container-homepage-button">
+        <a class="buttons-homepage-vendors" href="/tacovendors">Taco Vendors</a>
+    </div>
+    <div class="container-homepage-button"> 
+        <a class="buttons-homepage-restaurant" href="/mexicanRestaurants">
+            Mexican Restaurants
+        </a>
+    </div>
+
+</div>
     
 {% endblock %}
+

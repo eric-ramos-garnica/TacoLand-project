@@ -1,7 +1,76 @@
+/* Site Stylesheet
+    1.Global Styles
+    2.Typography Styles
+    3.Structure Styles
+    4.Module Styles
+    5.Components
+================================*/
+/* 1.Global styles
+================================ */
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+/* 2.Typography Styles 
+================================*/
+
+/* 3.Structure Styles 
+================================*/
+/* homepage */
+.main-background{
+    background-image: url('/static/img/background_image-PhotoRoom.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 56.25rem;
+    width: 100%;
+}
+
+.title-homepage{
+    background-color:rgb(240,120,68);
+    margin-bottom: 0px;
+    text-align: center;
+    color: aliceblue;
+    
+}
+
+.container-buttons{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(91,39,39) ;
+}
+
+.container-homepage-button{
+    height: 31.25rem;
+    width: 31.25rem;
+    background-color: rgb(254,242,192);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.875rem;
+}
+
+.buttons-homepage-vendors, .buttons-homepage-restaurant{
+    text-decoration: none;
+}
+
+
+
+
+
+
+
 img{
     height: 100px;
     width: 100px;
 }
+
 /* Set the size of the div element that contains the map */
 #map {
     height: 400px; /* The height is 400 pixels */
@@ -19,3 +88,6 @@ img{
 
 
 
+
+/* 5.Components 
+================================*/
