@@ -284,7 +284,9 @@ def login():
     password = request.form.get('password')
     #getting email and password from database
     obj =User.get_email_by_user(email)
-    pass_validation = bcrypt.check_password_hash(obj.password , password)
+    # if there is an account with the email
+    if obj:
+        pass_validation = bcrypt.check_password_hash(obj.password , password)
     
     if not obj or not pass_validation:
         flash("The email or password you entered was incorrect.")
