@@ -233,7 +233,8 @@ def rating_submission(vendor_id):
 
                 if user_photo:
                     Rating.create(session['id'],vendor_id,score,review,user_photo)
-                    if user_photo_obj.phone:
+                    if user_photo_obj.phone and len(user_photo_obj.phone) == 12:
+                        
                         #message from vendor
                         vendor = Vendor.get_vendor_by_id(vendor_id)
                         message = f'Thank you for your review!\nSincerely,\n{vendor.vendor_name}'
@@ -241,7 +242,7 @@ def rating_submission(vendor_id):
                 else:
                     no_user_photo = 'https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg'
                     Rating.create(session['id'],vendor_id,score,review,no_user_photo)
-                    if user_photo_obj.phone:
+                    if user_photo_obj.phone and len(user_photo_obj.phone) == 12:
                         #message from vendor
                         vendor = Vendor.get_vendor_by_id(vendor_id)
                         message = f'Thank you for your review!\nSincerely,\n{vendor.vendor_name}'
@@ -524,6 +525,7 @@ def changing_password_info():
         db.session.commit()
         return render_template('successful_password_change.html')
     
+
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)
