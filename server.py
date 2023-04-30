@@ -435,6 +435,11 @@ def user_rating_top_five():
                 average=  rating_sum/len(vendor_ratings)
                 round_rating = round(average)
                 top_five_vendors_rate.append(round_rating)
+            # gets the only five items
+            top_five_array =top_five_array[:5]
+            top_five_vendors_from_user = top_five_vendors_from_user[:5]
+            top_five_vendors_rate = top_five_vendors_rate[:5]
+        
         
         return render_template('user_rating_top_five.html', top_five_array=top_five_array,top_five_vendors_from_user=top_five_vendors_from_user,top_five_vendors_rate=top_five_vendors_rate)
         
