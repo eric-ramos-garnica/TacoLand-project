@@ -13,37 +13,40 @@
 {% set vendorId = []%}
 {% set hours = []%}
 {% set taco_icons = []%}
-
-<h1>All Vendors</h1>
-<!-- /filters by vendor type -->
-<div id="container-filter-business-type">
-  <a href="/filtervendors/taco truck"><button >Taco trucks</button></a>
-  <a href="/filtervendors/taco stand"><button >Taco stands</button></a>
-  <a href="/filtervendors/all"><button >All taco vendors</button></a>
-  <img class="filter-image" src="https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/48/null/external-filter-design-thinking-tanah-basah-glyph-tanah-basah.png"/>
+<div id="container-title-filter">
+  <div id="container-title-vendors">
+    <h1>All Vendors</h1>
+  </div>
+  <!-- /filters by vendor type -->
+  <div id="container-filter-business-type">
+    <a href="/filtervendors/taco truck"><button >Taco trucks</button></a>
+    <a href="/filtervendors/taco stand"><button >Taco stands</button></a>
+    <a href="/filtervendors/all"><button >All taco vendors</button></a>
+    <img class="filter-image" src="https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/48/null/external-filter-design-thinking-tanah-basah-glyph-tanah-basah.png"/>
+  </div>
+  
+  <div id="container-filters" style="display:none;">
+    <form action="/filterByZipcodeAndCity" method="GET" id="form-edit-filter">
+  
+      <label for="zipcode:">Zipcode:</label>
+      <input type="number" name="zipcode" id="zipcode">
+      <label for="city">City:</label>
+      <input type="text" name="city" id="city"><br>
+      <input type="radio" name="business_type_filter" id="Taco-trucks" value="taco truck">
+      <label for="Taco-trucks">Taco trucks</label>
+      <input type="radio" name="business_type_filter" id="Taco-stands" value="taco stand">
+      <label for="Taco-stands">Taco stands</label>
+      <input type="radio" name="business_type_filter" id="all" value="all" required>
+      <label for="all">All vendors</label>
+      <br>
+      <button type="submit">submit</button>
+      <button id="cancel-button-filter">Cancel</button>
+  
+    </form>
+  </div>
+  <!-- script -->
+  <script src="/static/js/vendorspage_filtering.js"></script>
 </div>
-
-<div id="container-filters" style="display:none;">
-  <form action="/filterByZipcodeAndCity" method="GET" id="form-edit-filter">
-
-    <label for="zipcode:">Zipcode:</label>
-    <input type="number" name="zipcode" id="zipcode">
-    <label for="city">City:</label>
-    <input type="text" name="city" id="city"><br>
-    <input type="radio" name="business_type_filter" id="Taco-trucks" value="taco truck">
-    <label for="Taco-trucks">Taco trucks</label>
-    <input type="radio" name="business_type_filter" id="Taco-stands" value="taco stand">
-    <label for="Taco-stands">Taco stands</label>
-    <input type="radio" name="business_type_filter" id="all" value="all" required>
-    <label for="all">All vendors</label>
-    <br>
-    <button type="submit">submit</button>
-    <button id="cancel-button-filter">Cancel</button>
-
-  </form>
-</div>
-<!-- script -->
-<script src="/static/js/vendorspage_filtering.js"></script>
 
 <!-- container  -->
 <div id="container-for-vendor-map">

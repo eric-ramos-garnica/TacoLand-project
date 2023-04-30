@@ -142,6 +142,19 @@ opacity: 1;
     display: flex;
 }
 
+#container-title-filter{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+#container-title-vendors{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
 
 
 
