@@ -1,5 +1,4 @@
-
-  // converting strings into arrays
+ // converting strings into arrays
 const str = document.getElementById("k").innerHTML;
 const arr = JSON.parse(str.replace(/'/g, "\"")).map(coord => {
   const [lat, long] = coord.split(",");

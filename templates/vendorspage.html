@@ -23,8 +23,8 @@
   <img class="filter-image" src="https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/48/null/external-filter-design-thinking-tanah-basah-glyph-tanah-basah.png"/>
 </div>
 
-<div id="container-filters" class="container-filter-display">
-  <form action="/filterByZipcodeAndCity" method="GET">
+<div id="container-filters" style="display:none;">
+  <form action="/filterByZipcodeAndCity" method="GET" id="form-edit-filter">
 
     <label for="zipcode:">Zipcode:</label>
     <input type="number" name="zipcode" id="zipcode">
@@ -36,17 +36,14 @@
     <label for="Taco-stands">Taco stands</label>
     <input type="radio" name="business_type_filter" id="all" value="all" required>
     <label for="all">All vendors</label>
+    <br>
     <button type="submit">submit</button>
+    <button id="cancel-button-filter">Cancel</button>
 
   </form>
 </div>
-<script>
-  var filter_button = document.querySelector(".filter-image")
-  filter_button.addEventListener('click',(e)=>{
-    document.getElementById("container-filter-business-type").className = "container-filter-display";
-    document.getElementById("container-filters").classList.remove("container-filter-display");
-  });
-</script>
+<!-- script -->
+<script src="/static/js/vendorspage_filtering.js"></script>
 
 
 <!-- show vendors -->
@@ -83,7 +80,7 @@
 <script
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo&callback=initMap&v=weekly"
 defer
-></script> 
+></> 
 
 <script src="/static/js/vendorspage.js"></script>
 

@@ -32,7 +32,7 @@ mex_restaurants_array.forEach((coord,i) => {
     });
     
     const infoWindow = new google.maps.InfoWindow({
-    content: `<a href="/restaurantInfo/${vendor_ids_array[i]}"><h2>${business_title_array[i]}</h2></a><h2>Hours:${phones_array[i]}</h2>`
+    content: `<a href="/restaurantInfo/${vendor_ids_array[i]}"><h2>${business_title_array[i]}</h2></a><h2>Phone:${phones_array[i]}</h2>`
     });
     
     marker.addListener('click', () => {
