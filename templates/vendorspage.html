@@ -45,8 +45,10 @@
 <!-- script -->
 <script src="/static/js/vendorspage_filtering.js"></script>
 
-
+<!-- container  -->
+<div id="container-for-vendor-map">
 <!-- show vendors -->
+<div style= "height: 600px; overflow-y: scroll;">
 <ul id="vendor-list">
   {% for vendor in vendors%}
   <li>
@@ -66,6 +68,7 @@
   </li>
   {% endfor %}
 </ul>
+</div>
 <!-- hidden elements -->
 <p id ="k" style="display:none" >{{my_list}}</p>
 <p id ="business_name" style="display:none">{{business_name}}</p>
@@ -74,9 +77,11 @@
 <p id="business_type" style="display:none">{{taco_icons}}</p>
 <br>
 <!-- <p id="result"></p> -->
+<!-- map -->
+  <div id="map"></div>
 
-<div id="map"></div>
 
+</div>
 <script
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo&callback=initMap&v=weekly"
 defer
