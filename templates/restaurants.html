@@ -13,35 +13,42 @@
 {% set phone = []%}
 {% set vendorId = []%}
 
-
-<h1>Mexican Restaurants</h1>
-{% if not mexican_restaurants_data %}
-    <p>Please enter zipcode or city or address</p>
-{% endif %}
-    <form action="/mexicanRestaurantsApi" method="GET">
-        <label for="location">Location</label>
-        <input type="text" name="restaurantsLocation" id="location">
-        <button type="submit">Submit</button>
-    </form>
-
-{% if mexican_restaurants_data %} 
-<ul id="mexican-restaurants-list">
-    {% if "businesses" in mexican_restaurants_data %}
-    {% for business in mexican_restaurants_data["businesses"] %}
-        <li>
-            <h2>{{business["name"]}}</h2>
-            <a href="/restaurantInfo/{{business['id']}}"><img src="{{business['image_url']}}" alt="Mexican image" class="mexican-restaurant-image"></a>
-            <p>Rating:{{business["rating"]}}</p>
-        </li>
-        <!-- appending all coordinates in array -->
-        {% set _ = coordinate_list.append(business['coordinates']) %}
-        {% set _ = business_name.append(business["name"]) %}
-        {% set _ = phone.append(business['display_phone']) %}
-        {% set _ = vendorId.append(business['id']) %}
-        <p id="regions" style="display: none;">{{mexican_restaurants_data['region']['center']}}</p>
-    {% endfor %}
+<div id="container-mexican-restaurants">
+    <h1>Mexican Restaurants</h1>
+    {% if not mexican_restaurants_data %}
+        <p>Please enter zipcode or city or address</p>
     {% endif %}
-</ul>
+        <form action="/mexicanRestaurantsApi" method="GET">
+            <label for="location">Location</label>
+            <input type="text" name="restaurantsLocation" id="location">
+            <button type="submit"id="submit-mexican-res">Submit</button>
+        </form>
+</div>
+<div id="container-mex-rest-and-map">
+{% if "businesses" in mexican_restaurants_data %}
+<div style= "height: 600px; overflow-y: scroll; width: 37.5rem; " id="scrollbar-restaurants" >
+    <ul id="mexican-restaurants-list">
+        {% for business in mexican_restaurants_data["businesses"] %}
+            <li class="mex-item-rest">
+                <div id="container-li-res">
+                    <a href="/restaurantInfo/{{business['id']}}"><img src="{{business['image_url']}}" alt="Mexican image" class="mexican-restaurant-image"></a>
+                    <div class="container-for-info-restaurant">
+                        <h2>{{business["name"]}}</h2>
+                        <p>Rating:{{business["rating"]}}</p>
+                    </div>
+                </div>
+            </li>
+            <!-- appending all coordinates in array -->
+            {% set _ = coordinate_list.append(business['coordinates']) %}
+            {% set _ = business_name.append(business["name"]) %}
+            {% set _ = phone.append(business['display_phone']) %}
+            {% set _ = vendorId.append(business['id']) %}
+            <p id="regions" style="display: none;">{{mexican_restaurants_data['region']['center']}}</p>
+        {% endfor %}
+        {% endif %}
+    </ul>
+</div>
+{% if mexican_restaurants_data %} 
 
     <!-- elements for javascript to get data -->
     <p id="k" style="display: none;">{{coordinate_list}}</p>
@@ -50,10 +57,9 @@
     <p id="vendor_id" style="display: none;" >{{vendorId}}</p>
     
     <!-- google maps -->
-    <h1>google maps</h1>
     <div id="map"></div>
 {% endif %}
-
+</div>
 
 <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo&callback=initMap&v=weekly"

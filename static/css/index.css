@@ -19,6 +19,11 @@ a{
     text-decoration: none;
     color: black;
 }
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 
 /* 2.Typography Styles 
 ================================*/
@@ -189,6 +194,7 @@ opacity: 1;
   padding: 0.625rem;
   width: 25rem;
   border-radius: 10px;
+  
 }
 #li-info{
     display: flex;
@@ -328,6 +334,44 @@ opacity: 1;
     width: 50%;
     text-align: center;
 }
+
+/* mexican Restaurants */
+.mex-item-rest{
+    border: 1px solid #ccc;
+    padding: 0.625rem;
+    margin-bottom: 0.313rem;
+    padding: 0.625rem;
+    width: 25rem;
+    border-radius: 10px;
+    
+}
+#container-mexican-restaurants{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2.5rem;
+}
+#mexican-restaurants-list li{
+    text-decoration: none;
+}
+#container-mex-rest-and-map{
+    display: flex;
+    flex-direction: row;
+}
+.container-for-info-restaurant{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#container-li-res{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+
 
 
 /* 1778 Oakland road apt22 */
