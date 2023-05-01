@@ -7,43 +7,56 @@
 {% endblock%}
 
 {% block body %}
-<h1>Welcome to {{name}} </h1>
-<img src="{{image_url}}" alt="image">
-<p>Address: {{address}}</p>
-<p>Phone: {{phone}}</p>
-<p>Rating: {{rating}}</p>
-
-<div>
-  <p>Make a rating</p>
-  <a href="{{url}}"><button>rating</button></a>
+<div id="container-vendor-info">
+  <h1 class="title-vendor-info">Welcome to {{name}} </h1>
+  <div class="image-taco-vendor-info">
+    <img src="{{image_url}}" alt="image">
+  </div>
+  <div class="taco-vendor-information">
+    <p>Address: {{address}}</p>
+    <p>Phone: {{phone}}</p>
+    <p>Rating: {{rating}}</p>
+  </div>
+    <a href="{{url}}"><button>reviews</button></a>
 </div> 
-<hr>
+<hr style="color: #04A064;">
 <br>
+
 <!-- directions -->
+<div id="container-map-direction">
+  <div>
+    <h1 class="title-vendor-info" >Directions</h1>
+  </div>
+  <div id="container-for-map">
+    <div class="direction-form-containers">
+      <label for="origin">Origin:</label>
+      <input type="text" id="origin" name="origin" placeholder="Type address" class="origin-autocomplate">
+      <i class="fa-solid fa-location-dot"></i>
+    </div>
+    <div class="direction-form-containers">
+      <label for="destination">Destination:</label>
+      <input type="text" id="destination" value="{{address}}" name="destination">
+      <i class="fa-solid fa-flag-checkered"></i>
+    </div>
+  </div>
+  <div class="button-direction">
+    <button onclick="calculateRoute()">Directions</button>
+  </div>
+  
+</div>
+ <!-- google maps container -->
+<div id="container-map-output">
+  <!-- google maps -->
+ <div id="map"></div>
+  <!-- pannel for directions -->
+  <div id="panel" style="display: none;"></div>
+</div>
 
-<div>
-    <label for="origin">Origin:</label>
-    <input type="text" id="origin" name="origin" placeholder="Type address" class="origin-autocomplate">
-    <i class="fa-solid fa-location-dot"></i>
-</div>
-<div>
-    <label for="destination">Destination:</label>
-    <input type="text" id="destination" value="{{address}}" name="destination">
-    <i class="fa-solid fa-flag-checkered"></i>
-</div>
-<div>
-    <button onclick="calculateRoute()">Calculate Route</button>
-</div>
 
-<!-- google maps container -->
-<div>
-    <!-- google maps -->
-    <div id="map"></div>
-    <!-- pannel for directions -->
-    <div id="panel"></div>
-    
-    <!-- output for google maps -->
-    <div id="output"></div>
+
+<div id="container-output">
+  <!-- output for google maps -->
+  <div id="output"></div>
 </div>
  
 <!-- hidden elements -->

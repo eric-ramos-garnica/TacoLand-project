@@ -44,6 +44,10 @@ var map;
         panel: document.getElementById("panel"),
     });
 
+      // Added this line so it can flex row map and direction
+  document.getElementById('panel').removeAttribute('style');
+  document.getElementById("container-map-output").classList.add("directions-map-flex-row");
+
     directionsRenderer.addListener("directions_changed", ()=>{
         const directions = directionsRenderer.getDirections();
 
