@@ -8,41 +8,53 @@
 
 {% block body %}
 
-{% for message in get_flashed_messages() %}
-        <h1 id="message">{{message}}</h1>
-{% endfor %}
-
-<h1>Welcome to {{vendor_info.vendor_name}} </h1>
-<img src="{{vendor_info.image}}" alt="image">
-<p>Hours {{vendor_info.working_hours}}</p>
-<p>address {{vendor_info.location}}</p>
-{% if rating == 0 %}
-    <p>Ratings:no rating</p>
-{% else %}
-    <p>Rating:{{rating}}</p>
-{% endif %}
-
-<div>
-  <!-- review button -->
-  <a href="/rating/{{vendor_info.vendor_id}}"><button>review</button></a>
-</div> 
-<hr>
-<br>
-<div>
-   <div>
-    <label for="origin">Origin:</label>
-    <input type="text" id="origin" name="origin" placeholder="Type address" class="origin-autocomplate">
-    <i class="fa-solid fa-location-dot"></i>
+<div id="container-vendor-info">
+  {% for message in get_flashed_messages() %}
+  <h1 id="message">{{message}}</h1>
+  {% endfor %}
+  
+  <h1 class="title-vendor-info">Welcome to {{vendor_info.vendor_name}} </h1>
+  <div class="container-for-image-info">
+    <div class="image-taco-vendor-info">
+      <img src="{{vendor_info.image}}" alt="image">
+    </div>
+    <div class="taco-vendor-information">
+      <p>Hours {{vendor_info.working_hours}}</p>
+      <p>address {{vendor_info.location}}</p>
+      {% if rating == 0 %}
+      <p>Ratings:no rating</p>
+      {% else %}
+      <p>Rating:{{rating}}</p>
+      {% endif %}
+    </div>
   </div>
-  <div>
-    <label for="destination">Destination:</label>
-    <input type="text" id="destination" value="{{vendor_info.location}}" name="destination">
-    <i class="fa-solid fa-flag-checkered"></i>
-  </div>
-  <div>
-    <button onclick="calculateRoute()">Calculate Route</button>
-  </div>
+  <a href="/rating/{{vendor_info.vendor_id}}"><button>reviews</button></a>
 </div>
+
+<hr style="color: #04A064;">
+<!-- review button --> 
+<br>
+<div id="container-map-direction">
+  <div>
+    <h1 class="title-vendor-info" >Directions</h1>
+  </div>
+  <div id="container-for-map">
+    <div>
+      <label for="origin">Origin:</label>
+      <input type="text" id="origin" name="origin" placeholder="Type address" class="origin-autocomplate" >
+      <i class="fa-solid fa-location-dot"></i>
+    </div>
+    <div>
+      <label for="destination">Destination:</label>
+      <input type="text" id="destination" value="{{vendor_info.location}}" name="destination">
+      <i class="fa-solid fa-flag-checkered"></i>
+    </div>
+  </div>
+  <div>
+    <button onclick="calculateRoute()">Directions</button>
+  </div>
+ </div>
+
 <!-- google maps container -->
 <div>
   <!-- google maps -->

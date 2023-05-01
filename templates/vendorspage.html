@@ -15,7 +15,7 @@
 {% set taco_icons = []%}
 <div id="container-title-filter">
   <div id="container-title-vendors">
-    <h1>All Vendors</h1>
+    <h1 class="title-vendorspage">All Vendors</h1>
   </div>
   <!-- /filters by vendor type -->
   <div id="container-filter-business-type">
@@ -39,8 +39,10 @@
       <input type="radio" name="business_type_filter" id="all" value="all" required>
       <label for="all">All vendors</label>
       <br>
-      <button type="submit">submit</button>
-      <button id="cancel-button-filter">Cancel</button>
+      <div class="buttons-filter-position" >
+        <button type="submit">submit</button>
+        <button id="cancel-button-filter">Cancel</button>
+      </div>
   
     </form>
   </div>

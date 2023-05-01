@@ -12,7 +12,9 @@
     margin: 0;
     padding: 0;
 }
-
+body{
+    background-color: white;
+}
 
 /* 2.Typography Styles 
 ================================*/
@@ -154,10 +156,63 @@ opacity: 1;
     justify-content: center;
     align-content: center;
 }
+.title-vendorspage{
+    color: rgb(235,107,60);
+}
+.buttons-filter-position{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 
+#container-filters{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
+#cancel-button-filter{
+    margin-left: 15px;
+}
 
+/* vendor_info */
+.title-vendor-info{
+    color: rgb(235,107,60)
+}
+#container-vendor-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
+.container-for-image-info{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-taco-vendor-info{
+    margin: 20px 40px 20px 20px;
+}
+.image-taco-vendor-info img{
+    height: 200px;
+    width: 200px;
+}
+
+#container-map-direction{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
 
 
