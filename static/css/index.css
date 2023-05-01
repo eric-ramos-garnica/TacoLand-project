@@ -178,6 +178,28 @@ opacity: 1;
     margin-left: 0.938rem;
 }
 
+.vendor-item {
+  border: 1px solid #ccc;
+  padding: 0.625rem;
+  margin-bottom: 0.313rem;
+  padding: 0.625rem;
+  width: 25rem;
+  border-radius: 10px;
+}
+#li-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.container-for-info-vendors{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+}
+
+
 /* vendor_info */
 .title-vendor-info{
     color: rgb(235,107,60)
