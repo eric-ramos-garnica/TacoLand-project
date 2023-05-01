@@ -277,7 +277,57 @@ opacity: 1;
     height: 25rem; /* Set a fixed height to limit the size of the panel */
   }
 
+/* Rating page */
+#container-info-img-title-rating{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#container-form-rating{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.costumer-review-container{
+    border: 1px solid #ccc;
+    padding: 0.625rem;
+    margin-bottom: 0.313rem;
+    padding: 0.625rem;
+    width: 25rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.review-info-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+#container-reviews-and-noreviews{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
+/* Rating submission */
+#container-body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+#container-submission-info{
+    width: 50%;
+    text-align: center;
+}
 
 
 /* 1778 Oakland road apt22 */

@@ -2,43 +2,52 @@
 {% block title %}Rating Page{% endblock %}
 {% block body %}
 
-{% for message in get_flashed_messages() %}
-        <h1 id="message">{{message}}</h1>
-{% endfor %}
 
-<div id="container-rating-review " >
-<h1>{{vendor_info.vendor_name}}</h1>
-<img src="{{vendor_info.image}}" alt="image"><br>
-
-<!-- will display button to make a review -->
-<button id="rate-review-button">Make a rate/review</button>
-
-<!-- will display rating & review form -->
-<form action=" /ratingSubmission/{{vendor_info.vendor_id}}" method="POST" style="display: none;" id="rating-review-form">
-    <label for="rating">Enter rating between 1-5</label><br>
-    <input type="number" name="rating" id="rating" min="1" max="5" required><br>
-
-    <label for="review">Review:</label><br>
-    <textarea name="review" id="review" cols="50" rows="5" required></textarea><br>
-
-    <button type="submit">submit</button>
-</form>
+<div id="container-rating-review">
+    <div id="container-info-img-title-rating">
+        {% for message in get_flashed_messages() %}
+                <h1 id="message">{{message}}</h1>
+        {% endfor %}
+        
+        <h1>{{vendor_info.vendor_name}}</h1>
+        <img src="{{vendor_info.image}}" alt="image"><br>
+        <!-- will display button to make a review -->
+        <button id="rate-review-button">Make a rate/review</button>
+        <form action=" /ratingSubmission/{{vendor_info.vendor_id}}" method="POST" style="display: none;" id="rating-review-form">
+            <div id="container-form-rating">
+                <div>
+                    <label for="rating">Enter rating between 1-5</label>
+                    <input type="number" name="rating" id="rating" min="1" max="5" required><br>
+                </div>
+                <label for="review">Review:</label><br>
+                <textarea name="review" id="review" cols="50" rows="5" required></textarea>
+                
+                <button type="submit">submit</button>
+            </div>
+        </form>
+        <!-- will display rating & review form -->
+    </div>
 </div>
 <hr>
 <!--will display review  -->
-{% if reviews%}
-<div>
+<div id="container-reviews-and-noreviews">
+    {% if reviews%}
     <!-- will display latest review -->
     {% for review in reviews[::-1]%}
-        <img src="{{review.photo}}" alt="user photo"> 
-        <h4>Rate:{{review.score}}</h4>    
-        <p>{{review.review}}</p>
+        <div class="costumer-review-container">
+            
+            <img src="{{review.photo}}" alt="user photo"> 
+            <div class="review-info-text">
+                <h4>Rate:{{review.score}}</h4>    
+                <p>{{review.review}}</p>
+            </div>
+        </div>
     {% endfor%}
+    {% else %}
+    <div>
+        <h1>No Reviews</h1>
+    </div>
+    {% endif%}
 </div>
-{% else %}
-<div>
-    <h1>No Reviews</h1>
-</div>
-{% endif%}
 <script src="/static/js/ratingpage.js"></script>
 {% endblock %}
