@@ -59,18 +59,20 @@
   <li class="vendor-item" id="li-info">
     <a href="/tacovendors/{{vendor.vendor_id}}"><img src="{{vendor.image}}" alt="image" class="tacoimage"></a>
     <div class="container-for-info-vendors">
-      <h2>{{vendor.vendor_name}}</h2>
-      {% set _ = my_list.append(vendor.coords) %}
-      {% set _ = business_name.append(vendor.vendor_name) %}
-      {% set _ = vendorId.append(vendor.vendor_id) %}
-      {% set _ = hours.append(vendor.working_hours) %}
-      {% set _ = taco_icons.append(vendor.business_type) %}
-      
-      {% if vendor.vendor_id in rating_dic %}
-      <p>Rating:{{rating_dic[vendor.vendor_id]}}</p>
-      {% else %}
-      <p>Rating:no ratings</p>
-      {% endif %}
+      <a href="/tacovendors/{{vendor.vendor_id}}">
+        <h2>{{vendor.vendor_name}}</h2>
+        {% set _ = my_list.append(vendor.coords) %}
+        {% set _ = business_name.append(vendor.vendor_name) %}
+        {% set _ = vendorId.append(vendor.vendor_id) %}
+        {% set _ = hours.append(vendor.working_hours) %}
+        {% set _ = taco_icons.append(vendor.business_type) %}
+        
+        {% if vendor.vendor_id in rating_dic %}
+        <p>Rating:{{rating_dic[vendor.vendor_id]}}</p>
+        {% else %}
+        <p>Rating:no ratings</p>
+        {% endif %}
+      </a>
     </div>
   </li>
   {% endfor %}
