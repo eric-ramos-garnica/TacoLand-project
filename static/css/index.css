@@ -175,7 +175,7 @@ opacity: 1;
 }
 
 #cancel-button-filter{
-    margin-left: 15px;
+    margin-left: 0.938rem;
 }
 
 /* vendor_info */
@@ -199,11 +199,11 @@ opacity: 1;
 }
 
 .image-taco-vendor-info{
-    margin: 20px 40px 20px 20px;
+    margin: 1.25rem 2.5rem 1.25rem 1.25rem;
 }
 .image-taco-vendor-info img{
-    height: 200px;
-    width: 200px;
+    height: 12.5rem;
+    width: 12.5rem;
 }
 
 #container-map-direction{
@@ -212,12 +212,48 @@ opacity: 1;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+}
+#container-for-map{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.direction-form-containers{
+    margin: 0.625rem;
+}
+
+.button-direction{
+    margin: 0.625rem;
 }
 
 
+.directions-map-flex-row {
+    display: flex;
+    flex-direction: row;
+    
+  }
+
+#container-output{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+#panel {
+    overflow-y: scroll;
+    height: 25rem; /* Set a fixed height to limit the size of the panel */
+  }
 
 
 
+
+/* 1778 Oakland road apt22 */
 
 /* 5.Components 
 ================================*/

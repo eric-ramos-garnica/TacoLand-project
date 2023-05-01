@@ -39,28 +39,33 @@
     <h1 class="title-vendor-info" >Directions</h1>
   </div>
   <div id="container-for-map">
-    <div>
+    <div class="direction-form-containers">
       <label for="origin">Origin:</label>
       <input type="text" id="origin" name="origin" placeholder="Type address" class="origin-autocomplate" >
       <i class="fa-solid fa-location-dot"></i>
     </div>
-    <div>
+    <div class="direction-form-containers">
       <label for="destination">Destination:</label>
       <input type="text" id="destination" value="{{vendor_info.location}}" name="destination">
       <i class="fa-solid fa-flag-checkered"></i>
     </div>
   </div>
-  <div>
+  <div class="button-direction">
     <button onclick="calculateRoute()">Directions</button>
   </div>
  </div>
 
 <!-- google maps container -->
-<div>
+<div id="container-map-output">
   <!-- google maps -->
-  <div id="map"></div>
+ <div id="map"></div>
   <!-- pannel for directions -->
   <div id="panel"></div>
+</div>
+
+
+
+<div id="container-output">
   <!-- output for google maps -->
   <div id="output"></div>
 </div>

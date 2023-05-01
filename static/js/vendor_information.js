@@ -47,6 +47,7 @@ function initMap() {
 
 
 function calculateRoute() {
+
   var origin = document.getElementById('origin').value;
   var destination = document.getElementById('destination').value;
 
@@ -55,6 +56,9 @@ function calculateRoute() {
     // draggable:true,   //i commented this  so the route wont be draggable.
     panel: document.getElementById("panel"),
   });
+
+  // Added this line so it can flex row map and direction
+  document.getElementById("container-map-output").classList.add("directions-map-flex-row");
 
   directionsRenderer.addListener("directions_changed", ()=>{
     const directions = directionsRenderer.getDirections();
