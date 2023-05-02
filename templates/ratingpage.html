@@ -33,7 +33,7 @@
 <div id="container-reviews-and-noreviews">
     {% if reviews%}
     <!-- will display latest review -->
-    {% for review in reviews[::-1]%}
+    {% for review in reviews%}
         <div class="costumer-review-container">
             
             <img src="{{review.photo}}" alt="user photo"> 
