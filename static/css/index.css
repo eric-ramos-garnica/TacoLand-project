@@ -212,7 +212,7 @@ opacity: 1;
 
 /* vendor_info */
 .title-vendor-info{
-    color: rgb(235,107,60)
+    color: rgb(235,107,60);
 }
 #container-vendor-info{
     display: flex;
@@ -461,6 +461,63 @@ opacity: 1;
 
 /* 5.Components 
 ================================*/
+/* loginpage */
+#container-logo-login h1{
+    color: rgb(235,107,60);
+}
+#container-loginpage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+#container-logo-login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1.875rem;
+    
+}
+#container-form-login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.button-container-login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#container-logo-login img {
+    margin-top: 1.875rem;
+}
+
+.button-container-login{
+    margin-top: 0.625rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 img{
     height: 100px;
     width: 100px;

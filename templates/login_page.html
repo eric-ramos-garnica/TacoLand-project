@@ -1,26 +1,29 @@
 {% extends 'base.html' %}
 {% block title %}Log in{% endblock %}
 {% block body %}
-    <div id="container">
-        <div id="container-logo">
+<div id="container-loginpage">
+        {% for message in get_flashed_messages() %}
+            <h1 id="message">{{message}}</h1>
+        {% endfor %}
+        <div id="container-logo-login">
+            <h1>Taco Land</h1>
             <img src="/static/img/taco_icon.png" alt="taco image">
-            <h2>Taco Land</h2>
         </div>
-    {% for message in get_flashed_messages() %}
-        <h1 id="message">{{message}}</h1>
-    {% endfor %}
-        <div id="container-form">
+        <div id="container-form-login">
             <form action="/loginpage" method="POST">
                 <label for="email">Email</label><br>
-                <input type="email" name="email" id="email">
+                <input type="email" name="email" id="email" required>
                 <br>
                 <label for="password">Password</label><br>
-                <input type="password" name="password" id="password">
+                <input type="password" name="password" id="password" required>
                 <br>
-                <button type="submit">Log in</button>
+                <div class="button-container-login">
+                    <button type="submit"  class="btn btn-primary">Log in</button>
+                </div>
             </form>
+            <br>
             <p>or</p>
-            <a href="/createaccountpage">Create account</a>
+            <a href="/createaccountpage"><button type="button" class="btn btn-secondary">Create Account</button></a>
         </div>
     </div>
 {% endblock %}

@@ -356,7 +356,7 @@ def vendor_account():
         user_businesses = Vendor.get_businesses_by_user_id(session['id'])
         return render_template('vendor_info_by_owner.html',user_businesses=user_businesses)
     else:
-        flash("Need to login to see vendor information!")
+        flash("Need to login to see business settings!")
         return redirect('/sellerPage')
     
 @app.route("/BusinessEdit/<vendor_id>")
