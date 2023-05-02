@@ -502,7 +502,33 @@ opacity: 1;
 }
 
 
+/* Create account */
+#container-title h1{
+    color: rgb(235,107,60);
+}
+#container-create-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+}
+#container-title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
+}
+
+#container-form-createpage {
+    /* border: 3px double #555; */
+    padding: 10px;
+}
+.button-create-account{
+    margin-top: 10px;
+}
 
 
 

@@ -3,30 +3,34 @@
 
 
 {% block body %}
-<form action="/createaccountpage" method="POST">
-    <div id="container">
-        <div id="container-title">
-            <h1>Sign up</h1>
-            <p>Please fill in this form to create account</p>
-            <hr>
-        </div>
-        <div id="container-form">
+<div id="container-create-page">
     {% for message in get_flashed_messages() %}
         <h1 id="message">{{message}}</h1>
     {% endfor %}
-        <label for="fname">Name</label>
-        <input type="text" name="fname" id="fname">
-        <label for="lname">Last Name</label>
-        <input type="text" name="lname" id="lname">
-        <br>
-        <label for="email">Email</label><br>
-        <input type="email" name="email" id="email">
-        <br>
-        <label for="password">Password</label><br>
-        <input type="password" name="password" id="password">
-        <br>
-        <button type="submit">Sign up</button>
-        </div>
+    <div id="container-form-createpage">
+        <form action="/createaccountpage" method="POST">
+            <div id="container-title">
+                <h1>Sign up</h1>
+                <p>Please fill in this form to create account.</p>
+            </div>
+            <div id="container-form">
+            <label for="fname">Firstname</label><br>
+            <input type="text" name="fname" id="fname" required>
+            <br>
+            <label for="lname">Lastname</label><br>
+            <input type="text" name="lname" id="lname" required>
+            <br>
+            <label for="email">Email</label><br>
+            <input type="email" name="email" id="email" required>
+            <br>
+            <label for="password">Password</label><br>
+            <input type="password" name="password" id="password" required>
+            <br>
+            <div class="button-create-account">
+                <button type="submit" class="btn btn-primary">Sign up</button>
+            </div>
+            </div>
+        </form>    
     </div>
-</form>    
+</div>
 {% endblock %}
