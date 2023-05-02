@@ -1,88 +1,91 @@
 {% extends 'base.html' %}
 {% block title %}Vendor sign up{% endblock %}
 {% block body %}
+<div id="container-create-vendor">
 
-<h1>Create vendor business</h1>
-<hr>
-
-{% for message in get_flashed_messages() %}
-        <h1 id="message">{{message}}</h1>
-{% endfor %}
-<form action="/vendorpage" id="vendor-form" method="POST" enctype="multipart/form-data">
-    <div id="containter-form">
-        <label for="vendorName">Business Name</label><br>
-        <input type="text" name="vendorName" id="vendorName" required><br>
+    <div id="container-info-create-vendor">
+        {% for message in get_flashed_messages() %}
+                <h1 id="message">{{message}}</h1>
+        {% endfor %}
+        <h1>Create Vendor Business</h1>
         
-        <label for="address">Address</label><br>
-        <input type="text" name="address" id="address" required><br>
+        <form action="/vendorpage" id="vendor-form" method="POST" enctype="multipart/form-data">
+            <div id="containter-form">
+                <label for="vendorName">Business Name</label><br>
+                <input type="text" name="vendorName" id="vendorName" required><br>
+                
+                <label for="address">Address</label><br>
+                <input type="text" name="address" id="address" required><br>
+                
+                <label for="hours">Hours</label><br>
+                <input type="text" name="hours" id="hours" required><br>
+                
+                <label for="image">Image</label>
+                <input type="file" name="my-file" id="image" required><br>
+                
+                <label for="zipcode">Zipcode</label><br>
+                <input type="number" name="zipcode" id="zipcode" required><br>
+                
+                
+                <label for="state">State</label><br>
+                <input type="text" name="state" id="state" required><br>
         
-        <label for="hours">Hours</label><br>
-        <input type="text" name="hours" id="hours" required><br>
-        
-        <label for="image">Image</label>
-		<input type="file" name="my-file" id="image" required><br>
-        
-        <label for="zipcode">Zipcode</label><br>
-        <input type="number" name="zipcode" id="zipcode" required><br>
-        
-        
-        <label for="state">State</label><br>
-        <input type="text" name="state" id="state" required><br>
-
-        <label for="city">City</label><br>
-        <input type="text" name="city" id="city" required><br>
-        
-        <span>Business:</span>
-        <input type="radio" name="business_type" id="taco_truck" value="taco truck" required>
-        <label for="taco_truck">Taco truck</label>
-        <input type="radio" name="business_type" id="taco_stand" value="taco stand">
-        <label for="taco_stand">Taco stand</label><br>
-        
-        <input type="hidden" id="coordinates" name="coordinates">
-        
-        <button type="submit">Submit</button>   
+                <label for="city">City</label><br>
+                <input type="text" name="city" id="city" required><br>
+                
+                <span>Business:</span>
+                <input type="radio" name="business_type" id="taco_truck" value="taco truck" required>
+                <label for="taco_truck">Taco truck</label>
+                <input type="radio" name="business_type" id="taco_stand" value="taco stand">
+                <label for="taco_stand">Taco stand</label><br>
+                
+                <input type="hidden" id="coordinates" name="coordinates">
+                
+                <button type="submit" class="btn btn-success">Submit</button>   
+            </div>
+        </form>
     </div>
-</form>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo&libraries=places"></script>
-<script>
-    window.addEventListener('load', function() {
-    const autocomplete = new google.maps.places.Autocomplete(document.getElementById('address'));
-
-    autocomplete.addListener('place_changed', function() {
-        const place = autocomplete.getPlace();
-        if (!place.geometry) {
-            console.log('No details available for input: ' + place.name);
-            return;
-        }
-        const address = place.formatted_address;
-        document.getElementById('address').value = address;
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo&libraries=places"></script>
+    <script>
+        window.addEventListener('load', function() {
+        const autocomplete = new google.maps.places.Autocomplete(document.getElementById('address'));
+    
+        autocomplete.addListener('place_changed', function() {
+            const place = autocomplete.getPlace();
+            if (!place.geometry) {
+                console.log('No details available for input: ' + place.name);
+                return;
+            }
+            const address = place.formatted_address;
+            document.getElementById('address').value = address;
+    
+        });
+    
+        //converting address to coordinates
+        const form = document.getElementById('vendor-form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // prevent form submission
+    
+            const apiKey = 'AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo';
+            const address = document.getElementById('address').value;
+    
+            fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'OK') {
+                        const location = data.results[0].geometry.location;
+                        const coordinates = [location.lat, location.lng];
+                        document.getElementById('coordinates').value = coordinates.join(',');
+                        form.submit(); // submit the form after getting the coordinates
+                    } else {
+                        console.log(`Error: ${data.status}`);
+                    }
+                })
+                .catch(error => console.log('Error:', error));
+        });
     });
-
-    //converting address to coordinates
-    const form = document.getElementById('vendor-form');
-    form.addEventListener('submit', function(event) {
-        event.preventDefault(); // prevent form submission
-
-        const apiKey = 'AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo';
-        const address = document.getElementById('address').value;
-
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'OK') {
-                    const location = data.results[0].geometry.location;
-                    const coordinates = [location.lat, location.lng];
-                    document.getElementById('coordinates').value = coordinates.join(',');
-                    form.submit(); // submit the form after getting the coordinates
-                } else {
-                    console.log(`Error: ${data.status}`);
-                }
-            })
-            .catch(error => console.log('Error:', error));
-    });
-});
-</script>
+    </script>
+</div>
 
 
 {% endblock %}
