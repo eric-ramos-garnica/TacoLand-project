@@ -33,14 +33,13 @@
         <label for="taco_truck">Taco truck</label>
         <input type="radio" name="business_type" id="taco_stand" value="taco stand">
         <label for="taco_stand">Taco stand</label><br>
+        <button type="submit">Edit</button>
 
         <input type="hidden" id="coordinates" name="coordinates">
         
-    
-        <button type="submit">Edit</button>
-        
     </div>
 </form>
+
 
 <p>or</p>
 
@@ -50,5 +49,6 @@
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo&libraries=places"></script>
 <script src="/static/js/edit.js"></script>
+
 
 {% endblock %}
