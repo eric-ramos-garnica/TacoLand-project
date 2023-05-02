@@ -438,7 +438,24 @@ opacity: 1;
     text-decoration: none;
     font-size: 2.5rem;
 }
-    
+
+/* business Settings */
+#container-title-settings{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+#businesses-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 40px;
+}
+#container-business{
+    margin: 40px;
+}
 
 /* 1778 Oakland road apt22 */
 

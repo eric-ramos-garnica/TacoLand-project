@@ -1,18 +1,25 @@
 {% extends 'base.html' %}
 {% block title %}Vendor businesses{% endblock %}
 {% block body %}
-  <h1>Businesses</h1>
+  <div id="container-title-settings">
+    <h1>Businesses</h1>
+  </div>
+  <hr>
   <ul id="businesses-list">
     {% for business in user_businesses%}
-    <li>
-        <h2>{{business.vendor_name}}</h2>
-        <img src="{{business.image}}" alt="business-image" class="business">
-        <p>Address:{{business.location}}</p>
-        <p>Hours:{{business.working_hours}}</p>
-        <p> city:{{business.city}} </p>
-        <p>Zipcode:{{business.zipcode}}</p>
-        <p>State:{{business.state}}</p>
-        <a href="/BusinessEdit/{{business.vendor_id}}"><button>Edit</button></a>
+    <li id="container-business">
+      <div class="card" style="width: 18rem;">
+        <img src="{{business.image}}" alt="business-image" class="business card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">{{business.vendor_name}}</h5>
+            <p class="card-text">Address: {{business.location}}</p>
+            <p class="card-text">Hours: {{business.working_hours}}</p>
+            <p class="card-text"> city: {{business.city}} </p>
+            <p class="card-text">Zipcode: {{business.zipcode}}</p>
+            <p class="card-text">State: {{business.state}}</p>
+            <a href="/BusinessEdit/{{business.vendor_id}}" class="btn btn-primary">Edit</a>
+        </div>
+      </div>
     </li>
     {% endfor %}
     </ul> 
