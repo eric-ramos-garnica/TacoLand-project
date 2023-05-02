@@ -19,9 +19,9 @@
   </div>
   <!-- /filters by vendor type -->
   <div id="container-filter-business-type">
-    <a href="/filtervendors/taco truck"><button >Taco trucks</button></a>
-    <a href="/filtervendors/taco stand"><button >Taco stands</button></a>
-    <a href="/filtervendors/all"><button >All taco vendors</button></a>
+    <a href="/filtervendors/taco truck"><button class="btn btn-success">Taco trucks</button></a>
+    <a href="/filtervendors/taco stand"><button class="btn btn-success">Taco stands</button></a>
+    <a href="/filtervendors/all"><button class="btn btn-success">All taco vendors</button></a>
     <img class="filter-image" src="https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/48/null/external-filter-design-thinking-tanah-basah-glyph-tanah-basah.png"/>
   </div>
   
@@ -53,7 +53,7 @@
 <!-- container  -->
 <div id="container-for-vendor-map">
 <!-- show vendors -->
-<div style= "height: 600px; overflow-y: scroll; width: 37.5rem;">
+<div style= "height: 600px; overflow-y: scroll; width: 37.5rem; background-color: white" >
 <ul id="vendor-list">
   {% for vendor in vendors%}
   <li class="vendor-item" id="li-info">
@@ -68,7 +68,7 @@
         {% set _ = taco_icons.append(vendor.business_type) %}
         
         {% if vendor.vendor_id in rating_dic %}
-        <p>Rating:{{rating_dic[vendor.vendor_id]}}</p>
+        <p class="rating-vendors">Rating:{{rating_dic[vendor.vendor_id]}}</p>
         {% else %}
         <p>Rating:no ratings</p>
         {% endif %}

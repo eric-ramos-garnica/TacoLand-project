@@ -13,7 +13,8 @@
     padding: 0;
 }
 body{
-    background-color: white;
+    background-color: rgba(253, 215, 133, 0.371);
+
 }
 a{
     text-decoration: none;
@@ -200,6 +201,7 @@ opacity: 1;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    background-color: hsl(0, 0%, 99%)	;
 }
 
 .container-for-info-vendors{
@@ -208,6 +210,13 @@ opacity: 1;
     justify-content:center;
     align-items: center;
 }
+.container-for-info-vendors h2{
+    color: rgb(235,107,60);
+}
+.rating-vendors{
+    color:rgb(4,160,100);
+}
+
 
 
 /* vendor_info */
