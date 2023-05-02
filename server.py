@@ -425,7 +425,8 @@ def user_rating_top_five():
         for i in range(len(all_ratings_by_user)):
             top_five_array.append(all_ratings_by_user[i])
             vendor = Vendor.get_vendor_by_id(all_ratings_by_user[i].vendor_id)
-            top_five_vendors_from_user.append(vendor)
+            if vendor:
+                top_five_vendors_from_user.append(vendor)
             #calculating average
             vendor_ratings =Rating.get_vendor_rating_by_id(all_ratings_by_user[i].vendor_id)
             if vendor_ratings:
