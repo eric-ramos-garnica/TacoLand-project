@@ -7,22 +7,36 @@
 {% endblock %}
 <!-- body -->
 {% block body %}
-<h1>Top 5 ratings</h1>
-
-{%if not top_five_array%}
-
-    <h2>No Ratings</h2>
-
-{% else %}
-
-    {% for idx in range(top_five_array|length) %}
-        <h2>{{idx + 1}}.</h2>
-        <p>{{top_five_vendors_from_user[idx].vendor_name}}</p>
-        <p><img src="{{top_five_vendors_from_user[idx].image}}" alt="vendor image"></p>
-        <p>Rating:{{top_five_vendors_rate[idx]}}</p>
-        <p>Users rate for vendor:{{top_five_array[idx].score}}</p>        
-    {% endfor %}
-
-{% endif %}
+<div id="container-top-five">
+    <h1>Top 5 ratings</h1>
+    
+    {%if not top_five_array%}
+    
+        <h2>No Ratings</h2>
+    
+    {% else %}
+    
+        {% for idx in range(top_five_array|length) %}
+        <div id="container-top-five-info">
+            <div class="tating-number">
+                <h2>{{idx + 1}}.</h2>
+            </div>
+            <div id="container-info-top-five">
+                    <div class="container-vendors-info-rating">
+                        <div class="image-top-five">
+                            <p><img src="{{top_five_vendors_from_user[idx].image}}" alt="vendor image"></p>
+                        </div>
+                        <div class="vendors-info-top-five">
+                            <p>{{top_five_vendors_from_user[idx].vendor_name}}</p>
+                            <p>Rating:{{top_five_vendors_rate[idx]}}</p>
+                            <p>Users rate for vendor:{{top_five_array[idx].score}}</p>        
+                        </div>
+                    </div>
+            </div>    
+        </div>
+        {% endfor %}
+    
+    {% endif %}
+</div>
 
 {% endblock %}
