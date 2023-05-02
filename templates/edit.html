@@ -1,53 +1,59 @@
 {% extends 'base.html' %}
 {% block title %}Edit page{% endblock %}
 {% block body %}
-<h1>Edit account</h1>
-<hr>
-
-<form action="/editpage" id="vendor-form" method="POST" enctype="multipart/form-data">
-    <div id="containter-form">
-        <label for="vendorName">Business Name</label><br>
-        <input type="text" name="vendorName" id="vendorName" required><br>
-
-        <label for="address">Address</label><br>
-        <input type="text" name="address" id="address" required><br>
-
-        <label for="hours">Hours</label><br>
-        <input type="text" name="hours" id="hours" required><br>
-
-        <label for="image">Image</label>
-		<input type="file" name="my-file" id="image" required><br>
-
-        <label for="zipcode">Zipcode</label><br>
-        <input type="number" name="zipcode" id="zipcode" required><br>
-
-
-        <label for="state">State</label><br>
-        <input type="text" name="state" id="state" required><br>
-
-        <label for="city">City</label><br>
-        <input type="text" name="city" id="city" required><br>
-
-        <span>Business:</span>
-        <input type="radio" name="business_type" id="taco_truck" value="taco truck">
-        <label for="taco_truck">Taco truck</label>
-        <input type="radio" name="business_type" id="taco_stand" value="taco stand">
-        <label for="taco_stand">Taco stand</label><br>
-        <button type="submit">Edit</button>
-
-        <input type="hidden" id="coordinates" name="coordinates">
+<div id="container-edit-account">
+    <div id="container-edit-info">
+        <h1>Edit Vendor Business</h1>
+        <hr>
         
+        <form action="/editpage" id="vendor-form" method="POST" enctype="multipart/form-data">
+            <div id="containter-form-edit-info">
+                <label for="vendorName">Business Name</label><br>
+                <input type="text" name="vendorName" id="vendorName" required><br>
+        
+                <label for="address">Address</label><br>
+                <input type="text" name="address" id="address" required><br>
+        
+                <label for="hours">Hours</label><br>
+                <input type="text" name="hours" id="hours" required><br>
+        
+                <label for="image">Image</label>
+                <input type="file" name="my-file" id="image" required><br>
+        
+                <label for="zipcode">Zipcode</label><br>
+                <input type="number" name="zipcode" id="zipcode" required><br>
+        
+        
+                <label for="state">State</label><br>
+                <input type="text" name="state" id="state" required><br>
+        
+                <label for="city">City</label><br>
+                <input type="text" name="city" id="city" required><br>
+        
+                <span>Business:</span>
+                <input type="radio" name="business_type" id="taco_truck" value="taco truck">
+                <label for="taco_truck">Taco truck</label>
+                <input type="radio" name="business_type" id="taco_stand" value="taco stand">
+                <label for="taco_stand">Taco stand</label><br>
+                <div id="edit-button-editpage">
+                    <button type="submit" class="btn btn-success">Edit</button>
+                </div>
+        
+                <input type="hidden" id="coordinates" name="coordinates">
+                
+            </div>
+        </form>
+        
+        <br>
+        <p>or</p>
+        
+        <div id="delete-button-edit">
+            <p>Delete account</p>
+            <a href="/deleteVendorAccount"><button class="btn btn-danger">Delete</button></a>
+        </div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo&libraries=places"></script>
+        <script src="/static/js/edit.js"></script>
     </div>
-</form>
-
-
-<p>or</p>
-
-<div>
-    <p>Delete account</p>
-    <a href="/deleteVendorAccount"><button>Delete</button></a>
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo&libraries=places"></script>
-<script src="/static/js/edit.js"></script>
 
 {% endblock %}

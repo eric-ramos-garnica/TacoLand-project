@@ -629,7 +629,38 @@ opacity: 1;
     padding: 50px;
 }
 
+/* Edit form */
+#container-edit-info h1{
+    color: rgb(235,107,60);
+}
+#container-edit-account{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+#container-edit-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px double lightgray;
+    padding: 50px;
+}
 
+#delete-button-edit{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#edit-button-editpage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 
 
