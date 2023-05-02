@@ -8,25 +8,24 @@
 {% for message in get_flashed_messages() %}
         <h1 id="message">{{message}}</h1>
 {% endfor %}
-
 <form action="/vendorpage" id="vendor-form" method="POST" enctype="multipart/form-data">
     <div id="containter-form">
         <label for="vendorName">Business Name</label><br>
         <input type="text" name="vendorName" id="vendorName" required><br>
-
+        
         <label for="address">Address</label><br>
         <input type="text" name="address" id="address" required><br>
-
+        
         <label for="hours">Hours</label><br>
         <input type="text" name="hours" id="hours" required><br>
-
+        
         <label for="image">Image</label>
 		<input type="file" name="my-file" id="image" required><br>
-
+        
         <label for="zipcode">Zipcode</label><br>
         <input type="number" name="zipcode" id="zipcode" required><br>
-
-
+        
+        
         <label for="state">State</label><br>
         <input type="text" name="state" id="state" required><br>
 
@@ -38,13 +37,14 @@
         <label for="taco_truck">Taco truck</label>
         <input type="radio" name="business_type" id="taco_stand" value="taco stand">
         <label for="taco_stand">Taco stand</label><br>
-
+        
         <input type="hidden" id="coordinates" name="coordinates">
-    
-        <button type="submit">Sign up</button>   
+        
+        <button type="submit">Submit</button>   
     </div>
 </form>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo&libraries=places"></script>
-    
 <script src="/static/js/create_vendor_account.js"></script>
+
+
 {% endblock %}

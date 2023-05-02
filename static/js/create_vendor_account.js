@@ -11,7 +11,7 @@ window.addEventListener('load', function() {
         document.getElementById('address').value = address;
 
     });
-    
+
     //converting address to coordinates
     const form = document.getElementById('vendor-form');
     form.addEventListener('submit', function(event) {
@@ -19,7 +19,7 @@ window.addEventListener('load', function() {
 
         const apiKey = 'AIzaSyD_6bTYpouO3j8eJSzy_Fx61zyZ9SknsXo';
         const address = document.getElementById('address').value;
-    
+
         fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`)
             .then(response => response.json())
             .then(data => {
