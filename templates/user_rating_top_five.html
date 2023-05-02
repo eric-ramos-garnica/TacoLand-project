@@ -16,27 +16,30 @@
     
     {% else %}
     
-        {% for idx in range(top_five_array|length) %}
-        <div id="container-top-five-info">
-            <div class="tating-number">
-                <h2>{{idx + 1}}.</h2>
+    {% for idx in range(top_five_array|length) %}
+    <!-- if user has less than 5 reviews -->
+        {% if idx < top_five_vendors_from_user|length %} 
+            <div id="container-top-five-info">
+                <div class="tating-number">
+                    <h2>{{idx + 1}}.</h2>
+                </div>
+                <div id="container-info-top-five">
+                        <div class="container-vendors-info-rating">
+                            <div class="image-top-five">
+                                <p><img src="{{top_five_vendors_from_user[idx].image}}" alt="vendor image"></p>
+                            </div>
+                            <div class="vendors-info-top-five">
+                                <p>{{top_five_vendors_from_user[idx].vendor_name}}</p>
+                                <p>Rating:{{top_five_vendors_rate[idx]}}</p>
+                                <p>Users rate for vendor:{{top_five_array[idx].score}}</p>        
+                            </div>
+                        </div>
+                </div>    
             </div>
-            <div id="container-info-top-five">
-                    <div class="container-vendors-info-rating">
-                        <div class="image-top-five">
-                            <p><img src="{{top_five_vendors_from_user[idx].image}}" alt="vendor image"></p>
-                        </div>
-                        <div class="vendors-info-top-five">
-                            <p>{{top_five_vendors_from_user[idx].vendor_name}}</p>
-                            <p>Rating:{{top_five_vendors_rate[idx]}}</p>
-                            <p>Users rate for vendor:{{top_five_array[idx].score}}</p>        
-                        </div>
-                    </div>
-            </div>    
-        </div>
-        {% endfor %}
+        {% endif %}
+    {% endfor %}
     
     {% endif %}
+    
 </div>
-
 {% endblock %}

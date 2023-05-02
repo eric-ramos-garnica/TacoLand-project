@@ -341,7 +341,7 @@ def vendor_info():
     
         vendor = Vendor.create(vendorname, location, workinghours, img_url, zipcode, state, city,session['id'],coords,business_type)
         if vendor:    
-            flash("Account created successfully!")
+            flash("Business created successfully!")
             return redirect('/vendorpage')
     else:
         flash("Need to login to create a vendor account")

@@ -28,7 +28,7 @@
       {% endif %}
     </div>
   </div>
-  <a href="/rating/{{vendor_info.vendor_id}}"><button>reviews</button></a>
+  <a href="/rating/{{vendor_info.vendor_id}}"><button class="btn btn-primary">reviews</button></a>
 </div>
 
 <hr style="color: #04A064;">
@@ -43,7 +43,7 @@
   <div id="container-for-map">
     <div class="direction-form-containers">
       <label for="origin">Origin:</label>
-      <input type="text" id="origin" name="origin" placeholder="Type address" class="origin-autocomplate" >
+      <input type="text" id="origin" name="origin" placeholder="Type address" class="origin-autocomplate">
       <i class="fa-solid fa-location-dot"></i>
     </div>
     <div class="direction-form-containers">
@@ -53,7 +53,7 @@
     </div>
   </div>
   <div class="button-direction">
-    <button onclick="calculateRoute()">Directions</button>
+    <button onclick="calculateRoute()" class="btn btn-primary">Directions</button>
   </div>
  </div>
 

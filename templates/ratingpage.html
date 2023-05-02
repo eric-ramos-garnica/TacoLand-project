@@ -12,7 +12,7 @@
         <h1>{{vendor_info.vendor_name}}</h1>
         <img src="{{vendor_info.image}}" alt="image"><br>
         <!-- will display button to make a review -->
-        <button id="rate-review-button">Make a rate/review</button>
+        <button id="rate-review-button" class="btn btn-primary">Make a review</button>
         <form action=" /ratingSubmission/{{vendor_info.vendor_id}}" method="POST" style="display: none;" id="rating-review-form">
             <div id="container-form-rating">
                 <div>
@@ -22,7 +22,7 @@
                 <label for="review">Review:</label><br>
                 <textarea name="review" id="review" cols="50" rows="5" required></textarea>
                 
-                <button type="submit">submit</button>
+                <button type="submit" class="btn btn-success">submit</button>
             </div>
         </form>
         <!-- will display rating & review form -->
