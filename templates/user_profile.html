@@ -8,111 +8,124 @@
 
 <!-- body -->
 {% block body %}
-<!-- image -->
-{% if not user_info.user_image%}
-<br>
-    <div id="container-user-image">
-        <form action="/userProfileEdit" method="POST" enctype="multipart/form-data">
+<div id="container-user-profile">
+    <div id="container-insie-user-profile">
 
-            <label for="user-image" ><i class="fa-solid fa-user fa-2xl"></i></label><br>
-            <input type="file" name="my-file" id="user-image" style="display: none;" required>
-            <button id="add-image-button">Add image</button>
-            <button id="user-image-button-submit" style="display: none;" type="submit">submit</button>
-            <button id="cancel-edit-img" style="display: none;">cancel</button>
-        </form>
-        
-    </div>
-    <!-- script -->
-    <script src="/static/js/user_profile/user_profile_image.js"></script>
-     
-{% else %}
-    <img src="{{user_info.user_image}}" alt="user-image">
-    <div id="container-user-image">
-        <form action="/userProfileEdit" method="POST" enctype="multipart/form-data">
-            <input type="file" name="my-file" id="user-image" style="display: none;" required>
-            <button id="add-image-button">Edit photo</button>
-            <button id="user-image-button-submit" style="display: none;" type="submit">submit</button>
-            <button id="cancel-edit-img" style="display: none;">cancel</button>
-        </form>
-    </div>
-    <!-- script -->
-    <script src="/static/js/user_profile/user_profile_image.js"></script>
-{%endif%}
-    <!-- NAME INFO -->
-    <div>
-        <p id="first-last-name">Name:{{user_info.fname}} {{user_info.lname}} <span><button id="edit-button-name">Edit</button></span></p>
-        <form action="/userProfileEdit" method="POST" style="display: none;" id="edit-form-name">
-            <label for="fname">First:</label>
-            <input type="text" name="name" id="fname" required>
-            <label for="lname">Last:</label>
-            <input type="text" name="lastname" id="lname"required>
-            <button type="submit" id="submit-button-name" >Submit</button>
-            <button id="cancel-edit-name" style="display: none;">cancel</button>
+        <!-- image -->
+        {% if not user_info.user_image%}
+    
+            <div id="container-user-image">
+                <form action="/userProfileEdit" method="POST" enctype="multipart/form-data">
+                    <div  id="image-photo-button-user-profile">
+                        <label for="user-image" ><i class="fa-solid fa-user fa-2xl"></i></label><br>
+                        <button id="add-image-button" class="btn btn-warning">Add image</button>
+                    </div>
+                    <input type="file" name="my-file" id="user-image" style="display: none;" required>
+                    <button id="user-image-button-submit" style="display: none;" type="submit" class="btn btn-success">submit</button>
+                    <button id="cancel-edit-img" style="display: none;" class="btn btn-primary">cancel</button>
+                </form>
+                
+            </div>
+            <!-- script -->
+            <script src="/static/js/user_profile/user_profile_image.js"></script>
+            
+        {% else %}
+            <img src="{{user_info.user_image}}" alt="user-image">
+            <div id="container-user-image">
+                <form action="/userProfileEdit" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="my-file" id="user-image" style="display: none;" required>
+                    <button id="add-image-button" class="btn btn-warning">Edit photo</button>
+                    <button id="user-image-button-submit" style="display: none;" type="submit" class="btn btn-success">submit</button>
+                    <button id="cancel-edit-img" style="display: none;" class="btn btn-primary">cancel</button>
+                </form>
+            </div>
+            <!-- script -->
+            <script src="/static/js/user_profile/user_profile_image.js"></script>
+        {%endif%}
+        <hr>
+            <!-- NAME INFO -->
+            <div>
+                <p id="first-last-name">Name:{{user_info.fname}} {{user_info.lname}} <span><button id="edit-button-name" class="btn btn-warning">Edit</button></span></p>
+                <form action="/userProfileEdit" method="POST" style="display: none;" id="edit-form-name">
+                    <label for="fname">First:</label>
+                    <input type="text" name="name" id="fname" required>
+                    <label for="lname">Last:</label>
+                    <input type="text" name="lastname" id="lname"required>
+                    <button type="submit" id="submit-button-name" class="btn btn-success">Submit</button>
+                    <button id="cancel-edit-name" style="display: none;" class="btn btn-primary">cancel</button>
+                </form>
+                <!-- script -->
+                <script src="/static/js/user_profile/user_profile_name.js"></script>
+            </div>
+            <hr>
+            <!-- email -->
+            <p>Email:{{user_info.email}}</p>
+            <hr>
+        <!-- phone  -->
+        {% if not user_info.phone %}
+            <form action="/userProfileEdit" method="POST">
+                <label for="user-phone" >Phone:</label>
+                <input type="text" name="user-phone-value" id="user-phone" disabled="disabled" required>
+                <button id="add-phone-button" class="btn btn-warning">Add phone</button>
+                <button id="user-phone-button-submit" style="display: none;" type="submit" class="btn btn-success">submit</button>
+                <button id="cancel-edit" style="display: none" class="btn btn-primary">cancel</button>
+            </form>
+            <script src="/static/js/user_profile/user_profile_phone.js"></script>
+    
+        {% else %}
+            <p id="user-phone-edit">Phone:{{user_info.phone}}<span><button id="edit-button-phone" class="btn btn-warning">Edit</button></span></p>
+            <form action="/userProfileEdit" method="POST" id="user-form-phone" style="display: none;" >
+                <label for="user-phone-edit" >Phone:</label>
+                <input type="text" name="user-phone-value" id="user-phone-edit" required>
+                <button type="submit" class="btn btn-success">submit</button>
+                <span><button id="cancel-edit" style="display: none" class="btn btn-primary">cancel</button></span>
+            </form>
+            
+            <!-- script -->
+            <script src="/static/js/user_profile/user_profile_phone_edit.js"></script>
+        {% endif %}
+        <hr>
+        <!-- gender -->
+        {% if not user_info.gender %}
+        <form action="/userProfileEdit" method="POST">
+            <label for="gender">Gender:</label>
+            <input type="text" name="gender-value" id="gender" disabled="disabled" required>
+            <button id="add-gender-button" class="btn btn-warning">Add gender</button>
+            <button id="user-gender-button-submit" style="display: none;" type="submit" class="btn btn-success">submit</button>
+            <span><button id="cancel-edit-gender" style="display: none" class="btn btn-primary">cancel</button></span>
         </form>
         <!-- script -->
-        <script src="/static/js/user_profile/user_profile_name.js"></script>
+        <script src="/static/js/user_profile/user_profile_gender.js"></script>
+        {%else%}
+            <p id="gender-element">Gender:{{user_info.gender}}<span><button id="edit-button-gender" class="btn btn-warning">Edit</button></span></p>
+            <form action="/userProfileEdit" method="POST" id="user-form-gender" style="display: none;">
+                <label for="gender">Gender:</label>
+                <input type="text" name="gender-value" id="gender" required >
+                <button id="user-gender-button-submit"  type="submit" class="btn btn-success">submit</button>
+                <span><button id="cancel-edit-gender" style="display: none" class="btn btn-primary">cancel</button></span>
+            </form>
+    
+            <!-- script -->
+        <script src="/static/js/user_profile/user_profile_gender_edit.js"></script>
+        {% endif %}
+        <hr>
+        <!-- password -->
+        <div>
+            <a href="/changePassword"><button class="btn btn-warning">Change Password</button></a><br>
+        </div>
+        <hr>
+        <!-- delete -->
+        <div>
+            <button id="delete-button" class="btn btn-danger">Delete Account</button>
+            <p id="par-delete" style="display: none;">Are you sure you want to delete Account?</p>
+            <div class="buttons-cancel-yes-deleting">
+                <a href="/deleteAccount" style="display: none;" id="button-yes-delete"><button class="btn btn-danger">Yes</button></a>
+                <button id="cancel-button-delete" style="display: none;" class="btn btn-primary" class="btn btn-primary">Cancel</button>
+            </div>
+            <script src="/static/js/user_profile/user_profile_delete.js"></script>
+        </div>
     </div>
-    <!-- email -->
-    <p>Email:{{user_info.email}}</p>
-<!-- phone  -->
-{% if not user_info.phone %}
-    <form action="/userProfileEdit" method="POST">
-        <label for="user-phone" >Phone:</label>
-        <input type="text" name="user-phone-value" id="user-phone" disabled="disabled" required>
-        <button id="add-phone-button">Add phone</button>
-        <button id="user-phone-button-submit" style="display: none;" type="submit">submit</button>
-        <button id="cancel-edit" style="display: none">cancel</button>
-    </form>
-    <script src="/static/js/user_profile/user_profile_phone.js"></script>
-
-{% else %}
-    <p id="user-phone-edit">Phone:{{user_info.phone}}<span><button id="edit-button-phone">edit</button></span></p>
-    <form action="/userProfileEdit" method="POST" id="user-form-phone" style="display: none;" >
-        <label for="user-phone-edit" >Phone:</label>
-        <input type="text" name="user-phone-value" id="user-phone-edit" required>
-        <button type="submit">submit</button>
-        <span><button id="cancel-edit" style="display: none">cancel</button></span>
-    </form>
-    
-    <!-- script -->
-    <script src="/static/js/user_profile/user_profile_phone_edit.js"></script>
-{% endif %}
-<!-- gender -->
-{% if not user_info.gender %}
-<form action="/userProfileEdit" method="POST">
-    <label for="gender">Gender:</label>
-    <input type="text" name="gender-value" id="gender" disabled="disabled" required>
-    <button id="add-gender-button">Add gender</button>
-    <button id="user-gender-button-submit" style="display: none;" type="submit">submit</button>
-    <span><button id="cancel-edit-gender" style="display: none">cancel</button></span>
-</form>
-<!-- script -->
-<script src="/static/js/user_profile/user_profile_gender.js"></script>
-{%else%}
-    <p id="gender-element">Gender:{{user_info.gender}}<span><button id="edit-button-gender">edit</button></span></p>
-    <form action="/userProfileEdit" method="POST" id="user-form-gender" style="display: none;">
-        <label for="gender">Gender:</label>
-        <input type="text" name="gender-value" id="gender" required >
-        <button id="user-gender-button-submit"  type="submit">submit</button>
-        <span><button id="cancel-edit-gender" style="display: none">cancel</button></span>
-    </form>
-
-    <!-- script -->
-<script src="/static/js/user_profile/user_profile_gender_edit.js"></script>
-{% endif %}
-<!-- password -->
-<div>
-    <a href="/changePassword"><button>Change Password</button></a><br>
-</div>
-<!-- delete -->
-<div>
-    <button id="delete-button">Delete Account</button>
-    <p id="par-delete" style="display: none;">Are you sure you want to delete Account?</p>
-    <a href="/deleteAccount" style="display: none;" id="button-yes-delete"><button>Yes</button></a>
-    <button id="cancel-button-delete" style="display: none;">Cancel</button>
-    <script src="/static/js/user_profile/user_profile_delete.js"></script>
-</div>
-    
+</div>    
        
 
 {% endblock %}

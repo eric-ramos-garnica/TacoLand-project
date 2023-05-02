@@ -500,8 +500,40 @@ opacity: 1;
     margin-right: 1.25rem;
 }
 
+/* User Profile */
+#container-user-profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
 
+#container-insie-user-profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px dotted lightgray;
+    width: 700px;
+    padding: 40px;
+}
+.buttons-cancel-yes-deleting{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.buttons-cancel-yes-deleting a{
+    margin: 5px;
+}
 
+#image-photo-button-user-profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 
 /* 1778 Oakland road apt22 */
