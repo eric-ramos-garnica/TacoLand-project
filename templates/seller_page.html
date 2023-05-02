@@ -5,6 +5,23 @@
 {% for message in get_flashed_messages() %}
     <h1 id="message">{{message}}</h1>
 {% endfor %}
-    <a href="/vendorpage">Create business</a>
-    <a href="/vendorInfo">businesses settings</a>
+<div id="image-container" style="position: relative;">
+    <img id="seller-img" src="https://static.wixstatic.com/media/ebb861_6199543465654d868df0f58760d7b386.png/v1/fill/w_1063,h_668,al_c,q_90,enc_auto/ebb861_6199543465654d868df0f58760d7b386.png" alt="background" style="width: 100%;">
+    <h1 id="image-caption" >Join the Taco Land community</h1>
+</div>
+
+<div id="container-vendors-settings">
+    <a class="container-sellers-button-vendors" href="/vendorpage">
+        <div class="buttons-vendors">
+            <p>𝕮𝖗𝖊𝖆𝖙𝖊</p>
+            <p>𝖇𝖚𝖘𝖎𝖓𝖊𝖘𝖘</p>
+        </div>
+    </a>
+    <a class="container-seller-button-settings" href="/vendorInfo">
+        <div class="buttons-vendors-settings">
+            <p>𝖇𝖚𝖘𝖎𝖓𝖊𝖘𝖘</p>
+            <p>𝖘𝖊𝖙𝖙𝖎𝖓𝖌𝖘</p>
+        </div>
+    </a>
+</div>
 {% endblock  %}
