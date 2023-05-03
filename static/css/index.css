@@ -620,6 +620,13 @@ opacity: 1;
     margin-bottom: 5px;
 }
 
+
+/*submission rating  */
+#container-submission-info h1{
+    color: rgb(235,107,60);
+    font-family: 'Titan One', cursive;
+}
+
 /* 1778 Oakland road apt22 */
 
 /* 5.Components 
