@@ -30,7 +30,7 @@
             <script src="/static/js/user_profile/user_profile_image.js"></script>
             
         {% else %}
-            <img src="{{user_info.user_image}}" alt="user-image">
+            <img class="user-image-user-profile"src="{{user_info.user_image}}" alt="user-image">
             <div id="container-user-image">
                 <form action="/userProfileEdit" method="POST" enctype="multipart/form-data">
                     <input type="file" name="my-file" id="user-image" style="display: none;" required>

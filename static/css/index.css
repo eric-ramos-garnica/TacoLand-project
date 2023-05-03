@@ -589,6 +589,13 @@ opacity: 1;
 #container-insie-user-profile h1{
     color: rgb(4,160,100);
 }
+.user-image-user-profile{
+    border-radius: 50%;
+    overflow: hidden; /* This line is optional, but recommended to ensure the image doesn't overflow outside the circular div */
+    width: 6.875rem; /* This line is optional, but adjust the width as necessary */
+    height: 6.875rem; /* This line is optional, but adjust the height as necessary */
+    margin-bottom: 5px;
+}
 
 /* 1778 Oakland road apt22 */
 
