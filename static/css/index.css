@@ -768,9 +768,12 @@ opacity: 1;
 }
 
 
+/* navbar */
+#logout-tab {
+    color: white;
+  }
 
-
-
+/* images */
 img{
     height: 100px;
     width: 100px;
