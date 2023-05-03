@@ -353,7 +353,7 @@ opacity: 1;
     flex-wrap: wrap;
 }
 #container-info-img-title-rating h1{
-    color:rgb(235,107,60)
+    color:rgb(235,107,60);
 }
 #container-info-img-title-rating img {
     border-radius: 50%;
@@ -423,7 +423,7 @@ opacity: 1;
     top: 200px;
     left: 32%;
     right: 32%;
-    color: white;
+    color: rgb(235,107,60);
 }
 
 #container-vendors-settings{
@@ -432,7 +432,7 @@ opacity: 1;
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
-    background-color: white;
+    background-color: rgba(253, 215, 133, 0.371);
     padding-bottom: 40px;
     padding-top: 40px;
     margin-top: 500px;
