@@ -26,14 +26,14 @@
 </div>
 <div id="container-mex-rest-and-map">
 {% if "businesses" in mexican_restaurants_data %}
-<div style= "height: 600px; overflow-y: scroll; width: 37.5rem; " id="scrollbar-restaurants" >
+<div style= "height: 600px; overflow-y: scroll; width: 37.5rem; background-color: white; " id="scrollbar-restaurants" >
     <ul id="mexican-restaurants-list">
         {% for business in mexican_restaurants_data["businesses"] %}
             <li class="mex-item-rest">
                 <div id="container-li-res">
                     <a href="/restaurantInfo/{{business['id']}}"><img src="{{business['image_url']}}" alt="Mexican image" class="mexican-restaurant-image"></a>
                     <div class="container-for-info-restaurant">
-                        <h2>{{business["name"]}}</h2>
+                        <h4>{{business["name"]}}</h4>
                         <p>Rating:{{business["rating"]}}</p>
                     </div>
                 </div>

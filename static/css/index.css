@@ -201,7 +201,7 @@ opacity: 1;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    background-color: hsl(0, 0%, 99%)	;
+    background-color: hsl(0, 0%, 99%);
 }
 
 .container-for-info-vendors{
@@ -210,11 +210,8 @@ opacity: 1;
     justify-content:center;
     align-items: center;
 }
-.container-for-info-vendors h2{
+.container-for-info-vendors h4{
     color: rgb(235,107,60);
-}
-.rating-vendors{
-    color:rgb(4,160,100);
 }
 
 
@@ -345,6 +342,9 @@ opacity: 1;
     align-items: center;
     flex-wrap: wrap;
 }
+.review-info-text h4{
+    color:rgb(235,107,60);
+}
 #container-reviews-and-noreviews{
     display: flex;
     flex-direction: column;
@@ -382,6 +382,7 @@ opacity: 1;
     padding: 0.625rem;
     width: 25rem;
     border-radius: 10px;
+    background-color: hsl(0, 0%, 99%)
     
 }
 #container-mexican-restaurants{
@@ -409,6 +410,9 @@ opacity: 1;
     flex-direction: row;
     justify-content: space-around;
 
+}
+.container-for-info-restaurant h4{
+    color:rgb(235,107,60);
 }
 
 
@@ -527,6 +531,7 @@ opacity: 1;
     padding: 0.625rem;
     width: 25rem;
     border-radius: 10px;
+    background-color: hsl(0, 0%, 99%);
 }
 .container-vendors-info-rating{
     display: flex;
@@ -537,6 +542,10 @@ opacity: 1;
 
 .image-top-five{
     margin-right: 1.25rem;
+}
+
+.vendors-info-top-five h4{
+    color: rgb(235,107,60);
 }
 
 /* User Profile */

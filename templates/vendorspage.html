@@ -60,7 +60,7 @@
     <a href="/tacovendors/{{vendor.vendor_id}}"><img src="{{vendor.image}}" alt="image" class="tacoimage"></a>
     <div class="container-for-info-vendors">
       <a href="/tacovendors/{{vendor.vendor_id}}">
-        <h2>{{vendor.vendor_name}}</h2>
+        <h4>{{vendor.vendor_name}}</h4>
         {% set _ = my_list.append(vendor.coords) %}
         {% set _ = business_name.append(vendor.vendor_name) %}
         {% set _ = vendorId.append(vendor.vendor_id) %}
