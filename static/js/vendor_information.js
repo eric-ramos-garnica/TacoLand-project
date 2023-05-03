@@ -34,7 +34,7 @@ function initMap() {
   });
 
   var infoWindow = new google.maps.InfoWindow({
-      content:`<a href="#"><h2>${business_name}</h2></a><h2>Hours:${hr}<h2><h2>Rating:${rating}</h2>`
+      content:`<a href="#"><h2 style="color: rgb(235,107,60); font-family: 'Titan One', cursive; text-decoration: underline;">${business_name}</h2></a><h2>Hours:${hr}<h2><h2>Rating:${rating}</h2>`
     });
     marker.addListener('click',function(){
       infoWindow.open(map,marker)

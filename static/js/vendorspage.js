@@ -44,7 +44,7 @@ function initMap() {
     });
     
     const infoWindow = new google.maps.InfoWindow({
-      content: `<a href="/tacovendors/${vendor_ids_array[i]}"><h2>${business_title_array[i]}</h2></a><h2>Hours:${hours_array[i]}</h2>`
+      content: `<a href="/tacovendors/${vendor_ids_array[i]}"><h2 style="color: rgb(235,107,60); font-family: 'Titan One', cursive; text-decoration: underline;">${business_title_array[i]}</h2></a><h2>Hours:${hours_array[i]}</h2>`
     });
     
     marker.addListener('click', () => {
