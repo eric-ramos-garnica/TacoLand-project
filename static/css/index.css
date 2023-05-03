@@ -485,6 +485,7 @@ opacity: 1;
     font-size: 2.5rem;
 }
 
+
 /* business Settings */
 #container-title-settings{
     display: flex;
@@ -502,7 +503,9 @@ opacity: 1;
 #container-business{
     margin: 40px;
 }
-
+#card-image-vendor{
+    height: 12.5rem;
+}
 
 /*Top 5 rating  */
 #container-top-five h1{

@@ -9,7 +9,7 @@
     {% for business in user_businesses%}
     <li id="container-business">
       <div class="card" style="width: 18rem;">
-        <img src="{{business.image}}" alt="business-image" class="business card-img-top">
+        <img src="{{business.image}}" alt="business-image" class="business card-img-top" id="card-image-vendor">
         <div class="card-body">
           <h5 class="card-title">{{business.vendor_name}}</h5>
             <p class="card-text">Address: {{business.location}}</p>
