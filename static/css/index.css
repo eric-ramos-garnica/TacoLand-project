@@ -28,7 +28,9 @@ ul {
 
 /* 2.Typography Styles 
 ================================*/
-
+body{
+    font-family: 'Literata', serif;
+}
 /* 3.Structure Styles 
 ================================*/
 /* homepage */
@@ -233,7 +235,7 @@ opacity: 1;
 
 .container-for-image-info{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
@@ -289,9 +291,10 @@ opacity: 1;
 }
 #output{
     font-size: 30px;
-    color: rgb(44,44,44);
+    color: hsl(0, 0%, 99%);
     font-size: 2.3rem;
     font-weight: bold;
+    font-family: 'Literata', serif;
 }
 
 #panel {
@@ -310,6 +313,10 @@ opacity: 1;
   display: block; /* This line is optional, but recommended to remove any extra spacing around the image */
   width: 200px; /* This line ensures that the image fills the circular div */
   height: 200px; /* This line ensures that the image aspect ratio is maintained */
+}
+.taco-vendor-information{
+    font-family: 'Literata', serif;
+    font-size: 20px; 
 }
 
 /* Rating page */

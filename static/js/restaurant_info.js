@@ -67,7 +67,7 @@ var map;
         function(response, status) {
         if (status === 'OK') {
             const output = document.querySelector('#output');
-            output.innerHTML = "<div class='alert-info'> From: " + document.getElementById("origin").value + ".<br>To: " + document.getElementById("destination").value + ".<br>Driving distance <i class='fa-solid fa-road'></i>" + response.routes[0].legs[0].distance.text + ".<br>Duration <i class='fa-solid fa-hourglass-half'></i> : " + response.routes[0].legs[0].duration.text + ". </div>" ;
+            output.innerHTML = "<div class='alert-info'> From: " + document.getElementById("origin").value + ".<br>To: " + document.getElementById("destination").value + ".<br>Driving distance <i class='fa-solid fa-road'style='color:rgb(240,120,68);'></i>" + response.routes[0].legs[0].distance.text + ".<br>Duration <i class='fa-solid fa-hourglass-half' style='color:rgb(240,120,68);'></i> : " + response.routes[0].legs[0].duration.text + ". </div>" ;
             directionsRenderer.setDirections(response);
         } else {
             window.alert('Directions request failed due to ' + status);
