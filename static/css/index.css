@@ -627,6 +627,18 @@ opacity: 1;
     font-family: 'Titan One', cursive;
 }
 
+/* deleting account */
+#container-deleting-account{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; ;
+}
+#container-deleting-account h1{
+    color: rgb(235,107,60);
+    font-family: 'Titan One', cursive;
+}
 /* 1778 Oakland road apt22 */
 
 /* 5.Components 
