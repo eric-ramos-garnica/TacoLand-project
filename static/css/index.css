@@ -487,6 +487,10 @@ opacity: 1;
 
 
 /* business Settings */
+#container-title-settings h1{
+    color: rgb(235,107,60);
+}
+
 #container-title-settings{
     display: flex;
     flex-direction: row;
