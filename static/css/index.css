@@ -352,6 +352,15 @@ opacity: 1;
     align-items: center;
     flex-wrap: wrap;
 }
+#container-info-img-title-rating h1{
+    color:rgb(235,107,60)
+}
+#container-info-img-title-rating img {
+    border-radius: 50%;
+    overflow: hidden; /* This line is optional, but recommended to ensure the image doesn't overflow outside the circular div */
+    width: 150px; /* This line is optional, but adjust the width as necessary */
+    height: 150px; /* This line is optional, but adjust the height as necessary */
+  }
 
 /* Rating submission */
 #container-body{
