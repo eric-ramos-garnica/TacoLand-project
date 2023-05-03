@@ -50,6 +50,7 @@ ul {
     margin-bottom: 0px;
     text-align: center;
     color: aliceblue;
+    font-family: 'Titan One', cursive;
     
 }
 
@@ -168,6 +169,7 @@ opacity: 1;
 }
 .title-vendorspage{
     color: rgb(235,107,60);
+    font-family: 'Titan One', cursive;
 }
 .buttons-filter-position{
     display: flex;
@@ -219,6 +221,7 @@ opacity: 1;
 /* vendor_info */
 .title-vendor-info{
     color: rgb(235,107,60);
+    font-family: 'Titan One', cursive;
 }
 #container-vendor-info{
     display: flex;
@@ -344,6 +347,7 @@ opacity: 1;
 }
 .review-info-text h4{
     color:rgb(235,107,60);
+    
 }
 #container-reviews-and-noreviews{
     display: flex;
@@ -354,6 +358,7 @@ opacity: 1;
 }
 #container-info-img-title-rating h1{
     color:rgb(235,107,60);
+    font-family: 'Titan One', cursive;
 }
 #container-info-img-title-rating img {
     border-radius: 50%;
@@ -380,7 +385,7 @@ opacity: 1;
     padding: 0.625rem;
     margin-bottom: 0.313rem;
     padding: 0.625rem;
-    width: 25rem;
+    width: 25rem
     border-radius: 10px;
     background-color: hsl(0, 0%, 99%)
     
@@ -394,6 +399,7 @@ opacity: 1;
 }
 #container-mexican-restaurants h1{
     color:rgb(235,107,60);
+    font-family: 'Titan One', cursive;
 }
 #mexican-restaurants-list li{
     text-decoration: none;
@@ -489,6 +495,7 @@ opacity: 1;
 /* business Settings */
 #container-title-settings h1{
     color: rgb(235,107,60);
+    font-family: 'Titan One', cursive;
 }
 
 #container-title-settings{
@@ -514,6 +521,7 @@ opacity: 1;
 /*Top 5 rating  */
 #container-top-five h1{
     color: rgb(235,107,60);
+    font-family: 'Titan One', cursive;
 }
 #container-top-five-info{
     display: flex;
@@ -595,6 +603,7 @@ opacity: 1;
 }
 #container-insie-user-profile h1{
     color: rgb(4,160,100);
+    font-family: 'Titan One', cursive;
 }
 .user-image-user-profile{
     border-radius: 50%;
@@ -611,6 +620,7 @@ opacity: 1;
 /* loginpage */
 #container-logo-login h1{
     color: rgb(235,107,60);
+    font-family: 'Titan One', cursive;
 }
 #container-loginpage {
     display: flex;
@@ -653,6 +663,7 @@ opacity: 1;
 /* Create account */
 #container-title h1{
     color: rgb(235,107,60);
+    font-family: 'Titan One', cursive;
 }
 #container-create-page{
     display: flex;
@@ -683,7 +694,7 @@ opacity: 1;
 /* create vendor business */
 #container-info-create-vendor h1{
     color: rgb(235,107,60);
-    
+    font-family: 'Titan One', cursive;   
 }
 #container-create-vendor{
     display: flex;
@@ -705,6 +716,7 @@ opacity: 1;
 /* Edit form */
 #container-edit-info h1{
     color: rgb(235,107,60);
+    font-family: 'Titan One', cursive;
 }
 #container-edit-account{
     display: flex;
@@ -740,6 +752,7 @@ opacity: 1;
 /* change password */
 #container-form-info-change-password h1{
     color: rgb(235,107,60);
+    font-family: 'Titan One', cursive;
     
 }
 #container-form-changew-password{
