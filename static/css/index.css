@@ -392,6 +392,9 @@ opacity: 1;
     align-items: center;
     margin-top: 2.5rem;
 }
+#container-mexican-restaurants h1{
+    color:rgb(235,107,60);
+}
 #mexican-restaurants-list li{
     text-decoration: none;
 }
@@ -565,6 +568,7 @@ opacity: 1;
     border: 1px dotted lightgray;
     width: 700px;
     padding: 40px;
+    background-color: hsl(0, 0%, 94%);
 }
 .buttons-cancel-yes-deleting{
     display: flex;
@@ -582,7 +586,9 @@ opacity: 1;
     justify-content: center;
     align-items: center;
 }
-
+#container-insie-user-profile h1{
+    color: rgb(4,160,100);
+}
 
 /* 1778 Oakland road apt22 */
 
