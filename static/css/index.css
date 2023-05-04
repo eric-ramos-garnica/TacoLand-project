@@ -374,6 +374,11 @@ opacity: 1;
     height: 150px; /* This line is optional, but adjust the height as necessary */
   }
 
+#container-reviews-and-noreviews h1{
+    color:rgb(235,107,60);
+    font-family: 'Titan One', cursive;
+}
+
 /* Rating submission */
 #container-body{
     display: flex;
