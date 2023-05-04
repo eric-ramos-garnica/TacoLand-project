@@ -493,6 +493,7 @@ def profile_edit():
         lname = request.form.get('lastname')
 
         if fname and lname:
+            session['name'] = fname
             user_info.fname = fname
             user_info.lname = lname
             db.session.commit()
